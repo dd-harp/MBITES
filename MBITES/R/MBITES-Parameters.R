@@ -1,0 +1,1917 @@
+###############################################################################
+#         __  ___      ____  _____________________
+#        /  |/  /     / __ )/  _/_  __/ ____/ ___/
+#       / /|_/ /_____/ __  |/ /  / / / __/  \__ \
+#      / /  / /_____/ /_/ // /  / / / /___ ___/ /
+#     /_/  /_/     /_____/___/ /_/ /_____//____/
+#
+#     MBITES-Parameters
+#     MBITES Team
+#     February 2018
+#
+###############################################################################
+
+#' MBITES Parameters Singleton
+#'
+#' This class is a singleton object in the \code{MBITES} package namespace that stores parameters needed for the MBITES simulation.
+#' It can be accessed by \code{MBITES:::MBITES_Pars}.
+#'
+#'
+#'
+#'
+#' @docType class
+#' @format An \code{\link{R6Class}} generator object
+#' @keywords R6 class
+#'
+#' @section **Constructor**:
+#'  * argument: im an agument!
+#'
+#' @section **Methods**:
+#'  * method: im a method!
+#'
+#' @section **Fields**:
+#'  * id: integer identifier of site
+#'  * field: im a field!
+#'
+MBITES_Parameters <- R6::R6Class(classname = "MBITES_Parameters",
+                 portable = TRUE,
+                 cloneable = FALSE,
+                 lock_class = FALSE,
+                 lock_objects = FALSE,
+
+                 public = list(
+
+                   # begin constructor
+                   initialize = function(){
+                     # futile.logger::flog.trace("MBITES_Parameters being born at: self %s , private %s",pryr::address(self),pryr::address(private))
+                   }, # end constructor
+
+                   # begin destructor
+                   finalize = function(){
+                     # futile.logger::flog.trace("MBITES_Parameters being killed at: self %s , private %s",pryr::address(self),pryr::address(private))
+                   }, # end destructor
+
+                   # time to event samplers
+                   # 'struct' of function (pointers to functions in c++)
+                   ttEvent = list(
+                     # time to event closures (must be given implementations before simulation starts)
+                     # attempt bouts
+                     BoutB = function(){stop("BoutB requires a concrete implementation!")},
+                     BoutO = function(){stop("BoutO requires a concrete implementation!")},
+                     BoutM = function(){stop("BoutM requires a concrete implementation!")},
+                     BoutS = function(){stop("BoutS requires a concrete implementation!")},
+                     # search bouts
+                     BoutBs = function(){stop("BoutBs requires a concrete implementation!")},
+                     BoutOs = function(){stop("BoutOs requires a concrete implementation!")},
+                     BoutMs = function(){stop("BoutMs requires a concrete implementation!")},
+                     BoutSs = function(){stop("BoutSs requires a concrete implementation!")},
+                     # estivation
+                     Estivate = function(){stop("Estivate requires a concrete implementation!")},
+                     # post-prandial resting
+                     ppr = function(){stop("ppr requires a concrete implementation!")}
+                   )
+
+                 ),
+
+                 private = list(
+
+                   aqua_model           = "emerge",
+
+                   # Search behavior
+                   disperse             = numeric(1), # P(move) even if resources present when i do checks
+
+                   # Post-bout Landing, House Entering, and Resting
+                   boutFail_p           = numeric(1), # 1/number of failed bouts until mosquito gives up and searches
+                   b_wts                = numeric(5), # weights on {i,r,v,w,l}
+                   o_wts                = numeric(5),
+                   m_wts                = numeric(5),
+                   s_wts                = numeric(5),
+                   InAndOut             = matrix(0L,5,5), # weights on transitioning between resting spots
+
+                   # Timing
+                   tSwarm               = numeric(1), # mating swarm timing
+                   # estivation 1
+                   Emax                 = numeric(1),
+                   Eb                   = numeric(1),
+                   Ep                   = numeric(1),
+                   eEndm                = numeric(1),
+                   eEndSd               = numeric(1),
+                   # estivation 2
+                   estivationDay        = integer(1),
+
+                   # Energetics
+                   energyPreG           = numeric(1), # pre-gonotrophic energy requirement
+                   preGsugar            = numeric(1), # sugar energy that can satisfy pre-gonotrophic energy
+                   energyFromBlood_b    = numeric(1), # half-maximum parameter for mbites_energyFromBlood
+                   S_u                  = numeric(1), # energy expended during a flight
+
+                   omega                = numeric(1),
+                   S_sa                 = numeric(1), # pSugarBout
+                   S_sb                 = numeric(1), # pSugarBout
+                   S_w                  = numeric(1),
+                   S_p                  = numeric(1),
+
+                   # Survival
+                   Bs_surv              = numeric(1),
+                   Os_surv              = numeric(1),
+                   Ms_surv              = numeric(1),
+                   Ss_surv              = numeric(1),
+                   B_surv               = numeric(1),
+                   O_surv               = numeric(1),
+                   M_surv               = numeric(1),
+                   S_surv               = numeric(1),
+
+                   # Bout success
+                   Bs_succeed           = numeric(1),
+                   Os_succeed           = numeric(1),
+                   Ms_succeed           = numeric(1),
+                   Ss_succeed           = numeric(1),
+                   B_succeed            = numeric(1),
+                   O_succeed            = numeric(1),
+                   M_succeed            = numeric(1),
+                   S_succeed            = numeric(1),
+
+                   # Host Encounter
+                   surviveH                = numeric(1), # survival probability for initial encounter (survive to probe)
+                   probeH                  = numeric(1), # probability that undeterred during probing
+                   surviveprobeH           = numeric(1), # survival probability for host probing
+                   feedH                   = numeric(1), # probability to successfully feed
+                   surviveZ                = numeric(1), # survival probability for initial encounter (survive to feed)
+                   feedZ                   = numeric(1), # probability to successfully feed
+
+                   PPR_a                = numeric(1), # mbites_pPPRFlight
+                   PPR_b                = numeric(1), # mbites_pPPRFlight
+                   S_a                  = numeric(1), # mbites_pEnergySurvival
+                   S_b                  = numeric(1), # mbites_pEnergySurvival
+
+                   TATTER               = logical(1), # control tattering
+                   ttsz_p               = numeric(1), # wing tattering (size of damage)
+                   ttsz_a               = numeric(1),
+                   ttsz_b               = numeric(1),
+
+                   ttr_a                = numeric(1), # wing tattering (probability of death)
+                   ttr_b                = numeric(1),
+
+                   chm_a                = numeric(1), # chemical damage to mosquito body
+                   chm_b                = numeric(1),
+
+                   SENESCE              = logical(1), # control senescence
+                   sns_a                = numeric(1), # senescence parameters
+                   sns_b                = numeric(1), # senescence parameters
+
+                   # BloodMeal
+                   bm_a                 = numeric(1), # Beta-distributed bloodmeal size
+                   bm_b                 = numeric(1), # Beta-distributed bloodmeal size
+
+                   OVERFEED             = logical(1), # control overfeeding
+                   of_a                 = numeric(1),
+                   of_b                 = numeric(1),
+
+                   # Oogenesis
+                   bloodPerEgg          = numeric(1), # egg provision: how much blood does each egg need?
+                   bs_m                 = numeric(1), # mean of normally dist. egg batch
+                   bs_sd                = numeric(1), # sd of normally dist. egg batch
+                   maxBatch             = integer(1), # max batch size
+                   emt_m                = numeric(1), # mean of normally dist. maturation time
+                   emt_sd               = numeric(1), # sd of normally dist. maturation time
+
+                   rf_a                 = numeric(1), # refeeding probability
+                   rf_b                 = numeric(1)
+
+                 )
+) # end MBITES_Parameters class definition
+
+
+###############################################################################
+# Timing
+###############################################################################
+
+#' MBITES Parameters: Make Deterministic Time-to-Event Closure
+#'
+#' Generates a closure that contains the following fields:
+#'  * wait: numeric value of deterministic waiting time
+#'
+#' The closure also contains the following functions:
+#'  * tteDet(t): samples a time to event following shifted exponential distribution
+#'
+#' @export
+make_ttEvent_Det <- function(wait){
+
+  # check bad arguments
+  if(any(sapply(as.list(match.call()),is.null))) {
+    stop("please do not pass any NULL arguments")
+  }
+
+  # data for the closure
+  wait  <- wait
+
+  # deterministic tte
+  tteDet <- function(t){
+    t + wait
+  }
+
+  return(tteDet)
+}
+
+#' MBITES Parameters: Make a Shifted Exponential Time-to-Event Closure
+#'
+#' Generates a closure that contains the following fields:
+#'  * rate: numeric value of rate parameter
+#'  * tmin: numeric value of minimum waiting time
+#'
+#' The closure also contains the following functions:
+#'  * tteShiftExp(t): samples a time to event following shifted exponential distribution
+#'
+#' @export
+make_ttEvent_Exp <- function(rate, tmin){
+
+  # check bad arguments
+  if(any(sapply(as.list(match.call()),is.null))) {
+    stop("please do not pass any NULL arguments")
+  }
+
+  # data for the closure
+  rate  <- rate
+  tmin <- tmin
+
+  # exponentially-distributed tte
+  tteShiftExp <- function(t){
+    t + tmin + rexp(n=1L,rate=rate)
+  }
+
+  return(tteShiftExp)
+}
+
+#' MBITES Parameters: Make a Shifted Gamma Time-to-Event Closure
+#'
+#' Generates a closure that contains the following fields:
+#'  * mean: numeric value of mean
+#'  * cv: numeric value of coefficient of variation (should be between 0 and 1 for reasonable sampling)
+#'  * tmin: numeric value of minimum waiting time
+#'
+#' The closure also contains the following functions:
+#'  * tteShiftGamma(t): samples a time to event following shifted exponential distribution
+#'
+#' @export
+make_ttEvent_Gamma <- function(mean, cv, tmin){
+
+  # check bad arguments
+  if(any(sapply(as.list(match.call()),is.null))) {
+    stop("please do not pass any NULL arguments")
+  }
+
+  # data for the closure
+  shape  <- 1/cv
+  scale <- mean*cv
+  tmin <- tmin
+
+  tteShiftGamma <- function(t){
+    t + tmin + rgamma(n=1L, shape=shape, scale = scale)
+  }
+
+  return(tteShiftGamma)
+}
+
+#' MBITES Parameters: Make a Shifted Diurnal Time-to-Event Closure
+#'
+#' Generates a closure that contains the following fields:
+#'  * field: i'm a field!
+#'
+#' The closure also contains the following functions:
+#'  * function: i'm a function!
+#'
+#' @export
+make_ttEvent_Diurnal <- function(peak, tmin){
+
+  if(any(sapply(as.list(match.call()),is.null))) {
+    stop("please do not pass any NULL arguments")
+  }
+
+  stop("make_ttEvent_Diurnal has not been implemented yet")
+
+}
+
+#' MBITES Parameters: Set Time-to-Event Sampling for Attempt and Search Bout Launch Intervals
+#'
+#' Sets concrete implementations of time-to-event sampling for attempt and search bout launch intervals. This method is called from \code{\link{MBITES_Setup}} and should
+#' not be called by users, although there is currently no way to prevent this.
+#'
+#' This method is bound to \code{MBITES_Parameters$set_ttEvent}
+#'
+set_ttEvent_MBITES_Parameters <- function(
+  # Timing
+  timing_model = 1L,
+  # deterministic
+  wait_b = NULL,
+  wait_o = NULL,
+  wait_m = NULL,
+  wait_s = NULL,
+  wait_bs = NULL,
+  wait_os = NULL,
+  wait_ms = NULL,
+  wait_ss = NULL,
+  # exp
+  rate_b = NULL,
+  tmin_b = NULL,
+  rate_o = NULL,
+  tmin_o = NULL,
+  rate_m = NULL,
+  tmin_m = NULL,
+  rate_s = NULL,
+  tmin_s = NULL,
+  rate_bs = NULL,
+  tmin_bs = NULL,
+  rate_os = NULL,
+  tmin_os = NULL,
+  rate_ms = NULL,
+  tmin_ms = NULL,
+  rate_ss = NULL,
+  tmin_ss = NULL,
+  # gamma
+  mean_b = NULL,
+  cv_b = NULL,
+  mean_o = NULL,
+  cv_o = NULL,
+  mean_m = NULL,
+  cv_m = NULL,
+  mean_s = NULL,
+  cv_s = NULL,
+  mean_bs = NULL,
+  cv_bs = NULL,
+  mean_os = NULL,
+  cv_os = NULL,
+  mean_ms = NULL,
+  cv_ms = NULL,
+  mean_ss = NULL,
+  cv_ss = NULL
+){
+  switch(timing_model,
+    "1" = {
+      cat("using deterministic time-to-event functions for attempt and search bouts\n")
+      # attempt bouts
+      self$ttEvent$BoutB <- make_ttEvent_Det(wait_b)
+      self$ttEvent$BoutO <- make_ttEvent_Det(wait_o)
+      self$ttEvent$BoutM <- make_ttEvent_Det(wait_m)
+      self$ttEvent$BoutS <- make_ttEvent_Det(wait_s)
+      # search bouts
+      self$ttEvent$BoutBs <- make_ttEvent_Det(wait_bs)
+      self$ttEvent$BoutOs <- make_ttEvent_Det(wait_os)
+      self$ttEvent$BoutMs <- make_ttEvent_Det(wait_ms)
+      self$ttEvent$BoutSs <- make_ttEvent_Det(wait_ss)
+    },
+    "2" = {
+      cat("using shifted exponential time-to-event functions for attempt and search bouts\n")
+      # attempt bouts
+      self$ttEvent$BoutB <- make_ttEvent_Exp(rate_b,tmin_b)
+      self$ttEvent$BoutO <- make_ttEvent_Exp(rate_o,tmin_o)
+      self$ttEvent$BoutM <- make_ttEvent_Exp(rate_m,tmin_m)
+      self$ttEvent$BoutS <- make_ttEvent_Exp(rate_s,tmin_s)
+      # search bouts
+      self$ttEvent$BoutBs <- make_ttEvent_Exp(rate_bs,tmin_bs)
+      self$ttEvent$BoutOs <- make_ttEvent_Exp(rate_os,tmin_os)
+      self$ttEvent$BoutMs <- make_ttEvent_Exp(rate_ms,tmin_ms)
+      self$ttEvent$BoutSs <- make_ttEvent_Exp(rate_ss,tmin_ss)
+    },
+    "3" = {
+      cat("using shifted gamma time-to-event functions for attempt and search bouts\n")
+      # attempt bouts
+      self$ttEvent$BoutB <- make_ttEvent_Gamma(mean_b,cv_b,tmin_b)
+      self$ttEvent$BoutO <- make_ttEvent_Gamma(mean_o,cv_o,tmin_o)
+      self$ttEvent$BoutM <- make_ttEvent_Gamma(mean_m,cv_m,tmin_m)
+      self$ttEvent$BoutS <- make_ttEvent_Gamma(mean_s,cv_s,tmin_s)
+      # search bouts
+      self$ttEvent$BoutBs <- make_ttEvent_Gamma(mean_bs,cv_bs,tmin_bs)
+      self$ttEvent$BoutOs <- make_ttEvent_Gamma(mean_os,cv_os,tmin_os)
+      self$ttEvent$BoutMs <- make_ttEvent_Gamma(mean_ms,cv_ms,tmin_ms)
+      self$ttEvent$BoutSs <- make_ttEvent_Gamma(mean_ss,cv_ss,tmin_ss)
+    },
+    "4" = {
+      cat("using shifted diurnal time-to-event functions for attempt and search bouts\n")
+      stop("shifted diurnal time-to-event sampling has not been implemented yet\n")
+    },
+    {stop("invalid entry for 'timing_model'\n")}
+  )
+
+}
+
+#' MBITES Parameters: Set Post-prandial Resting Time
+#'
+#' Sets concrete implementations of length of the post-prandial resting bout. This method is called from \code{\link{MBITES_Setup}} and should
+#' not be called by users, although there is currently no way to prevent this.
+#'
+#' This method is bound to \code{MBITES_Parameters$set_ttEvent_ppr}
+#'
+set_ttEvent_ppr_MBITES_Parameters <- function(
+  ppr_model = 1L,
+  # det
+  wait_ppr = NULL,
+  # exp
+  rate_ppr = NULL,
+  tmin_ppr = NULL,
+  # gamma
+  mean_ppr = NULL,
+  cv_ppr = NULL
+){
+  switch(ppr_model,
+    "1" = {
+      cat("using deterministic time-to-event functions for post-prandial resting bout\n")
+      self$ttEvent$ppr <- make_ttEvent_Det(wait_ppr)
+    },
+    "2" = {
+      cat("using shifted exponential time-to-event functions for post-prandial resting bout\n")
+      self$ttEvent$ppr <- make_ttEvent_Exp(rate_ppr,tmin_ppr)
+    },
+    "3" = {
+      cat("using shifted gamma time-to-event functions for post-prandial resting bout\n")
+      self$ttEvent$ppr <- make_ttEvent_Gamma(mean_ppr,cv_ppr,tmin_ppr)
+    },
+    {stop("invalid entry for 'ppr_model'\n")}
+  )
+}
+
+# set methods
+MBITES_Parameters$set(which = "public",name = "set_ttEvent",
+    value = set_ttEvent_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_ttEvent_ppr",
+    value = set_ttEvent_ppr_MBITES_Parameters, overwrite = TRUE
+)
+
+
+###############################################################################
+# Accessors (setters)
+###############################################################################
+
+set_defaultState_F_MBITES_Parameters <- function(defaultState_F){
+  if(!is.character(defaultState_F)){stop("'defaultState_F' must be a character\n")}
+  private$defaultState_F = defaultState_F
+}
+
+set_defaultState_M_MBITES_Parameters <- function(defaultState_M){
+  if(!is.character(defaultState_M)){stop("'defaultState_M' must be a character\n")}
+  private$defaultState_M = defaultState_M
+}
+
+#' set the string telling you what aquatic ecology model is being used
+set_aqua_model_MBITES_Parameters <- function(aqua_model){
+  if(!is.character(aqua_model)){stop("'aqua_model' must be a character\n")}
+  private$aqua_model = aqua_model
+}
+
+#' set dispersal (parameter to move even if resources are present)
+set_disperse_MBITES_Parameters <- function(disperse){
+  if(!is.numeric(disperse) & (disperse > 1 | disperse < 0)){stop("'disperse' must be between [0,1]\n")}
+  private$disperse = disperse
+}
+
+#' set 1/number of failed bouts until mosquito gives up and searches
+set_boutFail_p_MBITES_Parameters <- function(boutFail_p){
+  private$boutFail_p = boutFail_p
+}
+
+set_b_wts_MBITES_Parameters <- function(b_wts){
+  if(length(b_wts)!=5){stop("'b_wts' must be length 5\n")}
+  private$b_wts = b_wts
+}
+
+set_o_wts_MBITES_Parameters <- function(o_wts){
+  if(length(o_wts)!=5){stop("'o_wts' must be length 5\n")}
+  private$o_wts = o_wts
+}
+
+set_m_wts_MBITES_Parameters <- function(m_wts){
+  if(length(m_wts)!=5){stop("'m_wts' must be length 5\n")}
+  private$m_wts = m_wts
+}
+
+set_s_wts_MBITES_Parameters <- function(s_wts){
+  if(length(s_wts)!=5){stop("'s_wts' must be length 5\n")}
+  private$s_wts = s_wts
+}
+
+#' should be a named matrix because indexing is going to be on dimension names.
+set_InAndOut_MBITES_Parameters <- function(InAndOut){
+  if(!is.matrix(InAndOut)){stop("'InAndOut' must be a 5x5 matrix\n")}
+  private$InAndOut = InAndOut
+}
+
+set_tSwarm_MBITES_Parameters <- function(tSwarm){
+  private$tSwarm = tSwarm
+}
+
+set_Emax_MBITES_Parameters <- function(Emax){
+  private$Emax = Emax
+}
+
+set_Eb_MBITES_Parameters <- function(Eb){
+  private$Eb = Eb
+}
+
+set_Ep_MBITES_Parameters <- function(Ep){
+  private$Ep = Ep
+}
+
+set_eEndm_MBITES_Parameters <- function(eEndm){
+  private$eEndm = eEndm
+}
+
+set_eEndSd_MBITES_Parameters <- function(eEndSd){
+  private$eEndSd = eEndSd
+}
+
+set_estivationDay_MBITES_Parameters <- function(estivationDay){
+  private$estivationDay = estivationDay
+}
+
+set_energyPreG_MBITES_Parameters <- function(energyPreG){
+  private$energyPreG = energyPreG
+}
+
+set_preGsugar_MBITES_Parameters <- function(preGsugar){
+  private$preGsugar = preGsugar
+}
+
+set_energyFromBlood_b_MBITES_Parameters <- function(energyFromBlood_b){
+  private$energyFromBlood_b = energyFromBlood_b
+}
+
+set_S_u_MBITES_Parameters <- function(S_u){
+  private$S_u = S_u
+}
+
+set_omega_MBITES_Parameters <- function(omega){
+  private$omega = omega
+}
+
+set_S_sa_MBITES_Parameters <- function(S_sa){
+  private$S_sa = S_sa
+}
+
+set_S_sb_MBITES_Parameters <- function(S_sb){
+  private$S_sb = S_sb
+}
+
+set_S_w_MBITES_Parameters <- function(S_w){
+  private$S_w = S_w
+}
+
+set_S_p_MBITES_Parameters <- function(S_p){
+  private$S_p = S_p
+}
+
+set_Bs_surv_MBITES_Parameters <- function(Bs_surv){
+  private$Bs_surv = Bs_surv
+}
+
+set_Os_surv_MBITES_Parameters <- function(Os_surv){
+  private$Os_surv = Os_surv
+}
+
+set_Ms_surv_MBITES_Parameters <- function(Ms_surv){
+  private$Ms_surv = Ms_surv
+}
+
+set_Ss_surv_MBITES_Parameters <- function(Ss_surv){
+  private$Ss_surv = Ss_surv
+}
+
+set_B_surv_MBITES_Parameters <- function(B_surv){
+  private$B_surv = B_surv
+}
+
+set_O_surv_MBITES_Parameters <- function(O_surv){
+  private$O_surv = O_surv
+}
+
+set_M_surv_MBITES_Parameters <- function(M_surv){
+  private$M_surv = M_surv
+}
+
+set_S_surv_MBITES_Parameters <- function(S_surv){
+  private$S_surv = S_surv
+}
+
+set_Bs_succeed_MBITES_Parameters <- function(Bs_succeed){
+  private$Bs_succeed = Bs_succeed
+}
+
+set_Os_succeed_MBITES_Parameters <- function(Os_succeed){
+  private$Os_succeed = Os_succeed
+}
+
+set_Ms_succeed_MBITES_Parameters <- function(Ms_succeed){
+  private$Ms_succeed = Ms_succeed
+}
+
+set_Ss_succeed_MBITES_Parameters <- function(Ss_succeed){
+  private$Ss_succeed = Ss_succeed
+}
+
+set_B_succeed_MBITES_Parameters <- function(B_succeed){
+  private$B_succeed = B_succeed
+}
+
+set_O_succeed_MBITES_Parameters <- function(O_succeed){
+  private$O_succeed = O_succeed
+}
+
+set_M_succeed_MBITES_Parameters <- function(M_succeed){
+  private$M_succeed = M_succeed
+}
+
+set_S_succeed_MBITES_Parameters <- function(S_succeed){
+  private$S_succeed = S_succeed
+}
+
+set_surviveH_MBITES_Parameters <- function(surviveH){
+  private$surviveH = surviveH
+}
+
+set_probeH_MBITES_Parameters <- function(probeH){
+  private$probeH = probeH
+}
+
+set_surviveprobeH_MBITES_Parameters <- function(surviveprobeH){
+  private$surviveprobeH = surviveprobeH
+}
+
+set_feedH_MBITES_Parameters <- function(feedH){
+  private$feedH = feedH
+}
+
+set_surviveZ_MBITES_Parameters <- function(surviveZ){
+  private$surviveZ = surviveZ
+}
+
+set_feedZ_MBITES_Parameters <- function(feedZ){
+  private$feedZ = feedZ
+}
+
+set_PPR_a_MBITES_Parameters <- function(PPR_a){
+  private$PPR_a = PPR_a
+}
+
+set_PPR_b_MBITES_Parameters <- function(PPR_b){
+  private$PPR_b = PPR_b
+}
+
+set_S_a_MBITES_Parameters <- function(S_a){
+  private$S_a = S_a
+}
+
+set_S_b_MBITES_Parameters <- function(S_b){
+  private$S_b = S_b
+}
+
+set_ttsz_p_MBITES_Parameters <- function(ttsz_p){
+  private$ttsz_p = ttsz_p
+}
+
+set_ttsz_a_MBITES_Parameters <- function(ttsz_a){
+  private$ttsz_a = ttsz_a
+}
+
+set_ttsz_b_MBITES_Parameters <- function(ttsz_b){
+  private$ttsz_b = ttsz_b
+}
+
+set_ttr_a_MBITES_Parameters <- function(ttr_a){
+  private$ttr_a = ttr_a
+}
+
+set_ttr_b_MBITES_Parameters <- function(ttr_b){
+  private$ttr_b = ttr_b
+}
+
+set_chm_a_MBITES_Parameters <- function(chm_a){
+  private$chm_a = chm_a
+}
+
+set_chm_b_MBITES_Parameters <- function(chm_b){
+  private$chm_b = chm_b
+}
+
+set_sns_a_MBITES_Parameters <- function(sns_a){
+  private$sns_a = sns_a
+}
+
+set_sns_b_MBITES_Parameters <- function(sns_b){
+  private$sns_b = sns_b
+}
+
+set_bm_a_MBITES_Parameters <- function(bm_a){
+  private$bm_a = bm_a
+}
+
+set_bm_b_MBITES_Parameters <- function(bm_b){
+  private$bm_b = bm_b
+}
+
+set_of_a_MBITES_Parameters <- function(of_a){
+  private$of_a = of_a
+}
+
+set_of_b_MBITES_Parameters <- function(of_b){
+  private$of_b = of_b
+}
+
+set_bloodPerEgg_MBITES_Parameters <- function(bloodPerEgg){
+  private$bloodPerEgg = bloodPerEgg
+}
+
+set_bs_m_MBITES_Parameters <- function(bs_m){
+  private$bs_m = bs_m
+}
+
+set_bs_sd_MBITES_Parameters <- function(bs_sd){
+  private$bs_sd = bs_sd
+}
+
+set_maxBatch_MBITES_Parameters <- function(maxBatch){
+  private$maxBatch = maxBatch
+}
+
+set_emt_m_MBITES_Parameters <- function(emt_m){
+  private$emt_m = emt_m
+}
+
+set_emt_sd_MBITES_Parameters <- function(emt_sd){
+  private$emt_sd = emt_sd
+}
+
+set_rf_a_MBITES_Parameters <- function(rf_a){
+  private$rf_a = rf_a
+}
+
+set_rf_b_MBITES_Parameters <- function(rf_b){
+  private$rf_b = rf_b
+}
+
+# set methods
+MBITES_Parameters$set(which = "public",name = "set_defaultState_F",
+    value = set_defaultState_F_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_defaultState_M",
+    value = set_defaultState_M_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_aqua_model",
+    value = set_aqua_model_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_disperse",
+    value = set_disperse_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_boutFail_p",
+    value = set_boutFail_p_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_b_wts",
+    value = set_b_wts_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_o_wts",
+    value = set_o_wts_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_m_wts",
+    value = set_m_wts_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_s_wts",
+    value = set_s_wts_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_InAndOut",
+    value = set_InAndOut_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_tSwarm",
+    value = set_tSwarm_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_Emax",
+    value = set_Emax_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_Eb",
+    value = set_Eb_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_Ep",
+    value = set_Ep_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_eEndm",
+    value = set_eEndm_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_eEndSd",
+    value = set_eEndSd_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_estivationDay",
+    value = set_estivationDay_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_energyPreG",
+    value = set_energyPreG_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_preGsugar",
+    value = set_preGsugar_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_energyFromBlood_b",
+    value = set_energyFromBlood_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_S_u",
+    value = set_S_u_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_omega",
+    value = set_omega_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_S_sa",
+    value = set_S_sa_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_S_sb",
+    value = set_S_sb_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_S_w",
+    value = set_S_w_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_S_p",
+    value = set_S_p_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_Bs_surv",
+    value = set_Bs_surv_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_Os_surv",
+    value = set_Os_surv_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_Ms_surv",
+    value = set_Ms_surv_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_Ss_surv",
+    value = set_Ss_surv_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_B_surv",
+    value = set_B_surv_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_O_surv",
+    value = set_O_surv_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_M_surv",
+    value = set_M_surv_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_S_surv",
+    value = set_S_surv_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_Bs_succeed",
+    value = set_Bs_succeed_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_Os_succeed",
+    value = set_Os_succeed_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_Ms_succeed",
+    value = set_Ms_succeed_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_Ss_succeed",
+    value = set_Ss_succeed_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_B_succeed",
+    value = set_B_succeed_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_O_succeed",
+    value = set_O_succeed_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_M_succeed",
+    value = set_M_succeed_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_S_succeed",
+    value = set_S_succeed_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_surviveH",
+    value = set_surviveH_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_probeH",
+    value = set_probeH_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_surviveprobeH",
+    value = set_surviveprobeH_MBITES_Parameters, overwrite = TRUE
+)
+
+
+MBITES_Parameters$set(which = "public",name = "set_feedH",
+    value = set_feedH_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_surviveZ",
+    value = set_surviveZ_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_feedZ",
+    value = set_feedZ_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_PPR_a",
+    value = set_PPR_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_PPR_b",
+    value = set_PPR_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_S_a",
+    value = set_S_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_S_b",
+    value = set_S_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_ttsz_p",
+    value = set_ttsz_p_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_ttsz_a",
+    value = set_ttsz_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_ttsz_b",
+    value = set_ttsz_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_ttr_a",
+    value = set_ttr_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_ttr_b",
+    value = set_ttr_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_chm_a",
+    value = set_chm_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_chm_b",
+    value = set_chm_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_sns_a",
+    value = set_sns_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_sns_b",
+    value = set_sns_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_bm_a",
+    value = set_bm_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_bm_b",
+    value = set_bm_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_of_a",
+    value = set_of_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_of_b",
+    value = set_of_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_bloodPerEgg",
+    value = set_bloodPerEgg_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_bs_m",
+    value = set_bs_m_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_bs_sd",
+    value = set_bs_sd_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_maxBatch",
+    value = set_maxBatch_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_emt_m",
+    value = set_emt_m_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_emt_sd",
+    value = set_emt_sd_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_rf_a",
+    value = set_rf_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "set_rf_b",
+    value = set_rf_b_MBITES_Parameters, overwrite = TRUE
+)
+
+
+###############################################################################
+# Accessors (getters)
+###############################################################################
+
+get_defaultState_F_MBITES_Parameters <- function(){
+  return(private$defaultState_F)
+}
+
+get_defaultState_M_MBITES_Parameters <- function(){
+  return(private$defaultState_M)
+}
+
+#' get the string telling you what aquatic ecology model is being used
+get_aqua_model_MBITES_Parameters <- function(){
+  return(private$aqua_model)
+}
+
+#' get dispersal (parameter to move even if resources are present)
+get_disperse_MBITES_Parameters <- function(){
+  return(private$disperse)
+}
+
+#' get 1/number of failed bouts until mosquito gives up and searches
+get_boutFail_p_MBITES_Parameters <- function(){
+  return(private$boutFail_p)
+}
+
+#' MBITES Parameters: Return Resting Spot Weights for Behavioral States
+#'
+#' Return the specific weights for different resting spots associated with mosquito behavioral states.
+#'
+get_wts_MBITES_Parameters <- function(state){
+  switch(state,
+    B = {private$b_wts},
+    O = {private$o_wts},
+    M = {private$m_wts},
+    S = {private$s_wts},
+    {stop("illegal behavioral state entered from call to get_wts_MBITES_Parameters")}
+  )
+}
+
+#' should be a named matrix because indexing is going to be on dimension names.
+get_InAndOut_row_MBITES_Parameters <- function(i){
+  private$InAndOut[i,]
+}
+
+get_InAndOut_MBITES_Parameters <- function(){
+  private$InAndOut
+}
+
+get_tSwarm_MBITES_Parameters <- function(){
+  return(private$tSwarm)
+}
+
+get_Emax_MBITES_Parameters <- function(){
+  return(private$Emax)
+}
+
+get_Eb_MBITES_Parameters <- function(){
+  return(private$Eb)
+}
+
+get_Ep_MBITES_Parameters <- function(){
+  return(private$Ep)
+}
+
+get_eEndm_MBITES_Parameters <- function(){
+  return(private$eEndm)
+}
+
+get_eEndSd_MBITES_Parameters <- function(){
+  return(private$eEndSd)
+}
+
+get_estivationDay_MBITES_Parameters <- function(){
+  return(private$estivationDay)
+}
+
+get_energyPreG_MBITES_Parameters <- function(){
+  return(private$energyPreG)
+}
+
+get_preGsugar_MBITES_Parameters <- function(){
+  return(private$preGsugar)
+}
+
+get_energyFromBlood_b_MBITES_Parameters <- function(){
+  return(private$energyFromBlood_b)
+}
+
+get_S_u_MBITES_Parameters <- function(){
+  return(private$S_u)
+}
+
+get_omega_MBITES_Parameters <- function(){
+  return(private$omega)
+}
+
+get_S_sa_MBITES_Parameters <- function(){
+  return(private$S_sa)
+}
+
+get_S_sb_MBITES_Parameters <- function(){
+  return(private$S_sb)
+}
+
+get_S_w_MBITES_Parameters <- function(){
+  return(private$S_w)
+}
+
+get_S_p_MBITES_Parameters <- function(){
+  return(private$S_p)
+}
+
+get_Bs_surv_MBITES_Parameters <- function(){
+  return(private$Bs_surv)
+}
+
+get_Os_surv_MBITES_Parameters <- function(){
+  return(private$Os_surv)
+}
+
+get_Ms_surv_MBITES_Parameters <- function(){
+  return(private$Ms_surv)
+}
+
+get_Ss_surv_MBITES_Parameters <- function(){
+  return(private$Ss_surv)
+}
+
+get_B_surv_MBITES_Parameters <- function(){
+  return(private$B_surv)
+}
+
+get_O_surv_MBITES_Parameters <- function(){
+  return(private$O_surv)
+}
+
+get_M_surv_MBITES_Parameters <- function(){
+  return(private$M_surv)
+}
+
+get_S_surv_MBITES_Parameters <- function(){
+  return(private$S_surv)
+}
+
+get_Bs_succeed_MBITES_Parameters <- function(){
+  return(private$Bs_succeed)
+}
+
+get_Os_succeed_MBITES_Parameters <- function(){
+  return(private$Os_succeed)
+}
+
+get_Ms_succeed_MBITES_Parameters <- function(){
+  return(private$Ms_succeed)
+}
+
+get_Ss_succeed_MBITES_Parameters <- function(){
+  return(private$Ss_succeed)
+}
+
+get_B_succeed_MBITES_Parameters <- function(){
+  return(private$B_succeed)
+}
+
+get_O_succeed_MBITES_Parameters <- function(){
+  return(private$O_succeed)
+}
+
+get_M_succeed_MBITES_Parameters <- function(){
+  return(private$M_succeed)
+}
+
+get_S_succeed_MBITES_Parameters <- function(){
+  return(private$S_succeed)
+}
+
+get_surviveH_MBITES_Parameters <- function(){
+  return(private$surviveH)
+}
+
+get_probeH_MBITES_Parameters <- function(){
+  return(private$probeH)
+}
+
+get_surviveprobeH_MBITES_Parameters <- function(){
+  return(private$surviveprobeH)
+}
+
+get_feedH_MBITES_Parameters <- function(){
+  return(private$feedH)
+}
+
+get_surviveZ_MBITES_Parameters <- function(){
+  return(private$surviveZ)
+}
+
+get_feedZ_MBITES_Parameters <- function(){
+  return(private$feedZ)
+}
+
+get_PPR_a_MBITES_Parameters <- function(){
+  return(private$PPR_a)
+}
+
+get_PPR_b_MBITES_Parameters <- function(){
+  return(private$PPR_b)
+}
+
+get_S_a_MBITES_Parameters <- function(){
+  return(private$S_a)
+}
+
+get_S_b_MBITES_Parameters <- function(){
+  return(private$S_b)
+}
+
+get_ttsz_p_MBITES_Parameters <- function(){
+  return(private$ttsz_p)
+}
+
+get_ttsz_a_MBITES_Parameters <- function(){
+  return(private$ttsz_a)
+}
+
+get_ttsz_b_MBITES_Parameters <- function(){
+  return(private$ttsz_b)
+}
+
+get_ttr_a_MBITES_Parameters <- function(){
+  return(private$ttr_a)
+}
+
+get_ttr_b_MBITES_Parameters <- function(){
+  return(private$ttr_b)
+}
+
+get_chm_a_MBITES_Parameters <- function(){
+  return(private$chm_a)
+}
+
+get_chm_b_MBITES_Parameters <- function(){
+  return(private$chm_b)
+}
+
+get_sns_a_MBITES_Parameters <- function(){
+  return(private$sns_a)
+}
+
+get_sns_b_MBITES_Parameters <- function(){
+  return(private$sns_b)
+}
+
+get_bm_a_MBITES_Parameters <- function(){
+  return(private$bm_a)
+}
+
+get_bm_b_MBITES_Parameters <- function(){
+  return(private$bm_b)
+}
+
+get_of_a_MBITES_Parameters <- function(){
+  return(private$of_a)
+}
+
+get_of_b_MBITES_Parameters <- function(){
+  return(private$of_b)
+}
+
+get_bloodPerEgg_MBITES_Parameters <- function(){
+  return(private$bloodPerEgg)
+}
+
+get_bs_m_MBITES_Parameters <- function(){
+  return(private$bs_m)
+}
+
+get_bs_sd_MBITES_Parameters <- function(){
+  return(private$bs_sd)
+}
+
+get_maxBatch_MBITES_Parameters <- function(){
+  return(private$maxBatch)
+}
+
+get_emt_m_MBITES_Parameters <- function(){
+  return(private$emt_m)
+}
+
+get_emt_sd_MBITES_Parameters <- function(){
+  return(private$emt_sd)
+}
+
+get_rf_a_MBITES_Parameters <- function(){
+  return(private$rf_a)
+}
+
+get_rf_b_MBITES_Parameters <- function(){
+  return(private$rf_b)
+}
+
+# set methods
+MBITES_Parameters$set(which = "public",name = "get_defaultState_F",
+    value = get_defaultState_F_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_defaultState_M",
+    value = get_defaultState_M_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_aqua_model",
+    value = get_aqua_model_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_disperse",
+    value = get_disperse_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_boutFail_p",
+    value = get_boutFail_p_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_wts",
+    value = get_wts_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_InAndOut_row",
+    value = get_InAndOut_row_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_InAndOut",
+    value = get_InAndOut_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_tSwarm",
+    value = get_tSwarm_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_Emax",
+    value = get_Emax_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_Eb",
+    value = get_Eb_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_Ep",
+    value = get_Ep_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_eEndm",
+    value = get_eEndm_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_eEndSd",
+    value = get_eEndSd_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_estivationDay",
+    value = get_estivationDay_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_energyPreG",
+    value = get_energyPreG_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_preGsugar",
+    value = get_preGsugar_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_energyFromBlood_b",
+    value = get_energyFromBlood_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_S_u",
+    value = get_S_u_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_omega",
+    value = get_omega_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_S_sa",
+    value = get_S_sa_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_S_sb",
+    value = get_S_sb_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_S_w",
+    value = get_S_w_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_S_p",
+    value = get_S_p_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_Bs_surv",
+    value = get_Bs_surv_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_Os_surv",
+    value = get_Os_surv_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_Ms_surv",
+    value = get_Ms_surv_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_Ss_surv",
+    value = get_Ss_surv_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_B_surv",
+    value = get_B_surv_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_O_surv",
+    value = get_O_surv_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_M_surv",
+    value = get_M_surv_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_S_surv",
+    value = get_S_surv_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_Bs_succeed",
+    value = get_Bs_succeed_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_Os_succeed",
+    value = get_Os_succeed_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_Ms_succeed",
+    value = get_Ms_succeed_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_Ss_succeed",
+    value = get_Ss_succeed_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_B_succeed",
+    value = get_B_succeed_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_O_succeed",
+    value = get_O_succeed_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_M_succeed",
+    value = get_M_succeed_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_S_succeed",
+    value = get_S_succeed_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_surviveH",
+    value = get_surviveH_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_probeH",
+    value = get_probeH_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_surviveprobeH",
+    value = get_surviveprobeH_MBITES_Parameters, overwrite = TRUE
+)
+
+
+MBITES_Parameters$set(which = "public",name = "get_feedH",
+    value = get_feedH_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_surviveZ",
+    value = get_surviveZ_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_feedZ",
+    value = get_feedZ_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_PPR_a",
+    value = get_PPR_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_PPR_b",
+    value = get_PPR_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_S_a",
+    value = get_S_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_S_b",
+    value = get_S_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_ttsz_p",
+    value = get_ttsz_p_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_ttsz_a",
+    value = get_ttsz_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_ttsz_b",
+    value = get_ttsz_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_ttr_a",
+    value = get_ttr_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_ttr_b",
+    value = get_ttr_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_chm_a",
+    value = get_chm_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_chm_b",
+    value = get_chm_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_sns_a",
+    value = get_sns_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_sns_b",
+    value = get_sns_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_bm_a",
+    value = get_bm_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_bm_b",
+    value = get_bm_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_of_a",
+    value = get_of_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_of_b",
+    value = get_of_b_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_bloodPerEgg",
+    value = get_bloodPerEgg_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_bs_m",
+    value = get_bs_m_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_bs_sd",
+    value = get_bs_sd_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_maxBatch",
+    value = get_maxBatch_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_emt_m",
+    value = get_emt_m_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_emt_sd",
+    value = get_emt_sd_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_rf_a",
+    value = get_rf_a_MBITES_Parameters, overwrite = TRUE
+)
+
+MBITES_Parameters$set(which = "public",name = "get_rf_b",
+    value = get_rf_b_MBITES_Parameters, overwrite = TRUE
+)
+
+
+###############################################################################
+# Set Parameters
+###############################################################################
+
+#' MBITES Parameters: Set Parameters
+#'
+#' Parameter descriptions below.
+#'
+#' @param defaultState_F character of behavioral state that female mosquito has when it emerges
+#' @param defaultState_M character of behavioral state that male mosquito has when it emerges
+#' @param aqua_model character in \code{emerge,EL4P}
+#' @param disperse probability for mosquito to initiate a search bout even if resources are present, called from \code{\link{mbites_checkForResources}}
+#' @param boutFail_p geometric probability to give up and initiate a search after a failed bout, called from \code{\link{mbites_boutFailCheck}}
+#' @param b_wts behavior-specific landing spot weights, caled from \code{\link{mbites_newSpot}}
+#' @param o_wts behavior-specific landing spot weights, caled from \code{\link{mbites_newSpot}}
+#' @param m_wts behavior-specific landing spot weights, caled from \code{\link{mbites_newSpot}}
+#' @param s_wts behavior-specific landing spot weights, caled from \code{\link{mbites_newSpot}}
+#' @param InAndOut named transition matrix between landing spots, called from \code{\link{mbites_newSpot}}
+#' @param tSwarm time of day to start swarming behavior, called from \code{\link{mbites_findSwarm}}
+#' @param Emax related to daily estivation probability, called from \code{\link{mbites_prEstivate}}
+#' @param Eb related to daily estivation probability, called from \code{\link{mbites_prEstivate}}
+#' @param Ep probability to survive estivation, called from \code{\link{mbites_checkEstivation1}}
+#' @param eEndm mean day of year to wakeup from estivation, called from \code{\link{mbites_wakeUpTime}}
+#' @param eEndSd sd of day of year to wakeup from estivation, called from \code{\link{mbites_wakeUpTime}}
+#' @param estivationDay day of the year to deterministically initiate estivation, called from \code{\link{mbites_checkEstivation2}}
+#' @param energyPreG pre-gonotrophic energy requirement, called from \code{\link{mbites_BloodEnergetics}} and \code{\link{mbites_sugarMeal}}
+#' @param preGsugar amount of energy a sugar meal contributes to the pre-gonotrophic energy requirement, called from \code{\link{mbites_sugarMeal}}
+#' @param energyFromBlood_b amount of energy derived per unit of blood, called from \code{\link{mbites_energyFromBlood}}
+#' @param S_u amount of energy burned by a mosquito during a bout, called from \code{\link{mbites_flightBurnEnergy}}
+#' @param omega scaling parameter called in \code{\link{mbites_pSugarBout}}
+#' @param S_sa parameter for probability to queue a sugar bout as function of a mosquito's energy, called from \code{\link{mbites_pSugarBout}}
+#' @param S_sb parameter for probability to queue a sugar bout as function of a mosquito's energy, called from \code{\link{mbites_pSugarBout}}
+#' @param S_w scaling parameter called in \code{\link{mbites_pSugarBout}}
+#' @param S_p scaling parameter called in \code{\link{mbites_pSugarBout}}
+#' @param Bs_surv blood feeding search bout baseline survival probability, called from \code{\link{surviveFlight}}
+#' @param Os_surv oviposition search bout baseline survival probability, called from \code{\link{surviveFlight}}
+#' @param Ms_surv mating search bout baseline survival probability, called from \code{\link{surviveFlight}}
+#' @param Ss_surv sugar feeding search bout baseline survival probability, called from \code{\link{surviveFlight}}
+#' @param B_surv blood feeding bout baseline survival probability, called from \code{\link{surviveFlight}}
+#' @param O_surv oviposition bout baseline survival probability, called from \code{\link{surviveFlight}}
+#' @param M_surv mating bout baseline survival probability, called from \code{\link{surviveFlight}}
+#' @param S_surv sugar feeding bout baseline survival probability, called from \code{\link{surviveFlight}}
+#' @param Bs_succeed unconditional probability for blood feeding search bout to succeed
+#' @param Os_succeed unconditional probability for egg laying search bout to succeed
+#' @param Ms_succeed unconditional probability for mating search bout to succeed
+#' @param Ss_succeed unconditional probability for sugar feeding search bout to succeed
+#' @param B_succeed unconditional probability for blood feeding attempt bout to succeed
+#' @param O_succeed unconditional probability for egg laying attempt bout to succeed
+#' @param M_succeed unconditional probability for mating attempt bout to succeed
+#' @param S_succeed unconditional probability for sugar feeding attempt bout to succeed
+#' @param surviveH survival probability for initial encounter (survive to probe)
+#' @param probeH probability that undeterred during probing
+#' @param surviveprobeH survival probability for host probing
+#' @param feedH probability to successfully feed
+#' @param surviveZ survival probability for initial encounter (survive to feed)
+#' @param feedZ probability to successfully feed
+#' @param PPR_a parameter for probability of death during post-prandial resting as function of blood meal size, called from \code{\link{mbites_pPPRFlight}}
+#' @param PPR_b parameter for probability of death during post-prandial resting as function of blood meal size, called from \code{\link{mbites_pPPRFlight}}
+#' @param S_a parameter for probability of death due to energy reserves, called from \code{\link{mbites_pEnergySurvival}}
+#' @param S_b parameter for probability of death due to energy reserves, called from \code{\link{mbites_pEnergySurvival}}
+#' @param ttsz_p zero-inflation for wing damage (probability of zero damage incurred), called from \code{\link{mbites_WingTattering}}
+#' @param ttsz_a alpha parameter for beta distributed wing damage, called from \code{\link{mbites_WingTattering}}
+#' @param ttsz_b beta parameter for beta distributed wing damage, called from \code{\link{mbites_WingTattering}}
+#' @param ttr_a parameter for probability of death due to wing tattering, called from \code{\link{mbites_pTatter}}
+#' @param ttr_b parameter for probability of death due to wing tattering, called from \code{\link{mbites_pTatter}}
+#' @param chm_a parameter for probability of death due to chemical damage, called from \code{\link{mbites_pChem}}
+#' @param chm_b parameter for probability of death due to chemical damage, called from \code{\link{mbites_pChem}}
+#' @param sns_a parameter for probability of death due to senescence, called from \code{\link{mbites_pSenesce}}
+#' @param sns_b parameter for probability of death due to senescence, called from \code{\link{mbites_pSenesce}}
+#' @param bm_a alpha parameter for beta distributed blood meal size, called from \code{\link{mbites_rBloodMealSize}}
+#' @param bm_b beta parameter for beta distributed blood meal size, called from \code{\link{mbites_rBloodMealSize}}
+#' @param of_a parameter for probability of death due to overfeeding, called from \code{\link{mbites_pOverFeed}}
+#' @param of_b parameter for probability of death due to overfeeding, called from \code{\link{mbites_pOverFeed}}
+#' @param bloodPerEgg units of blood required for each egg to develop, called from \code{\link{mbites_oogenesis2}}
+#' @param bs_m mean of normally distributed egg batch size, called from \code{\link{mbites_rBatchSizeNorm}}
+#' @param bs_sd standard deviation of normally distributed egg batch size, called from \code{\link{mbites_rBatchSizeNorm}}
+#' @param maxBatch maximum allowable egg batch size, called from \code{\link{mbites_rBatchSizeBms}}
+#' @param emt_m mean of normally distributed egg maturation time, called from \code{\link{mbites_rEggMaturationTimeNorm}}
+#' @param emt_sd standard deviation of normally distributed egg maturation time, called from \code{\link{mbites_rEggMaturationTimeNorm}}
+#' @param rf_a parameter for probably of refeeding as function of blood meal size, called from \code{\link{mbites_pReFeed}}
+#' @param rf_b parameter for probably of refeeding as function of blood meal size, called from \code{\link{mbites_pReFeed}}
+#'
+set_parameters_MBITES_Parameters <- function(
+
+  defaultState_F       = "B",
+  defaultState_M       = "S",
+  aqua_model           = "emerge",
+
+  # Search behavior
+  disperse             = 0, # P(move) even if resources present when i do checks
+
+  # Post-bout Landing, House Entering, and Resting
+  boutFail_p           = 1/3, # 1/number of failed bouts until mosquito gives up and searches
+  b_wts                = rep(1,5), # weights on {i,r,v,w,l}
+  o_wts                = rep(1,5),
+  m_wts                = rep(1,5),
+  s_wts                = rep(1,5),
+  InAndOut             = matrix(data = c(4,2,2,1,6,
+                                         2,1,1,1,4,
+                                         1,1,1,1,2,
+                                         0,0,0,0,1,
+                                         1,1,2,1,0),
+                                         nrow = 5,ncol = 5,byrow = TRUE,dimnames = list(c("i","w","v","r","l"),c("i","w","v","r","l"))), # weights on transitioning between resting spots
+
+  # Timing
+  tSwarm               = 18.5/24, # mating swarm timing
+  # estivation 1
+  Emax                 = NaN,
+  Eb                   = NaN,
+  Ep                   = NaN,
+  eEndm                = NaN,
+  eEndSd               = NaN,
+  # estivation 2
+  estivationDay        = NaN,
+
+  # Energetics
+  energyPreG           = 0, # pre-gonotrophic energy requirement
+  preGsugar            = 0, # sugar energy that can satisfy pre-gonotrophic energy
+  energyFromBlood_b    = 0.25, # half-maximum parameter for mbites_energyFromBlood
+  S_u                  = 1/7, # energy expended during a flight
+
+  # pSugarBout
+  omega                = 0,
+  S_sa                 = 25,
+  S_sb                 = 20,
+  S_w                  = 5,
+  S_p                  = 2,
+
+  # Survival (baseline survival, see MBITES-Survival)
+  Bs_surv              = 0.95,
+  Os_surv              = 0.90,
+  Ms_surv              = 0.98,
+  Ss_surv              = 0.98,
+
+  B_surv               = 0.98,
+  O_surv               = 0.98,
+  M_surv               = 0.98,
+  S_surv               = 0.98,
+
+  # success
+  Bs_succeed              = 0.99,
+  Os_succeed              = 0.99,
+  Ms_succeed              = 0.99,
+  Ss_succeed              = 0.99,
+  B_succeed               = 0.95,
+  O_succeed               = 0.95,
+  M_succeed               = 0.99,
+  S_succeed               = 0.99,
+
+  surviveH                = 1,
+  probeH                  = 1,
+  surviveprobeH           = 1,
+  feedH                   = 1,
+  surviveZ                = 1,
+  feedZ                   = 1,
+
+  PPR_a                = 15, # mbites_pPPRFlight
+  PPR_b                = 300, # mbites_pPPRFlight
+  S_a                  = 20, # mbites_pEnergySurvival
+  S_b                  = 10, # mbites_pEnergySurvival
+
+  ttsz_p               = 0.5, # wing tattering (size of damage)
+  ttsz_a               = 5,
+  ttsz_b               = 95,
+
+  ttr_a                = 15, # wing tattering (probability of death)
+  ttr_b                = 500,
+
+  chm_a                = 7.5, # chemical damage to mosquito body
+  chm_b                = 500,
+
+  sns_a                = 0.085, # senescence parameters
+  sns_b                = 100, # senescence parameters
+
+  # BloodMeal
+  bm_a                 = 7.5, # Beta-distributed bloodmeal size
+  bm_b                 = 2.5, # Beta-distributed bloodmeal size
+
+  # overfeeding
+  of_a                 = 5,
+  of_b                 = 5e3,
+
+  # Oogenesis
+  bloodPerEgg          = 0.05, # egg provision: how much blood does each egg need?
+  bs_m                 = 50, # mean of normally dist. egg batch
+  bs_sd                = 5, # sd of normally dist. egg batch
+  maxBatch             = 60, # max batch size
+  emt_m                = 3, # mean of normally dist. maturation time
+  emt_sd               = 1, # sd of normally dist. maturation time
+
+  rf_a                 = 10, # refeeding probability
+  rf_b                 = 3
+
+){
+
+  private$defaultState_F       = defaultState_F
+  private$defaultState_M       = defaultState_M
+  private$aqua_model           = aqua_model
+  private$disperse             = disperse
+  private$boutFail_p           = boutFail_p
+  private$b_wts                = b_wts
+  private$o_wts                = o_wts
+  private$m_wts                = m_wts
+  private$s_wts                = s_wts
+  private$InAndOut             = InAndOut
+  private$tSwarm               = tSwarm
+  private$Emax                 = Emax
+  private$Eb                   = Eb
+  private$Ep                   = Ep
+  private$eEndm                = eEndm
+  private$eEndSd               = eEndSd
+  private$estivationDay        = estivationDay
+  private$energyPreG           = energyPreG
+  private$preGsugar            = preGsugar
+  private$energyFromBlood_b    = energyFromBlood_b
+  private$S_u                  = S_u
+  private$omega                = omega
+  private$S_sb                 = S_sb
+  private$S_sa                 = S_sa
+  private$S_w                  = S_w
+  private$S_p                  = S_p
+  private$Bs_surv              = Bs_surv
+  private$Os_surv              = Os_surv
+  private$Ms_surv              = Ms_surv
+  private$Ss_surv              = Ss_surv
+  private$B_surv               = B_surv
+  private$O_surv               = O_surv
+  private$M_surv               = M_surv
+  private$S_surv               = S_surv
+  private$Bs_succeed           = Bs_succeed
+  private$Os_succeed           = Os_succeed
+  private$Ms_succeed           = Ms_succeed
+  private$Ss_succeed           = Ss_succeed
+  private$B_succeed            = B_succeed
+  private$O_succeed            = O_succeed
+  private$M_succeed            = M_succeed
+  private$S_succeed            = S_succeed
+  private$surviveH             = surviveH
+  private$probeH               = probeH
+  private$surviveprobeH        = surviveprobeH
+  private$feedH                = feedH
+  private$surviveZ             = surviveZ
+  private$feedZ                = feedZ
+  private$PPR_a                = PPR_a
+  private$PPR_b                = PPR_b
+  private$S_a                  = S_a
+  private$S_b                  = S_b
+  private$ttsz_p               = ttsz_p
+  private$ttsz_a               = ttsz_a
+  private$ttsz_b               = ttsz_b
+  private$ttr_a                = ttr_a
+  private$ttr_b                = ttr_b
+  private$chm_a                = chm_a
+  private$chm_b                = chm_b
+  private$sns_a                = sns_a
+  private$sns_b                = sns_b
+  private$bm_a                 = bm_a
+  private$bm_b                 = bm_b
+  private$of_a                 = of_a
+  private$of_b                 = of_b
+  private$bloodPerEgg          = bloodPerEgg
+  private$bs_m                 = bs_m
+  private$bs_sd                = bs_sd
+  private$maxBatch             = maxBatch
+  private$emt_m                = emt_m
+  private$emt_sd               = emt_sd
+  private$rf_a                 = rf_a
+  private$rf_b                 = rf_b
+
+}
+
+# set methods
+MBITES_Parameters$set(which = "public",name = "set_parameters",
+    value = set_parameters_MBITES_Parameters, overwrite = TRUE
+)
+
+
+###############################################################################
+# assign MBITES parameters instance in the package namespace (a bit hacky)
+###############################################################################
+
+Parameters <- MBITES_Parameters$new()
+rspot <- c("i","w","v","r","l")
