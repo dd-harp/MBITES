@@ -57,7 +57,7 @@ for(i in 1:seq_along(peridomestic_data)){
 
   seed <- peridomestic_data[[i]]$seed
   set.seed(seed)
-  cat(" --- setting up simulation initial conditions ",i," of 26 --- \n")
+  cat(" --- running simulation ",i," of 26 --- \n")
 
 
   ###############################################################################
