@@ -12,11 +12,7 @@
 ###############################################################################
 
 rm(list = ls());gc()
-
-.libPaths( c( .libPaths(), "/ihme/malaria_modeling/dtcitron/Rlibs") )
-library(MBITES, lib.loc = "/ihme/malaria_modeling/dtcitron/Rlibs")
-
-
+library(here)
 
 
 ###############################################################################
@@ -84,8 +80,10 @@ mosquitos = data.frame(
 # Run MBITES
 ###############################################################################
 
-directory <- "/ihme/malaria_modeling/dtcitron/MBITES_demo/trivial"
-#directory <- "/Users/slwu89/Desktop/mbites/trivial/"
+directory <- here("output/trivial/")
+if(!dir.exists(directory)){
+  dir.create(directory,recursive = T)
+}
 
 # initialize methods
 MBITES_Setup_MBDETES()
@@ -118,7 +116,7 @@ Human_NULL_Initialize(humans)
 MBITES_Initialize(mosquitos)
 
 # run simulation
-set_output(directory = directory,runID = 3)
+set_output(directory = directory,runID = 1)
 
 simulation(tMax = 365*5,pretty = TRUE)
 hardreset()
@@ -132,7 +130,7 @@ library(jsonlite)
 library(ggplot2)
 
 # where the files can be found
-output_dir <- paste0(directory,"run3")
+output_dir <- paste0(directory,"run1")
 
 mosquitos_df <- fromJSON(paste0(output_dir,"/mosquito_F_3.json"), flatten = TRUE)
 mosquitos_df <- mosquitos_df[-which(sapply(mosquitos_df$id,is.null)),]
