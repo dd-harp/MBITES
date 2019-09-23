@@ -17,12 +17,13 @@
 ###############################################################################
 
 rm(list=ls());gc()
+library(here)
 
 # set up
-script_dir <- "/Users/slwu89/Desktop/git/MASH-Main/MASH-dev/SeanWu/MBITES-Scripts/"
-out_dir <- "/Users/slwu89/Desktop/mbites/peridomIHME/finals/"
-analysis_dir <- "/Users/slwu89/Desktop/mbites/peridomIHME/analyzed/"
-lscape_dir <- "/Users/slwu89/Desktop/git/MASH-Main/MASH-dev/DavidSmith/MBITES-Demo/"
+script_dir <- here("scripts/")
+out_dir <- here("output/peridom/")
+analysis_dir <- here("output/peridom_analyzed/")
+lscape_dir <- here("data/pointsets/")
 
 library(Rcpp)
 library(lokern)
@@ -218,12 +219,3 @@ for(i in 1:n){
 }
 
 saveRDS(object = EIRs,file = paste0(analysis_dir,"EIR.rds"),compress = TRUE)
-
-
-###############################################################################
-# process landscapes
-###############################################################################
-
-
-# dist_mat <- as.matrix(read.csv(paste0(directory,"DavidSmith/MBITES-Demo/dist_",run,".csv"), header = FALSE))
-# kernel <- as.matrix(read.csv(paste0(directory,"DavidSmith/MBITES-Demo/movement_",run,".csv"), header = FALSE))
