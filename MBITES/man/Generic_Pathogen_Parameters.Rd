@@ -4,9 +4,8 @@
 \name{Generic_Pathogen_Parameters}
 \alias{Generic_Pathogen_Parameters}
 \title{Generic Pathogen Class}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-Generic_Pathogen_Parameters
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 i'm a class!
@@ -34,3 +33,69 @@ i'm a class!
 
 \keyword{R6}
 \keyword{class}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{Generic_Pathogen_Parameters$new()}}
+\item \href{#method-finalize}{\code{Generic_Pathogen_Parameters$finalize()}}
+\item \href{#method-get_b}{\code{Generic_Pathogen_Parameters$get_b()}}
+\item \href{#method-get_c}{\code{Generic_Pathogen_Parameters$get_c()}}
+\item \href{#method-get_human_incubation}{\code{Generic_Pathogen_Parameters$get_human_incubation()}}
+\item \href{#method-get_mosquito_incubation}{\code{Generic_Pathogen_Parameters$get_mosquito_incubation()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pathogen_Parameters$new()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-finalize"></a>}}
+\if{latex}{\out{\hypertarget{method-finalize}{}}}
+\subsection{Method \code{finalize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pathogen_Parameters$finalize()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_b"></a>}}
+\if{latex}{\out{\hypertarget{method-get_b}{}}}
+\subsection{Method \code{get_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pathogen_Parameters$get_b()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_c"></a>}}
+\if{latex}{\out{\hypertarget{method-get_c}{}}}
+\subsection{Method \code{get_c()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pathogen_Parameters$get_c()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_human_incubation"></a>}}
+\if{latex}{\out{\hypertarget{method-get_human_incubation}{}}}
+\subsection{Method \code{get_human_incubation()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pathogen_Parameters$get_human_incubation()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_mosquito_incubation"></a>}}
+\if{latex}{\out{\hypertarget{method-get_mosquito_incubation}{}}}
+\subsection{Method \code{get_mosquito_incubation()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pathogen_Parameters$get_mosquito_incubation()}\if{html}{\out{</div>}}
+}
+
+}
+}

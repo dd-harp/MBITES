@@ -4,9 +4,8 @@
 \name{MBITES_Parameters}
 \alias{MBITES_Parameters}
 \title{MBITES Parameters Singleton}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-MBITES_Parameters
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 This class is a singleton object in the \code{MBITES} package namespace that stores parameters needed for the MBITES simulation.
@@ -36,3 +35,1624 @@ It can be accessed by \code{MBITES:::MBITES_Pars}.
 
 \keyword{R6}
 \keyword{class}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{MBITES_Parameters$new()}}
+\item \href{#method-finalize}{\code{MBITES_Parameters$finalize()}}
+\item \href{#method-set_ttEvent}{\code{MBITES_Parameters$set_ttEvent()}}
+\item \href{#method-set_ttEvent_ppr}{\code{MBITES_Parameters$set_ttEvent_ppr()}}
+\item \href{#method-set_defaultState_F}{\code{MBITES_Parameters$set_defaultState_F()}}
+\item \href{#method-set_defaultState_M}{\code{MBITES_Parameters$set_defaultState_M()}}
+\item \href{#method-set_aqua_model}{\code{MBITES_Parameters$set_aqua_model()}}
+\item \href{#method-set_disperse}{\code{MBITES_Parameters$set_disperse()}}
+\item \href{#method-set_boutFail_p}{\code{MBITES_Parameters$set_boutFail_p()}}
+\item \href{#method-set_b_wts}{\code{MBITES_Parameters$set_b_wts()}}
+\item \href{#method-set_o_wts}{\code{MBITES_Parameters$set_o_wts()}}
+\item \href{#method-set_m_wts}{\code{MBITES_Parameters$set_m_wts()}}
+\item \href{#method-set_s_wts}{\code{MBITES_Parameters$set_s_wts()}}
+\item \href{#method-set_InAndOut}{\code{MBITES_Parameters$set_InAndOut()}}
+\item \href{#method-set_tSwarm}{\code{MBITES_Parameters$set_tSwarm()}}
+\item \href{#method-set_Emax}{\code{MBITES_Parameters$set_Emax()}}
+\item \href{#method-set_Eb}{\code{MBITES_Parameters$set_Eb()}}
+\item \href{#method-set_Ep}{\code{MBITES_Parameters$set_Ep()}}
+\item \href{#method-set_eEndm}{\code{MBITES_Parameters$set_eEndm()}}
+\item \href{#method-set_eEndSd}{\code{MBITES_Parameters$set_eEndSd()}}
+\item \href{#method-set_estivationDay}{\code{MBITES_Parameters$set_estivationDay()}}
+\item \href{#method-set_energyPreG}{\code{MBITES_Parameters$set_energyPreG()}}
+\item \href{#method-set_preGsugar}{\code{MBITES_Parameters$set_preGsugar()}}
+\item \href{#method-set_energyFromBlood_b}{\code{MBITES_Parameters$set_energyFromBlood_b()}}
+\item \href{#method-set_S_u}{\code{MBITES_Parameters$set_S_u()}}
+\item \href{#method-set_omega}{\code{MBITES_Parameters$set_omega()}}
+\item \href{#method-set_S_sa}{\code{MBITES_Parameters$set_S_sa()}}
+\item \href{#method-set_S_sb}{\code{MBITES_Parameters$set_S_sb()}}
+\item \href{#method-set_S_w}{\code{MBITES_Parameters$set_S_w()}}
+\item \href{#method-set_S_p}{\code{MBITES_Parameters$set_S_p()}}
+\item \href{#method-set_Bs_surv}{\code{MBITES_Parameters$set_Bs_surv()}}
+\item \href{#method-set_Os_surv}{\code{MBITES_Parameters$set_Os_surv()}}
+\item \href{#method-set_Ms_surv}{\code{MBITES_Parameters$set_Ms_surv()}}
+\item \href{#method-set_Ss_surv}{\code{MBITES_Parameters$set_Ss_surv()}}
+\item \href{#method-set_B_surv}{\code{MBITES_Parameters$set_B_surv()}}
+\item \href{#method-set_O_surv}{\code{MBITES_Parameters$set_O_surv()}}
+\item \href{#method-set_M_surv}{\code{MBITES_Parameters$set_M_surv()}}
+\item \href{#method-set_S_surv}{\code{MBITES_Parameters$set_S_surv()}}
+\item \href{#method-set_Bs_succeed}{\code{MBITES_Parameters$set_Bs_succeed()}}
+\item \href{#method-set_Os_succeed}{\code{MBITES_Parameters$set_Os_succeed()}}
+\item \href{#method-set_Ms_succeed}{\code{MBITES_Parameters$set_Ms_succeed()}}
+\item \href{#method-set_Ss_succeed}{\code{MBITES_Parameters$set_Ss_succeed()}}
+\item \href{#method-set_B_succeed}{\code{MBITES_Parameters$set_B_succeed()}}
+\item \href{#method-set_O_succeed}{\code{MBITES_Parameters$set_O_succeed()}}
+\item \href{#method-set_M_succeed}{\code{MBITES_Parameters$set_M_succeed()}}
+\item \href{#method-set_S_succeed}{\code{MBITES_Parameters$set_S_succeed()}}
+\item \href{#method-set_surviveH}{\code{MBITES_Parameters$set_surviveH()}}
+\item \href{#method-set_probeH}{\code{MBITES_Parameters$set_probeH()}}
+\item \href{#method-set_surviveprobeH}{\code{MBITES_Parameters$set_surviveprobeH()}}
+\item \href{#method-set_feedH}{\code{MBITES_Parameters$set_feedH()}}
+\item \href{#method-set_surviveZ}{\code{MBITES_Parameters$set_surviveZ()}}
+\item \href{#method-set_feedZ}{\code{MBITES_Parameters$set_feedZ()}}
+\item \href{#method-set_PPR_a}{\code{MBITES_Parameters$set_PPR_a()}}
+\item \href{#method-set_PPR_b}{\code{MBITES_Parameters$set_PPR_b()}}
+\item \href{#method-set_S_a}{\code{MBITES_Parameters$set_S_a()}}
+\item \href{#method-set_S_b}{\code{MBITES_Parameters$set_S_b()}}
+\item \href{#method-set_ttsz_p}{\code{MBITES_Parameters$set_ttsz_p()}}
+\item \href{#method-set_ttsz_a}{\code{MBITES_Parameters$set_ttsz_a()}}
+\item \href{#method-set_ttsz_b}{\code{MBITES_Parameters$set_ttsz_b()}}
+\item \href{#method-set_ttr_a}{\code{MBITES_Parameters$set_ttr_a()}}
+\item \href{#method-set_ttr_b}{\code{MBITES_Parameters$set_ttr_b()}}
+\item \href{#method-set_chm_a}{\code{MBITES_Parameters$set_chm_a()}}
+\item \href{#method-set_chm_b}{\code{MBITES_Parameters$set_chm_b()}}
+\item \href{#method-set_sns_a}{\code{MBITES_Parameters$set_sns_a()}}
+\item \href{#method-set_sns_b}{\code{MBITES_Parameters$set_sns_b()}}
+\item \href{#method-set_bm_a}{\code{MBITES_Parameters$set_bm_a()}}
+\item \href{#method-set_bm_b}{\code{MBITES_Parameters$set_bm_b()}}
+\item \href{#method-set_of_a}{\code{MBITES_Parameters$set_of_a()}}
+\item \href{#method-set_of_b}{\code{MBITES_Parameters$set_of_b()}}
+\item \href{#method-set_bloodPerEgg}{\code{MBITES_Parameters$set_bloodPerEgg()}}
+\item \href{#method-set_bs_m}{\code{MBITES_Parameters$set_bs_m()}}
+\item \href{#method-set_bs_sd}{\code{MBITES_Parameters$set_bs_sd()}}
+\item \href{#method-set_maxBatch}{\code{MBITES_Parameters$set_maxBatch()}}
+\item \href{#method-set_emt_m}{\code{MBITES_Parameters$set_emt_m()}}
+\item \href{#method-set_emt_sd}{\code{MBITES_Parameters$set_emt_sd()}}
+\item \href{#method-set_rf_a}{\code{MBITES_Parameters$set_rf_a()}}
+\item \href{#method-set_rf_b}{\code{MBITES_Parameters$set_rf_b()}}
+\item \href{#method-get_defaultState_F}{\code{MBITES_Parameters$get_defaultState_F()}}
+\item \href{#method-get_defaultState_M}{\code{MBITES_Parameters$get_defaultState_M()}}
+\item \href{#method-get_aqua_model}{\code{MBITES_Parameters$get_aqua_model()}}
+\item \href{#method-get_disperse}{\code{MBITES_Parameters$get_disperse()}}
+\item \href{#method-get_boutFail_p}{\code{MBITES_Parameters$get_boutFail_p()}}
+\item \href{#method-get_wts}{\code{MBITES_Parameters$get_wts()}}
+\item \href{#method-get_InAndOut_row}{\code{MBITES_Parameters$get_InAndOut_row()}}
+\item \href{#method-get_InAndOut}{\code{MBITES_Parameters$get_InAndOut()}}
+\item \href{#method-get_tSwarm}{\code{MBITES_Parameters$get_tSwarm()}}
+\item \href{#method-get_Emax}{\code{MBITES_Parameters$get_Emax()}}
+\item \href{#method-get_Eb}{\code{MBITES_Parameters$get_Eb()}}
+\item \href{#method-get_Ep}{\code{MBITES_Parameters$get_Ep()}}
+\item \href{#method-get_eEndm}{\code{MBITES_Parameters$get_eEndm()}}
+\item \href{#method-get_eEndSd}{\code{MBITES_Parameters$get_eEndSd()}}
+\item \href{#method-get_estivationDay}{\code{MBITES_Parameters$get_estivationDay()}}
+\item \href{#method-get_energyPreG}{\code{MBITES_Parameters$get_energyPreG()}}
+\item \href{#method-get_preGsugar}{\code{MBITES_Parameters$get_preGsugar()}}
+\item \href{#method-get_energyFromBlood_b}{\code{MBITES_Parameters$get_energyFromBlood_b()}}
+\item \href{#method-get_S_u}{\code{MBITES_Parameters$get_S_u()}}
+\item \href{#method-get_omega}{\code{MBITES_Parameters$get_omega()}}
+\item \href{#method-get_S_sa}{\code{MBITES_Parameters$get_S_sa()}}
+\item \href{#method-get_S_sb}{\code{MBITES_Parameters$get_S_sb()}}
+\item \href{#method-get_S_w}{\code{MBITES_Parameters$get_S_w()}}
+\item \href{#method-get_S_p}{\code{MBITES_Parameters$get_S_p()}}
+\item \href{#method-get_Bs_surv}{\code{MBITES_Parameters$get_Bs_surv()}}
+\item \href{#method-get_Os_surv}{\code{MBITES_Parameters$get_Os_surv()}}
+\item \href{#method-get_Ms_surv}{\code{MBITES_Parameters$get_Ms_surv()}}
+\item \href{#method-get_Ss_surv}{\code{MBITES_Parameters$get_Ss_surv()}}
+\item \href{#method-get_B_surv}{\code{MBITES_Parameters$get_B_surv()}}
+\item \href{#method-get_O_surv}{\code{MBITES_Parameters$get_O_surv()}}
+\item \href{#method-get_M_surv}{\code{MBITES_Parameters$get_M_surv()}}
+\item \href{#method-get_S_surv}{\code{MBITES_Parameters$get_S_surv()}}
+\item \href{#method-get_Bs_succeed}{\code{MBITES_Parameters$get_Bs_succeed()}}
+\item \href{#method-get_Os_succeed}{\code{MBITES_Parameters$get_Os_succeed()}}
+\item \href{#method-get_Ms_succeed}{\code{MBITES_Parameters$get_Ms_succeed()}}
+\item \href{#method-get_Ss_succeed}{\code{MBITES_Parameters$get_Ss_succeed()}}
+\item \href{#method-get_B_succeed}{\code{MBITES_Parameters$get_B_succeed()}}
+\item \href{#method-get_O_succeed}{\code{MBITES_Parameters$get_O_succeed()}}
+\item \href{#method-get_M_succeed}{\code{MBITES_Parameters$get_M_succeed()}}
+\item \href{#method-get_S_succeed}{\code{MBITES_Parameters$get_S_succeed()}}
+\item \href{#method-get_surviveH}{\code{MBITES_Parameters$get_surviveH()}}
+\item \href{#method-get_probeH}{\code{MBITES_Parameters$get_probeH()}}
+\item \href{#method-get_surviveprobeH}{\code{MBITES_Parameters$get_surviveprobeH()}}
+\item \href{#method-get_feedH}{\code{MBITES_Parameters$get_feedH()}}
+\item \href{#method-get_surviveZ}{\code{MBITES_Parameters$get_surviveZ()}}
+\item \href{#method-get_feedZ}{\code{MBITES_Parameters$get_feedZ()}}
+\item \href{#method-get_PPR_a}{\code{MBITES_Parameters$get_PPR_a()}}
+\item \href{#method-get_PPR_b}{\code{MBITES_Parameters$get_PPR_b()}}
+\item \href{#method-get_S_a}{\code{MBITES_Parameters$get_S_a()}}
+\item \href{#method-get_S_b}{\code{MBITES_Parameters$get_S_b()}}
+\item \href{#method-get_ttsz_p}{\code{MBITES_Parameters$get_ttsz_p()}}
+\item \href{#method-get_ttsz_a}{\code{MBITES_Parameters$get_ttsz_a()}}
+\item \href{#method-get_ttsz_b}{\code{MBITES_Parameters$get_ttsz_b()}}
+\item \href{#method-get_ttr_a}{\code{MBITES_Parameters$get_ttr_a()}}
+\item \href{#method-get_ttr_b}{\code{MBITES_Parameters$get_ttr_b()}}
+\item \href{#method-get_chm_a}{\code{MBITES_Parameters$get_chm_a()}}
+\item \href{#method-get_chm_b}{\code{MBITES_Parameters$get_chm_b()}}
+\item \href{#method-get_sns_a}{\code{MBITES_Parameters$get_sns_a()}}
+\item \href{#method-get_sns_b}{\code{MBITES_Parameters$get_sns_b()}}
+\item \href{#method-get_bm_a}{\code{MBITES_Parameters$get_bm_a()}}
+\item \href{#method-get_bm_b}{\code{MBITES_Parameters$get_bm_b()}}
+\item \href{#method-get_of_a}{\code{MBITES_Parameters$get_of_a()}}
+\item \href{#method-get_of_b}{\code{MBITES_Parameters$get_of_b()}}
+\item \href{#method-get_bloodPerEgg}{\code{MBITES_Parameters$get_bloodPerEgg()}}
+\item \href{#method-get_bs_m}{\code{MBITES_Parameters$get_bs_m()}}
+\item \href{#method-get_bs_sd}{\code{MBITES_Parameters$get_bs_sd()}}
+\item \href{#method-get_maxBatch}{\code{MBITES_Parameters$get_maxBatch()}}
+\item \href{#method-get_emt_m}{\code{MBITES_Parameters$get_emt_m()}}
+\item \href{#method-get_emt_sd}{\code{MBITES_Parameters$get_emt_sd()}}
+\item \href{#method-get_rf_a}{\code{MBITES_Parameters$get_rf_a()}}
+\item \href{#method-get_rf_b}{\code{MBITES_Parameters$get_rf_b()}}
+\item \href{#method-set_parameters}{\code{MBITES_Parameters$set_parameters()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$new()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-finalize"></a>}}
+\if{latex}{\out{\hypertarget{method-finalize}{}}}
+\subsection{Method \code{finalize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$finalize()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_ttEvent"></a>}}
+\if{latex}{\out{\hypertarget{method-set_ttEvent}{}}}
+\subsection{Method \code{set_ttEvent()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_ttEvent(
+  timing_model = 1L,
+  wait_b = NULL,
+  wait_o = NULL,
+  wait_m = NULL,
+  wait_s = NULL,
+  wait_bs = NULL,
+  wait_os = NULL,
+  wait_ms = NULL,
+  wait_ss = NULL,
+  rate_b = NULL,
+  tmin_b = NULL,
+  rate_o = NULL,
+  tmin_o = NULL,
+  rate_m = NULL,
+  tmin_m = NULL,
+  rate_s = NULL,
+  tmin_s = NULL,
+  rate_bs = NULL,
+  tmin_bs = NULL,
+  rate_os = NULL,
+  tmin_os = NULL,
+  rate_ms = NULL,
+  tmin_ms = NULL,
+  rate_ss = NULL,
+  tmin_ss = NULL,
+  mean_b = NULL,
+  cv_b = NULL,
+  mean_o = NULL,
+  cv_o = NULL,
+  mean_m = NULL,
+  cv_m = NULL,
+  mean_s = NULL,
+  cv_s = NULL,
+  mean_bs = NULL,
+  cv_bs = NULL,
+  mean_os = NULL,
+  cv_os = NULL,
+  mean_ms = NULL,
+  cv_ms = NULL,
+  mean_ss = NULL,
+  cv_ss = NULL
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_ttEvent_ppr"></a>}}
+\if{latex}{\out{\hypertarget{method-set_ttEvent_ppr}{}}}
+\subsection{Method \code{set_ttEvent_ppr()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_ttEvent_ppr(
+  ppr_model = 1L,
+  wait_ppr = NULL,
+  rate_ppr = NULL,
+  tmin_ppr = NULL,
+  mean_ppr = NULL,
+  cv_ppr = NULL
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_defaultState_F"></a>}}
+\if{latex}{\out{\hypertarget{method-set_defaultState_F}{}}}
+\subsection{Method \code{set_defaultState_F()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_defaultState_F(defaultState_F)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_defaultState_M"></a>}}
+\if{latex}{\out{\hypertarget{method-set_defaultState_M}{}}}
+\subsection{Method \code{set_defaultState_M()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_defaultState_M(defaultState_M)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_aqua_model"></a>}}
+\if{latex}{\out{\hypertarget{method-set_aqua_model}{}}}
+\subsection{Method \code{set_aqua_model()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_aqua_model(aqua_model)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_disperse"></a>}}
+\if{latex}{\out{\hypertarget{method-set_disperse}{}}}
+\subsection{Method \code{set_disperse()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_disperse(disperse)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_boutFail_p"></a>}}
+\if{latex}{\out{\hypertarget{method-set_boutFail_p}{}}}
+\subsection{Method \code{set_boutFail_p()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_boutFail_p(boutFail_p)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_b_wts"></a>}}
+\if{latex}{\out{\hypertarget{method-set_b_wts}{}}}
+\subsection{Method \code{set_b_wts()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_b_wts(b_wts)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_o_wts"></a>}}
+\if{latex}{\out{\hypertarget{method-set_o_wts}{}}}
+\subsection{Method \code{set_o_wts()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_o_wts(o_wts)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_m_wts"></a>}}
+\if{latex}{\out{\hypertarget{method-set_m_wts}{}}}
+\subsection{Method \code{set_m_wts()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_m_wts(m_wts)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_s_wts"></a>}}
+\if{latex}{\out{\hypertarget{method-set_s_wts}{}}}
+\subsection{Method \code{set_s_wts()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_s_wts(s_wts)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_InAndOut"></a>}}
+\if{latex}{\out{\hypertarget{method-set_InAndOut}{}}}
+\subsection{Method \code{set_InAndOut()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_InAndOut(InAndOut)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_tSwarm"></a>}}
+\if{latex}{\out{\hypertarget{method-set_tSwarm}{}}}
+\subsection{Method \code{set_tSwarm()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_tSwarm(tSwarm)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_Emax"></a>}}
+\if{latex}{\out{\hypertarget{method-set_Emax}{}}}
+\subsection{Method \code{set_Emax()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_Emax(Emax)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_Eb"></a>}}
+\if{latex}{\out{\hypertarget{method-set_Eb}{}}}
+\subsection{Method \code{set_Eb()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_Eb(Eb)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_Ep"></a>}}
+\if{latex}{\out{\hypertarget{method-set_Ep}{}}}
+\subsection{Method \code{set_Ep()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_Ep(Ep)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_eEndm"></a>}}
+\if{latex}{\out{\hypertarget{method-set_eEndm}{}}}
+\subsection{Method \code{set_eEndm()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_eEndm(eEndm)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_eEndSd"></a>}}
+\if{latex}{\out{\hypertarget{method-set_eEndSd}{}}}
+\subsection{Method \code{set_eEndSd()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_eEndSd(eEndSd)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_estivationDay"></a>}}
+\if{latex}{\out{\hypertarget{method-set_estivationDay}{}}}
+\subsection{Method \code{set_estivationDay()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_estivationDay(estivationDay)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_energyPreG"></a>}}
+\if{latex}{\out{\hypertarget{method-set_energyPreG}{}}}
+\subsection{Method \code{set_energyPreG()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_energyPreG(energyPreG)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_preGsugar"></a>}}
+\if{latex}{\out{\hypertarget{method-set_preGsugar}{}}}
+\subsection{Method \code{set_preGsugar()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_preGsugar(preGsugar)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_energyFromBlood_b"></a>}}
+\if{latex}{\out{\hypertarget{method-set_energyFromBlood_b}{}}}
+\subsection{Method \code{set_energyFromBlood_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_energyFromBlood_b(energyFromBlood_b)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_S_u"></a>}}
+\if{latex}{\out{\hypertarget{method-set_S_u}{}}}
+\subsection{Method \code{set_S_u()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_S_u(S_u)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_omega"></a>}}
+\if{latex}{\out{\hypertarget{method-set_omega}{}}}
+\subsection{Method \code{set_omega()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_omega(omega)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_S_sa"></a>}}
+\if{latex}{\out{\hypertarget{method-set_S_sa}{}}}
+\subsection{Method \code{set_S_sa()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_S_sa(S_sa)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_S_sb"></a>}}
+\if{latex}{\out{\hypertarget{method-set_S_sb}{}}}
+\subsection{Method \code{set_S_sb()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_S_sb(S_sb)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_S_w"></a>}}
+\if{latex}{\out{\hypertarget{method-set_S_w}{}}}
+\subsection{Method \code{set_S_w()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_S_w(S_w)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_S_p"></a>}}
+\if{latex}{\out{\hypertarget{method-set_S_p}{}}}
+\subsection{Method \code{set_S_p()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_S_p(S_p)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_Bs_surv"></a>}}
+\if{latex}{\out{\hypertarget{method-set_Bs_surv}{}}}
+\subsection{Method \code{set_Bs_surv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_Bs_surv(Bs_surv)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_Os_surv"></a>}}
+\if{latex}{\out{\hypertarget{method-set_Os_surv}{}}}
+\subsection{Method \code{set_Os_surv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_Os_surv(Os_surv)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_Ms_surv"></a>}}
+\if{latex}{\out{\hypertarget{method-set_Ms_surv}{}}}
+\subsection{Method \code{set_Ms_surv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_Ms_surv(Ms_surv)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_Ss_surv"></a>}}
+\if{latex}{\out{\hypertarget{method-set_Ss_surv}{}}}
+\subsection{Method \code{set_Ss_surv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_Ss_surv(Ss_surv)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_B_surv"></a>}}
+\if{latex}{\out{\hypertarget{method-set_B_surv}{}}}
+\subsection{Method \code{set_B_surv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_B_surv(B_surv)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_O_surv"></a>}}
+\if{latex}{\out{\hypertarget{method-set_O_surv}{}}}
+\subsection{Method \code{set_O_surv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_O_surv(O_surv)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_M_surv"></a>}}
+\if{latex}{\out{\hypertarget{method-set_M_surv}{}}}
+\subsection{Method \code{set_M_surv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_M_surv(M_surv)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_S_surv"></a>}}
+\if{latex}{\out{\hypertarget{method-set_S_surv}{}}}
+\subsection{Method \code{set_S_surv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_S_surv(S_surv)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_Bs_succeed"></a>}}
+\if{latex}{\out{\hypertarget{method-set_Bs_succeed}{}}}
+\subsection{Method \code{set_Bs_succeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_Bs_succeed(Bs_succeed)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_Os_succeed"></a>}}
+\if{latex}{\out{\hypertarget{method-set_Os_succeed}{}}}
+\subsection{Method \code{set_Os_succeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_Os_succeed(Os_succeed)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_Ms_succeed"></a>}}
+\if{latex}{\out{\hypertarget{method-set_Ms_succeed}{}}}
+\subsection{Method \code{set_Ms_succeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_Ms_succeed(Ms_succeed)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_Ss_succeed"></a>}}
+\if{latex}{\out{\hypertarget{method-set_Ss_succeed}{}}}
+\subsection{Method \code{set_Ss_succeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_Ss_succeed(Ss_succeed)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_B_succeed"></a>}}
+\if{latex}{\out{\hypertarget{method-set_B_succeed}{}}}
+\subsection{Method \code{set_B_succeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_B_succeed(B_succeed)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_O_succeed"></a>}}
+\if{latex}{\out{\hypertarget{method-set_O_succeed}{}}}
+\subsection{Method \code{set_O_succeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_O_succeed(O_succeed)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_M_succeed"></a>}}
+\if{latex}{\out{\hypertarget{method-set_M_succeed}{}}}
+\subsection{Method \code{set_M_succeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_M_succeed(M_succeed)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_S_succeed"></a>}}
+\if{latex}{\out{\hypertarget{method-set_S_succeed}{}}}
+\subsection{Method \code{set_S_succeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_S_succeed(S_succeed)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_surviveH"></a>}}
+\if{latex}{\out{\hypertarget{method-set_surviveH}{}}}
+\subsection{Method \code{set_surviveH()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_surviveH(surviveH)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_probeH"></a>}}
+\if{latex}{\out{\hypertarget{method-set_probeH}{}}}
+\subsection{Method \code{set_probeH()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_probeH(probeH)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_surviveprobeH"></a>}}
+\if{latex}{\out{\hypertarget{method-set_surviveprobeH}{}}}
+\subsection{Method \code{set_surviveprobeH()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_surviveprobeH(surviveprobeH)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_feedH"></a>}}
+\if{latex}{\out{\hypertarget{method-set_feedH}{}}}
+\subsection{Method \code{set_feedH()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_feedH(feedH)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_surviveZ"></a>}}
+\if{latex}{\out{\hypertarget{method-set_surviveZ}{}}}
+\subsection{Method \code{set_surviveZ()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_surviveZ(surviveZ)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_feedZ"></a>}}
+\if{latex}{\out{\hypertarget{method-set_feedZ}{}}}
+\subsection{Method \code{set_feedZ()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_feedZ(feedZ)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_PPR_a"></a>}}
+\if{latex}{\out{\hypertarget{method-set_PPR_a}{}}}
+\subsection{Method \code{set_PPR_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_PPR_a(PPR_a)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_PPR_b"></a>}}
+\if{latex}{\out{\hypertarget{method-set_PPR_b}{}}}
+\subsection{Method \code{set_PPR_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_PPR_b(PPR_b)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_S_a"></a>}}
+\if{latex}{\out{\hypertarget{method-set_S_a}{}}}
+\subsection{Method \code{set_S_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_S_a(S_a)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_S_b"></a>}}
+\if{latex}{\out{\hypertarget{method-set_S_b}{}}}
+\subsection{Method \code{set_S_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_S_b(S_b)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_ttsz_p"></a>}}
+\if{latex}{\out{\hypertarget{method-set_ttsz_p}{}}}
+\subsection{Method \code{set_ttsz_p()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_ttsz_p(ttsz_p)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_ttsz_a"></a>}}
+\if{latex}{\out{\hypertarget{method-set_ttsz_a}{}}}
+\subsection{Method \code{set_ttsz_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_ttsz_a(ttsz_a)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_ttsz_b"></a>}}
+\if{latex}{\out{\hypertarget{method-set_ttsz_b}{}}}
+\subsection{Method \code{set_ttsz_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_ttsz_b(ttsz_b)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_ttr_a"></a>}}
+\if{latex}{\out{\hypertarget{method-set_ttr_a}{}}}
+\subsection{Method \code{set_ttr_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_ttr_a(ttr_a)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_ttr_b"></a>}}
+\if{latex}{\out{\hypertarget{method-set_ttr_b}{}}}
+\subsection{Method \code{set_ttr_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_ttr_b(ttr_b)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_chm_a"></a>}}
+\if{latex}{\out{\hypertarget{method-set_chm_a}{}}}
+\subsection{Method \code{set_chm_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_chm_a(chm_a)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_chm_b"></a>}}
+\if{latex}{\out{\hypertarget{method-set_chm_b}{}}}
+\subsection{Method \code{set_chm_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_chm_b(chm_b)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_sns_a"></a>}}
+\if{latex}{\out{\hypertarget{method-set_sns_a}{}}}
+\subsection{Method \code{set_sns_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_sns_a(sns_a)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_sns_b"></a>}}
+\if{latex}{\out{\hypertarget{method-set_sns_b}{}}}
+\subsection{Method \code{set_sns_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_sns_b(sns_b)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_bm_a"></a>}}
+\if{latex}{\out{\hypertarget{method-set_bm_a}{}}}
+\subsection{Method \code{set_bm_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_bm_a(bm_a)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_bm_b"></a>}}
+\if{latex}{\out{\hypertarget{method-set_bm_b}{}}}
+\subsection{Method \code{set_bm_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_bm_b(bm_b)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_of_a"></a>}}
+\if{latex}{\out{\hypertarget{method-set_of_a}{}}}
+\subsection{Method \code{set_of_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_of_a(of_a)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_of_b"></a>}}
+\if{latex}{\out{\hypertarget{method-set_of_b}{}}}
+\subsection{Method \code{set_of_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_of_b(of_b)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_bloodPerEgg"></a>}}
+\if{latex}{\out{\hypertarget{method-set_bloodPerEgg}{}}}
+\subsection{Method \code{set_bloodPerEgg()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_bloodPerEgg(bloodPerEgg)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_bs_m"></a>}}
+\if{latex}{\out{\hypertarget{method-set_bs_m}{}}}
+\subsection{Method \code{set_bs_m()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_bs_m(bs_m)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_bs_sd"></a>}}
+\if{latex}{\out{\hypertarget{method-set_bs_sd}{}}}
+\subsection{Method \code{set_bs_sd()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_bs_sd(bs_sd)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_maxBatch"></a>}}
+\if{latex}{\out{\hypertarget{method-set_maxBatch}{}}}
+\subsection{Method \code{set_maxBatch()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_maxBatch(maxBatch)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_emt_m"></a>}}
+\if{latex}{\out{\hypertarget{method-set_emt_m}{}}}
+\subsection{Method \code{set_emt_m()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_emt_m(emt_m)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_emt_sd"></a>}}
+\if{latex}{\out{\hypertarget{method-set_emt_sd}{}}}
+\subsection{Method \code{set_emt_sd()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_emt_sd(emt_sd)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_rf_a"></a>}}
+\if{latex}{\out{\hypertarget{method-set_rf_a}{}}}
+\subsection{Method \code{set_rf_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_rf_a(rf_a)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_rf_b"></a>}}
+\if{latex}{\out{\hypertarget{method-set_rf_b}{}}}
+\subsection{Method \code{set_rf_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_rf_b(rf_b)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_defaultState_F"></a>}}
+\if{latex}{\out{\hypertarget{method-get_defaultState_F}{}}}
+\subsection{Method \code{get_defaultState_F()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_defaultState_F()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_defaultState_M"></a>}}
+\if{latex}{\out{\hypertarget{method-get_defaultState_M}{}}}
+\subsection{Method \code{get_defaultState_M()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_defaultState_M()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_aqua_model"></a>}}
+\if{latex}{\out{\hypertarget{method-get_aqua_model}{}}}
+\subsection{Method \code{get_aqua_model()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_aqua_model()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_disperse"></a>}}
+\if{latex}{\out{\hypertarget{method-get_disperse}{}}}
+\subsection{Method \code{get_disperse()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_disperse()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_boutFail_p"></a>}}
+\if{latex}{\out{\hypertarget{method-get_boutFail_p}{}}}
+\subsection{Method \code{get_boutFail_p()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_boutFail_p()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_wts"></a>}}
+\if{latex}{\out{\hypertarget{method-get_wts}{}}}
+\subsection{Method \code{get_wts()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_wts(state)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_InAndOut_row"></a>}}
+\if{latex}{\out{\hypertarget{method-get_InAndOut_row}{}}}
+\subsection{Method \code{get_InAndOut_row()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_InAndOut_row(i)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_InAndOut"></a>}}
+\if{latex}{\out{\hypertarget{method-get_InAndOut}{}}}
+\subsection{Method \code{get_InAndOut()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_InAndOut()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_tSwarm"></a>}}
+\if{latex}{\out{\hypertarget{method-get_tSwarm}{}}}
+\subsection{Method \code{get_tSwarm()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_tSwarm()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_Emax"></a>}}
+\if{latex}{\out{\hypertarget{method-get_Emax}{}}}
+\subsection{Method \code{get_Emax()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_Emax()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_Eb"></a>}}
+\if{latex}{\out{\hypertarget{method-get_Eb}{}}}
+\subsection{Method \code{get_Eb()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_Eb()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_Ep"></a>}}
+\if{latex}{\out{\hypertarget{method-get_Ep}{}}}
+\subsection{Method \code{get_Ep()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_Ep()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_eEndm"></a>}}
+\if{latex}{\out{\hypertarget{method-get_eEndm}{}}}
+\subsection{Method \code{get_eEndm()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_eEndm()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_eEndSd"></a>}}
+\if{latex}{\out{\hypertarget{method-get_eEndSd}{}}}
+\subsection{Method \code{get_eEndSd()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_eEndSd()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_estivationDay"></a>}}
+\if{latex}{\out{\hypertarget{method-get_estivationDay}{}}}
+\subsection{Method \code{get_estivationDay()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_estivationDay()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_energyPreG"></a>}}
+\if{latex}{\out{\hypertarget{method-get_energyPreG}{}}}
+\subsection{Method \code{get_energyPreG()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_energyPreG()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_preGsugar"></a>}}
+\if{latex}{\out{\hypertarget{method-get_preGsugar}{}}}
+\subsection{Method \code{get_preGsugar()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_preGsugar()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_energyFromBlood_b"></a>}}
+\if{latex}{\out{\hypertarget{method-get_energyFromBlood_b}{}}}
+\subsection{Method \code{get_energyFromBlood_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_energyFromBlood_b()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_S_u"></a>}}
+\if{latex}{\out{\hypertarget{method-get_S_u}{}}}
+\subsection{Method \code{get_S_u()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_S_u()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_omega"></a>}}
+\if{latex}{\out{\hypertarget{method-get_omega}{}}}
+\subsection{Method \code{get_omega()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_omega()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_S_sa"></a>}}
+\if{latex}{\out{\hypertarget{method-get_S_sa}{}}}
+\subsection{Method \code{get_S_sa()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_S_sa()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_S_sb"></a>}}
+\if{latex}{\out{\hypertarget{method-get_S_sb}{}}}
+\subsection{Method \code{get_S_sb()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_S_sb()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_S_w"></a>}}
+\if{latex}{\out{\hypertarget{method-get_S_w}{}}}
+\subsection{Method \code{get_S_w()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_S_w()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_S_p"></a>}}
+\if{latex}{\out{\hypertarget{method-get_S_p}{}}}
+\subsection{Method \code{get_S_p()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_S_p()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_Bs_surv"></a>}}
+\if{latex}{\out{\hypertarget{method-get_Bs_surv}{}}}
+\subsection{Method \code{get_Bs_surv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_Bs_surv()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_Os_surv"></a>}}
+\if{latex}{\out{\hypertarget{method-get_Os_surv}{}}}
+\subsection{Method \code{get_Os_surv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_Os_surv()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_Ms_surv"></a>}}
+\if{latex}{\out{\hypertarget{method-get_Ms_surv}{}}}
+\subsection{Method \code{get_Ms_surv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_Ms_surv()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_Ss_surv"></a>}}
+\if{latex}{\out{\hypertarget{method-get_Ss_surv}{}}}
+\subsection{Method \code{get_Ss_surv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_Ss_surv()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_B_surv"></a>}}
+\if{latex}{\out{\hypertarget{method-get_B_surv}{}}}
+\subsection{Method \code{get_B_surv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_B_surv()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_O_surv"></a>}}
+\if{latex}{\out{\hypertarget{method-get_O_surv}{}}}
+\subsection{Method \code{get_O_surv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_O_surv()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_M_surv"></a>}}
+\if{latex}{\out{\hypertarget{method-get_M_surv}{}}}
+\subsection{Method \code{get_M_surv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_M_surv()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_S_surv"></a>}}
+\if{latex}{\out{\hypertarget{method-get_S_surv}{}}}
+\subsection{Method \code{get_S_surv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_S_surv()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_Bs_succeed"></a>}}
+\if{latex}{\out{\hypertarget{method-get_Bs_succeed}{}}}
+\subsection{Method \code{get_Bs_succeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_Bs_succeed()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_Os_succeed"></a>}}
+\if{latex}{\out{\hypertarget{method-get_Os_succeed}{}}}
+\subsection{Method \code{get_Os_succeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_Os_succeed()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_Ms_succeed"></a>}}
+\if{latex}{\out{\hypertarget{method-get_Ms_succeed}{}}}
+\subsection{Method \code{get_Ms_succeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_Ms_succeed()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_Ss_succeed"></a>}}
+\if{latex}{\out{\hypertarget{method-get_Ss_succeed}{}}}
+\subsection{Method \code{get_Ss_succeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_Ss_succeed()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_B_succeed"></a>}}
+\if{latex}{\out{\hypertarget{method-get_B_succeed}{}}}
+\subsection{Method \code{get_B_succeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_B_succeed()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_O_succeed"></a>}}
+\if{latex}{\out{\hypertarget{method-get_O_succeed}{}}}
+\subsection{Method \code{get_O_succeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_O_succeed()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_M_succeed"></a>}}
+\if{latex}{\out{\hypertarget{method-get_M_succeed}{}}}
+\subsection{Method \code{get_M_succeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_M_succeed()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_S_succeed"></a>}}
+\if{latex}{\out{\hypertarget{method-get_S_succeed}{}}}
+\subsection{Method \code{get_S_succeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_S_succeed()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_surviveH"></a>}}
+\if{latex}{\out{\hypertarget{method-get_surviveH}{}}}
+\subsection{Method \code{get_surviveH()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_surviveH()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_probeH"></a>}}
+\if{latex}{\out{\hypertarget{method-get_probeH}{}}}
+\subsection{Method \code{get_probeH()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_probeH()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_surviveprobeH"></a>}}
+\if{latex}{\out{\hypertarget{method-get_surviveprobeH}{}}}
+\subsection{Method \code{get_surviveprobeH()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_surviveprobeH()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_feedH"></a>}}
+\if{latex}{\out{\hypertarget{method-get_feedH}{}}}
+\subsection{Method \code{get_feedH()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_feedH()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_surviveZ"></a>}}
+\if{latex}{\out{\hypertarget{method-get_surviveZ}{}}}
+\subsection{Method \code{get_surviveZ()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_surviveZ()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_feedZ"></a>}}
+\if{latex}{\out{\hypertarget{method-get_feedZ}{}}}
+\subsection{Method \code{get_feedZ()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_feedZ()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_PPR_a"></a>}}
+\if{latex}{\out{\hypertarget{method-get_PPR_a}{}}}
+\subsection{Method \code{get_PPR_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_PPR_a()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_PPR_b"></a>}}
+\if{latex}{\out{\hypertarget{method-get_PPR_b}{}}}
+\subsection{Method \code{get_PPR_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_PPR_b()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_S_a"></a>}}
+\if{latex}{\out{\hypertarget{method-get_S_a}{}}}
+\subsection{Method \code{get_S_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_S_a()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_S_b"></a>}}
+\if{latex}{\out{\hypertarget{method-get_S_b}{}}}
+\subsection{Method \code{get_S_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_S_b()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_ttsz_p"></a>}}
+\if{latex}{\out{\hypertarget{method-get_ttsz_p}{}}}
+\subsection{Method \code{get_ttsz_p()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_ttsz_p()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_ttsz_a"></a>}}
+\if{latex}{\out{\hypertarget{method-get_ttsz_a}{}}}
+\subsection{Method \code{get_ttsz_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_ttsz_a()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_ttsz_b"></a>}}
+\if{latex}{\out{\hypertarget{method-get_ttsz_b}{}}}
+\subsection{Method \code{get_ttsz_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_ttsz_b()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_ttr_a"></a>}}
+\if{latex}{\out{\hypertarget{method-get_ttr_a}{}}}
+\subsection{Method \code{get_ttr_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_ttr_a()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_ttr_b"></a>}}
+\if{latex}{\out{\hypertarget{method-get_ttr_b}{}}}
+\subsection{Method \code{get_ttr_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_ttr_b()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_chm_a"></a>}}
+\if{latex}{\out{\hypertarget{method-get_chm_a}{}}}
+\subsection{Method \code{get_chm_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_chm_a()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_chm_b"></a>}}
+\if{latex}{\out{\hypertarget{method-get_chm_b}{}}}
+\subsection{Method \code{get_chm_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_chm_b()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_sns_a"></a>}}
+\if{latex}{\out{\hypertarget{method-get_sns_a}{}}}
+\subsection{Method \code{get_sns_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_sns_a()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_sns_b"></a>}}
+\if{latex}{\out{\hypertarget{method-get_sns_b}{}}}
+\subsection{Method \code{get_sns_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_sns_b()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_bm_a"></a>}}
+\if{latex}{\out{\hypertarget{method-get_bm_a}{}}}
+\subsection{Method \code{get_bm_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_bm_a()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_bm_b"></a>}}
+\if{latex}{\out{\hypertarget{method-get_bm_b}{}}}
+\subsection{Method \code{get_bm_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_bm_b()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_of_a"></a>}}
+\if{latex}{\out{\hypertarget{method-get_of_a}{}}}
+\subsection{Method \code{get_of_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_of_a()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_of_b"></a>}}
+\if{latex}{\out{\hypertarget{method-get_of_b}{}}}
+\subsection{Method \code{get_of_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_of_b()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_bloodPerEgg"></a>}}
+\if{latex}{\out{\hypertarget{method-get_bloodPerEgg}{}}}
+\subsection{Method \code{get_bloodPerEgg()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_bloodPerEgg()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_bs_m"></a>}}
+\if{latex}{\out{\hypertarget{method-get_bs_m}{}}}
+\subsection{Method \code{get_bs_m()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_bs_m()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_bs_sd"></a>}}
+\if{latex}{\out{\hypertarget{method-get_bs_sd}{}}}
+\subsection{Method \code{get_bs_sd()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_bs_sd()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_maxBatch"></a>}}
+\if{latex}{\out{\hypertarget{method-get_maxBatch}{}}}
+\subsection{Method \code{get_maxBatch()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_maxBatch()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_emt_m"></a>}}
+\if{latex}{\out{\hypertarget{method-get_emt_m}{}}}
+\subsection{Method \code{get_emt_m()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_emt_m()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_emt_sd"></a>}}
+\if{latex}{\out{\hypertarget{method-get_emt_sd}{}}}
+\subsection{Method \code{get_emt_sd()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_emt_sd()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_rf_a"></a>}}
+\if{latex}{\out{\hypertarget{method-get_rf_a}{}}}
+\subsection{Method \code{get_rf_a()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_rf_a()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_rf_b"></a>}}
+\if{latex}{\out{\hypertarget{method-get_rf_b}{}}}
+\subsection{Method \code{get_rf_b()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$get_rf_b()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_parameters"></a>}}
+\if{latex}{\out{\hypertarget{method-set_parameters}{}}}
+\subsection{Method \code{set_parameters()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Parameters$set_parameters(
+  defaultState_F = "B",
+  defaultState_M = "S",
+  aqua_model = "emerge",
+  disperse = 0,
+  boutFail_p = 1/3,
+  b_wts = rep(1, 5),
+  o_wts = rep(1, 5),
+  m_wts = rep(1, 5),
+  s_wts = rep(1, 5),
+  InAndOut = matrix(data = c(4, 2, 2, 1, 6, 2, 1, 1, 1, 4, 1, 1, 1, 1, 2, 0, 0, 0, 0,
+    1, 1, 1, 2, 1, 0), nrow = 5, ncol = 5, byrow = TRUE, dimnames = list(c("i", "w", "v",
+    "r", "l"), c("i", "w", "v", "r", "l"))),
+  tSwarm = 18.5/24,
+  Emax = NaN,
+  Eb = NaN,
+  Ep = NaN,
+  eEndm = NaN,
+  eEndSd = NaN,
+  estivationDay = NaN,
+  energyPreG = 0,
+  preGsugar = 0,
+  energyFromBlood_b = 0.25,
+  S_u = 1/7,
+  omega = 0,
+  S_sa = 25,
+  S_sb = 20,
+  S_w = 5,
+  S_p = 2,
+  Bs_surv = 0.95,
+  Os_surv = 0.9,
+  Ms_surv = 0.98,
+  Ss_surv = 0.98,
+  B_surv = 0.98,
+  O_surv = 0.98,
+  M_surv = 0.98,
+  S_surv = 0.98,
+  Bs_succeed = 0.99,
+  Os_succeed = 0.99,
+  Ms_succeed = 0.99,
+  Ss_succeed = 0.99,
+  B_succeed = 0.95,
+  O_succeed = 0.95,
+  M_succeed = 0.99,
+  S_succeed = 0.99,
+  surviveH = 1,
+  probeH = 1,
+  surviveprobeH = 1,
+  feedH = 1,
+  surviveZ = 1,
+  feedZ = 1,
+  PPR_a = 15,
+  PPR_b = 300,
+  S_a = 20,
+  S_b = 10,
+  ttsz_p = 0.5,
+  ttsz_a = 5,
+  ttsz_b = 95,
+  ttr_a = 15,
+  ttr_b = 500,
+  chm_a = 7.5,
+  chm_b = 500,
+  sns_a = 0.085,
+  sns_b = 100,
+  bm_a = 7.5,
+  bm_b = 2.5,
+  of_a = 5,
+  of_b = 5000,
+  bloodPerEgg = 0.05,
+  bs_m = 50,
+  bs_sd = 5,
+  maxBatch = 60,
+  emt_m = 3,
+  emt_sd = 1,
+  rf_a = 10,
+  rf_b = 3
+)}\if{html}{\out{</div>}}
+}
+
+}
+}

@@ -4,9 +4,8 @@
 \name{Tile}
 \alias{Tile}
 \title{Tile Class}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-Tile
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 A \code{Tile} consists of a set of \code{\link{Site}} objects defininng where events occur,
@@ -35,3 +34,119 @@ and the agents that enact the dynamics on the tile.
 
 \keyword{R6}
 \keyword{class}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{Tile$new()}}
+\item \href{#method-finalize}{\code{Tile$finalize()}}
+\item \href{#method-get_id}{\code{Tile$get_id()}}
+\item \href{#method-get_mosquitoes}{\code{Tile$get_mosquitoes()}}
+\item \href{#method-get_mosquito}{\code{Tile$get_mosquito()}}
+\item \href{#method-get_humans}{\code{Tile$get_humans()}}
+\item \href{#method-get_human}{\code{Tile$get_human()}}
+\item \href{#method-get_sites}{\code{Tile$get_sites()}}
+\item \href{#method-get_site}{\code{Tile$get_site()}}
+\item \href{#method-oneDay}{\code{Tile$oneDay()}}
+\item \href{#method-reset}{\code{Tile$reset()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Tile$new()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-finalize"></a>}}
+\if{latex}{\out{\hypertarget{method-finalize}{}}}
+\subsection{Method \code{finalize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Tile$finalize()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_id"></a>}}
+\if{latex}{\out{\hypertarget{method-get_id}{}}}
+\subsection{Method \code{get_id()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Tile$get_id()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_mosquitoes"></a>}}
+\if{latex}{\out{\hypertarget{method-get_mosquitoes}{}}}
+\subsection{Method \code{get_mosquitoes()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Tile$get_mosquitoes()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_mosquito"></a>}}
+\if{latex}{\out{\hypertarget{method-get_mosquito}{}}}
+\subsection{Method \code{get_mosquito()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Tile$get_mosquito(id)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_humans"></a>}}
+\if{latex}{\out{\hypertarget{method-get_humans}{}}}
+\subsection{Method \code{get_humans()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Tile$get_humans()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_human"></a>}}
+\if{latex}{\out{\hypertarget{method-get_human}{}}}
+\subsection{Method \code{get_human()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Tile$get_human(id)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_sites"></a>}}
+\if{latex}{\out{\hypertarget{method-get_sites}{}}}
+\subsection{Method \code{get_sites()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Tile$get_sites()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_site"></a>}}
+\if{latex}{\out{\hypertarget{method-get_site}{}}}
+\subsection{Method \code{get_site()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Tile$get_site(id)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-oneDay"></a>}}
+\if{latex}{\out{\hypertarget{method-oneDay}{}}}
+\subsection{Method \code{oneDay()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Tile$oneDay()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-reset"></a>}}
+\if{latex}{\out{\hypertarget{method-reset}{}}}
+\subsection{Method \code{reset()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Tile$reset()}\if{html}{\out{</div>}}
+}
+
+}
+}

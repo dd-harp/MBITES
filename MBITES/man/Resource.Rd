@@ -4,9 +4,8 @@
 \name{Resource}
 \alias{Resource}
 \title{Landscape Resource Class}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-Resource
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 All resources inherit from the \code{Resource} abstract base class object.
@@ -35,3 +34,59 @@ All resources inherit from the \code{Resource} abstract base class object.
 
 \keyword{R6}
 \keyword{class}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{Resource$new()}}
+\item \href{#method-finalize}{\code{Resource$finalize()}}
+\item \href{#method-reset}{\code{Resource$reset()}}
+\item \href{#method-get_w}{\code{Resource$get_w()}}
+\item \href{#method-get_site}{\code{Resource$get_site()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Resource$new(w, site)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-finalize"></a>}}
+\if{latex}{\out{\hypertarget{method-finalize}{}}}
+\subsection{Method \code{finalize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Resource$finalize()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-reset"></a>}}
+\if{latex}{\out{\hypertarget{method-reset}{}}}
+\subsection{Method \code{reset()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Resource$reset()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_w"></a>}}
+\if{latex}{\out{\hypertarget{method-get_w}{}}}
+\subsection{Method \code{get_w()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Resource$get_w()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_site"></a>}}
+\if{latex}{\out{\hypertarget{method-get_site}{}}}
+\subsection{Method \code{get_site()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Resource$get_site()}\if{html}{\out{</div>}}
+}
+
+}
+}

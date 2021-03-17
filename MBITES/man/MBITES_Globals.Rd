@@ -4,9 +4,8 @@
 \name{MBITES_Globals}
 \alias{MBITES_Globals}
 \title{MBITES Globals Singleton}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-MBITES_Globals
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 This class is a singleton object in the \code{MBITES} package namespace that stores global values needed for the MBITES simulation.
@@ -36,3 +35,239 @@ It can be accessed by \code{MBITES:::Globals}.
 
 \keyword{R6}
 \keyword{class}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{MBITES_Globals$new()}}
+\item \href{#method-finalize}{\code{MBITES_Globals$finalize()}}
+\item \href{#method-simulate}{\code{MBITES_Globals$simulate()}}
+\item \href{#method-set_output}{\code{MBITES_Globals$set_output()}}
+\item \href{#method-set_mosquito_f_bloodHist}{\code{MBITES_Globals$set_mosquito_f_bloodHist()}}
+\item \href{#method-set_mosquito_f_eggHist}{\code{MBITES_Globals$set_mosquito_f_eggHist()}}
+\item \href{#method-get_mosquito_f_bloodHist}{\code{MBITES_Globals$get_mosquito_f_bloodHist()}}
+\item \href{#method-get_mosquito_f_eggHist}{\code{MBITES_Globals$get_mosquito_f_eggHist()}}
+\item \href{#method-reset}{\code{MBITES_Globals$reset()}}
+\item \href{#method-hardreset}{\code{MBITES_Globals$hardreset()}}
+\item \href{#method-get_tNow}{\code{MBITES_Globals$get_tNow()}}
+\item \href{#method-increment_tNow}{\code{MBITES_Globals$increment_tNow()}}
+\item \href{#method-get_SETUP}{\code{MBITES_Globals$get_SETUP()}}
+\item \href{#method-set_SETUP}{\code{MBITES_Globals$set_SETUP()}}
+\item \href{#method-get_mosquito_f_out}{\code{MBITES_Globals$get_mosquito_f_out()}}
+\item \href{#method-get_mosquito_m_out}{\code{MBITES_Globals$get_mosquito_m_out()}}
+\item \href{#method-get_human_out}{\code{MBITES_Globals$get_human_out()}}
+\item \href{#method-get_mosquito_id}{\code{MBITES_Globals$get_mosquito_id()}}
+\item \href{#method-get_human_id}{\code{MBITES_Globals$get_human_id()}}
+\item \href{#method-get_tileID}{\code{MBITES_Globals$get_tileID()}}
+\item \href{#method-add_tile}{\code{MBITES_Globals$add_tile()}}
+\item \href{#method-get_tile}{\code{MBITES_Globals$get_tile()}}
+\item \href{#method-get_n_tiles}{\code{MBITES_Globals$get_n_tiles()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$new()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-finalize"></a>}}
+\if{latex}{\out{\hypertarget{method-finalize}{}}}
+\subsection{Method \code{finalize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$finalize()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-simulate"></a>}}
+\if{latex}{\out{\hypertarget{method-simulate}{}}}
+\subsection{Method \code{simulate()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$simulate(tMax, pretty = TRUE)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_output"></a>}}
+\if{latex}{\out{\hypertarget{method-set_output}{}}}
+\subsection{Method \code{set_output()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$set_output(directory, runID)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_mosquito_f_bloodHist"></a>}}
+\if{latex}{\out{\hypertarget{method-set_mosquito_f_bloodHist}{}}}
+\subsection{Method \code{set_mosquito_f_bloodHist()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$set_mosquito_f_bloodHist(bloodHist)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_mosquito_f_eggHist"></a>}}
+\if{latex}{\out{\hypertarget{method-set_mosquito_f_eggHist}{}}}
+\subsection{Method \code{set_mosquito_f_eggHist()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$set_mosquito_f_eggHist(eggHist)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_mosquito_f_bloodHist"></a>}}
+\if{latex}{\out{\hypertarget{method-get_mosquito_f_bloodHist}{}}}
+\subsection{Method \code{get_mosquito_f_bloodHist()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$get_mosquito_f_bloodHist()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_mosquito_f_eggHist"></a>}}
+\if{latex}{\out{\hypertarget{method-get_mosquito_f_eggHist}{}}}
+\subsection{Method \code{get_mosquito_f_eggHist()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$get_mosquito_f_eggHist()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-reset"></a>}}
+\if{latex}{\out{\hypertarget{method-reset}{}}}
+\subsection{Method \code{reset()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$reset(directory, runID)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-hardreset"></a>}}
+\if{latex}{\out{\hypertarget{method-hardreset}{}}}
+\subsection{Method \code{hardreset()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$hardreset()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_tNow"></a>}}
+\if{latex}{\out{\hypertarget{method-get_tNow}{}}}
+\subsection{Method \code{get_tNow()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$get_tNow()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-increment_tNow"></a>}}
+\if{latex}{\out{\hypertarget{method-increment_tNow}{}}}
+\subsection{Method \code{increment_tNow()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$increment_tNow()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_SETUP"></a>}}
+\if{latex}{\out{\hypertarget{method-get_SETUP}{}}}
+\subsection{Method \code{get_SETUP()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$get_SETUP()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_SETUP"></a>}}
+\if{latex}{\out{\hypertarget{method-set_SETUP}{}}}
+\subsection{Method \code{set_SETUP()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$set_SETUP(which)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_mosquito_f_out"></a>}}
+\if{latex}{\out{\hypertarget{method-get_mosquito_f_out}{}}}
+\subsection{Method \code{get_mosquito_f_out()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$get_mosquito_f_out()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_mosquito_m_out"></a>}}
+\if{latex}{\out{\hypertarget{method-get_mosquito_m_out}{}}}
+\subsection{Method \code{get_mosquito_m_out()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$get_mosquito_m_out()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_human_out"></a>}}
+\if{latex}{\out{\hypertarget{method-get_human_out}{}}}
+\subsection{Method \code{get_human_out()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$get_human_out()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_mosquito_id"></a>}}
+\if{latex}{\out{\hypertarget{method-get_mosquito_id}{}}}
+\subsection{Method \code{get_mosquito_id()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$get_mosquito_id()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_human_id"></a>}}
+\if{latex}{\out{\hypertarget{method-get_human_id}{}}}
+\subsection{Method \code{get_human_id()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$get_human_id()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_tileID"></a>}}
+\if{latex}{\out{\hypertarget{method-get_tileID}{}}}
+\subsection{Method \code{get_tileID()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$get_tileID()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-add_tile"></a>}}
+\if{latex}{\out{\hypertarget{method-add_tile}{}}}
+\subsection{Method \code{add_tile()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$add_tile(tile)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_tile"></a>}}
+\if{latex}{\out{\hypertarget{method-get_tile}{}}}
+\subsection{Method \code{get_tile()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$get_tile(id)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_n_tiles"></a>}}
+\if{latex}{\out{\hypertarget{method-get_n_tiles}{}}}
+\subsection{Method \code{get_n_tiles()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$get_n_tiles()}\if{html}{\out{</div>}}
+}
+
+}
+}

@@ -4,9 +4,8 @@
 \name{Mosquito_Female}
 \alias{Mosquito_Female}
 \title{MBITES: Female Mosquito Class}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-Mosquito_Female
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 Female mosquitoes inherit from the \code{\link{Mosquito}} abstract base class object.
@@ -35,3 +34,245 @@ Female mosquitoes inherit from the \code{\link{Mosquito}} abstract base class ob
 
 \keyword{R6}
 \keyword{class}
+\section{Super class}{
+\code{\link[MBITES:Mosquito]{MBITES::Mosquito}} -> \code{Mosquito_Female}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-BloodMeal}{\code{Mosquito_Female$BloodMeal()}}
+\item \href{#method-rBloodMealSize}{\code{Mosquito_Female$rBloodMealSize()}}
+\item \href{#method-pPPRFlight}{\code{Mosquito_Female$pPPRFlight()}}
+\item \href{#method-PPRFlight}{\code{Mosquito_Female$PPRFlight()}}
+\item \href{#method-sugarMeal}{\code{Mosquito_Female$sugarMeal()}}
+\item \href{#method-chooseHost}{\code{Mosquito_Female$chooseHost()}}
+\item \href{#method-humanEncounter}{\code{Mosquito_Female$humanEncounter()}}
+\item \href{#method-zooEncounter}{\code{Mosquito_Female$zooEncounter()}}
+\item \href{#method-exit}{\code{Mosquito_Female$exit()}}
+\item \href{#method-trackProbe}{\code{Mosquito_Female$trackProbe()}}
+\item \href{#method-trackFeed}{\code{Mosquito_Female$trackFeed()}}
+\item \href{#method-trackRest}{\code{Mosquito_Female$trackRest()}}
+\item \href{#method-trackOviposit}{\code{Mosquito_Female$trackOviposit()}}
+\item \href{#method-chooseMate}{\code{Mosquito_Female$chooseMate()}}
+\item \href{#method-mating}{\code{Mosquito_Female$mating()}}
+\item \href{#method-new}{\code{Mosquito_Female$new()}}
+\item \href{#method-pathogenDynamics}{\code{Mosquito_Female$pathogenDynamics()}}
+\item \href{#method-checkEggMaturation}{\code{Mosquito_Female$checkEggMaturation()}}
+\item \href{#method-chooseHabitat}{\code{Mosquito_Female$chooseHabitat()}}
+}
+}
+\if{html}{
+\out{<details ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="BloodEnergetics">}\href{../../MBITES/html/Mosquito.html#method-BloodEnergetics}{\code{MBITES::Mosquito$BloodEnergetics()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="BloodFeedingSearchCheck">}\href{../../MBITES/html/Mosquito.html#method-BloodFeedingSearchCheck}{\code{MBITES::Mosquito$BloodFeedingSearchCheck()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="MBITES">}\href{../../MBITES/html/Mosquito.html#method-MBITES}{\code{MBITES::Mosquito$MBITES()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="MatingSearchCheck">}\href{../../MBITES/html/Mosquito.html#method-MatingSearchCheck}{\code{MBITES::Mosquito$MatingSearchCheck()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="OvipositSearchCheck">}\href{../../MBITES/html/Mosquito.html#method-OvipositSearchCheck}{\code{MBITES::Mosquito$OvipositSearchCheck()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="SugarSearchCheck">}\href{../../MBITES/html/Mosquito.html#method-SugarSearchCheck}{\code{MBITES::Mosquito$SugarSearchCheck()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="attempt_B">}\href{../../MBITES/html/Mosquito.html#method-attempt_B}{\code{MBITES::Mosquito$attempt_B()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="attempt_M">}\href{../../MBITES/html/Mosquito.html#method-attempt_M}{\code{MBITES::Mosquito$attempt_M()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="attempt_O">}\href{../../MBITES/html/Mosquito.html#method-attempt_O}{\code{MBITES::Mosquito$attempt_O()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="attempt_S">}\href{../../MBITES/html/Mosquito.html#method-attempt_S}{\code{MBITES::Mosquito$attempt_S()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="attempt_search">}\href{../../MBITES/html/Mosquito.html#method-attempt_search}{\code{MBITES::Mosquito$attempt_search()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="basicHistoryList">}\href{../../MBITES/html/Mosquito.html#method-basicHistoryList}{\code{MBITES::Mosquito$basicHistoryList()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="boutFailCheck">}\href{../../MBITES/html/Mosquito.html#method-boutFailCheck}{\code{MBITES::Mosquito$boutFailCheck()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="checkForResources">}\href{../../MBITES/html/Mosquito.html#method-checkForResources}{\code{MBITES::Mosquito$checkForResources()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="chooseSugarSource">}\href{../../MBITES/html/Mosquito.html#method-chooseSugarSource}{\code{MBITES::Mosquito$chooseSugarSource()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="energetics">}\href{../../MBITES/html/Mosquito.html#method-energetics}{\code{MBITES::Mosquito$energetics()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="energyFromBlood">}\href{../../MBITES/html/Mosquito.html#method-energyFromBlood}{\code{MBITES::Mosquito$energyFromBlood()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="enterHouse">}\href{../../MBITES/html/Mosquito.html#method-enterHouse}{\code{MBITES::Mosquito$enterHouse()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="finalize">}\href{../../MBITES/html/Mosquito.html#method-finalize}{\code{MBITES::Mosquito$finalize()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="flightBurnEnergy">}\href{../../MBITES/html/Mosquito.html#method-flightBurnEnergy}{\code{MBITES::Mosquito$flightBurnEnergy()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="get_id">}\href{../../MBITES/html/Mosquito.html#method-get_id}{\code{MBITES::Mosquito$get_id()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="get_surviveFlightBaseProb">}\href{../../MBITES/html/Mosquito.html#method-get_surviveFlightBaseProb}{\code{MBITES::Mosquito$get_surviveFlightBaseProb()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="move">}\href{../../MBITES/html/Mosquito.html#method-move}{\code{MBITES::Mosquito$move()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="newSpot">}\href{../../MBITES/html/Mosquito.html#method-newSpot}{\code{MBITES::Mosquito$newSpot()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="oneBout">}\href{../../MBITES/html/Mosquito.html#method-oneBout}{\code{MBITES::Mosquito$oneBout()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="pChem">}\href{../../MBITES/html/Mosquito.html#method-pChem}{\code{MBITES::Mosquito$pChem()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="pEnergySurvival">}\href{../../MBITES/html/Mosquito.html#method-pEnergySurvival}{\code{MBITES::Mosquito$pEnergySurvival()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="pSenesce">}\href{../../MBITES/html/Mosquito.html#method-pSenesce}{\code{MBITES::Mosquito$pSenesce()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="pSugarBout">}\href{../../MBITES/html/Mosquito.html#method-pSugarBout}{\code{MBITES::Mosquito$pSugarBout()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="pTatter">}\href{../../MBITES/html/Mosquito.html#method-pTatter}{\code{MBITES::Mosquito$pTatter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="restingSpot">}\href{../../MBITES/html/Mosquito.html#method-restingSpot}{\code{MBITES::Mosquito$restingSpot()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="survival">}\href{../../MBITES/html/Mosquito.html#method-survival}{\code{MBITES::Mosquito$survival()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="surviveFlight">}\href{../../MBITES/html/Mosquito.html#method-surviveFlight}{\code{MBITES::Mosquito$surviveFlight()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="surviveHazards">}\href{../../MBITES/html/Mosquito.html#method-surviveHazards}{\code{MBITES::Mosquito$surviveHazards()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="timing">}\href{../../MBITES/html/Mosquito.html#method-timing}{\code{MBITES::Mosquito$timing()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="trackHistory">}\href{../../MBITES/html/Mosquito.html#method-trackHistory}{\code{MBITES::Mosquito$trackHistory()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Mosquito" data-id="updateState">}\href{../../MBITES/html/Mosquito.html#method-updateState}{\code{MBITES::Mosquito$updateState()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-BloodMeal"></a>}}
+\if{latex}{\out{\hypertarget{method-BloodMeal}{}}}
+\subsection{Method \code{BloodMeal()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$BloodMeal()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-rBloodMealSize"></a>}}
+\if{latex}{\out{\hypertarget{method-rBloodMealSize}{}}}
+\subsection{Method \code{rBloodMealSize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$rBloodMealSize()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pPPRFlight"></a>}}
+\if{latex}{\out{\hypertarget{method-pPPRFlight}{}}}
+\subsection{Method \code{pPPRFlight()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$pPPRFlight()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-PPRFlight"></a>}}
+\if{latex}{\out{\hypertarget{method-PPRFlight}{}}}
+\subsection{Method \code{PPRFlight()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$PPRFlight()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-sugarMeal"></a>}}
+\if{latex}{\out{\hypertarget{method-sugarMeal}{}}}
+\subsection{Method \code{sugarMeal()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$sugarMeal()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-chooseHost"></a>}}
+\if{latex}{\out{\hypertarget{method-chooseHost}{}}}
+\subsection{Method \code{chooseHost()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$chooseHost()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-humanEncounter"></a>}}
+\if{latex}{\out{\hypertarget{method-humanEncounter}{}}}
+\subsection{Method \code{humanEncounter()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$humanEncounter()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-zooEncounter"></a>}}
+\if{latex}{\out{\hypertarget{method-zooEncounter}{}}}
+\subsection{Method \code{zooEncounter()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$zooEncounter()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-exit"></a>}}
+\if{latex}{\out{\hypertarget{method-exit}{}}}
+\subsection{Method \code{exit()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$exit(endSim = FALSE)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-trackProbe"></a>}}
+\if{latex}{\out{\hypertarget{method-trackProbe}{}}}
+\subsection{Method \code{trackProbe()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$trackProbe()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-trackFeed"></a>}}
+\if{latex}{\out{\hypertarget{method-trackFeed}{}}}
+\subsection{Method \code{trackFeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$trackFeed()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-trackRest"></a>}}
+\if{latex}{\out{\hypertarget{method-trackRest}{}}}
+\subsection{Method \code{trackRest()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$trackRest()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-trackOviposit"></a>}}
+\if{latex}{\out{\hypertarget{method-trackOviposit}{}}}
+\subsection{Method \code{trackOviposit()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$trackOviposit()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-chooseMate"></a>}}
+\if{latex}{\out{\hypertarget{method-chooseMate}{}}}
+\subsection{Method \code{chooseMate()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$chooseMate()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-mating"></a>}}
+\if{latex}{\out{\hypertarget{method-mating}{}}}
+\subsection{Method \code{mating()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$mating()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$new(bDay, site, tileID)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pathogenDynamics"></a>}}
+\if{latex}{\out{\hypertarget{method-pathogenDynamics}{}}}
+\subsection{Method \code{pathogenDynamics()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$pathogenDynamics()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-checkEggMaturation"></a>}}
+\if{latex}{\out{\hypertarget{method-checkEggMaturation}{}}}
+\subsection{Method \code{checkEggMaturation()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$checkEggMaturation()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-chooseHabitat"></a>}}
+\if{latex}{\out{\hypertarget{method-chooseHabitat}{}}}
+\subsection{Method \code{chooseHabitat()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$chooseHabitat()}\if{html}{\out{</div>}}
+}
+
+}
+}

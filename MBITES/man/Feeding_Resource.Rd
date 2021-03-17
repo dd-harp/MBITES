@@ -4,9 +4,8 @@
 \name{Feeding_Resource}
 \alias{Feeding_Resource}
 \title{Landscape Feeding Resource Class}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-Feeding_Resource
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 A \code{Feeding_Resource} is a type of resource at a \code{\link{Site}} where mosquitoes can expect to find
@@ -35,3 +34,60 @@ human or other vertebrate hosts when seeking a blood meal.
 
 \keyword{R6}
 \keyword{class}
+\section{Super class}{
+\code{\link[MBITES:Resource]{MBITES::Resource}} -> \code{Feeding_Resource}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{Feeding_Resource$new()}}
+\item \href{#method-finalize}{\code{Feeding_Resource$finalize()}}
+\item \href{#method-reset}{\code{Feeding_Resource$reset()}}
+\item \href{#method-get_enterP}{\code{Feeding_Resource$get_enterP()}}
+}
+}
+\if{html}{
+\out{<details open ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Resource" data-id="get_site">}\href{../../MBITES/html/Resource.html#method-get_site}{\code{MBITES::Resource$get_site()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Resource" data-id="get_w">}\href{../../MBITES/html/Resource.html#method-get_w}{\code{MBITES::Resource$get_w()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Feeding_Resource$new(w, site, enterP)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-finalize"></a>}}
+\if{latex}{\out{\hypertarget{method-finalize}{}}}
+\subsection{Method \code{finalize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Feeding_Resource$finalize()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-reset"></a>}}
+\if{latex}{\out{\hypertarget{method-reset}{}}}
+\subsection{Method \code{reset()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Feeding_Resource$reset()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_enterP"></a>}}
+\if{latex}{\out{\hypertarget{method-get_enterP}{}}}
+\subsection{Method \code{get_enterP()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Feeding_Resource$get_enterP()}\if{html}{\out{</div>}}
+}
+
+}
+}

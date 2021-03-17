@@ -4,9 +4,8 @@
 \name{Mating_Resource}
 \alias{Mating_Resource}
 \title{Mating Resource Base Class}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-Mating_Resource
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 A \code{Mating_Resource} is a type of resource at a \code{\link{Site}} where mosquitoes travel mating.
@@ -34,3 +33,50 @@ A \code{Mating_Resource} is a type of resource at a \code{\link{Site}} where mos
 
 \keyword{R6}
 \keyword{class}
+\section{Super class}{
+\code{\link[MBITES:Resource]{MBITES::Resource}} -> \code{Mating_Resource}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{Mating_Resource$new()}}
+\item \href{#method-finalize}{\code{Mating_Resource$finalize()}}
+\item \href{#method-reset}{\code{Mating_Resource$reset()}}
+}
+}
+\if{html}{
+\out{<details open ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Resource" data-id="get_site">}\href{../../MBITES/html/Resource.html#method-get_site}{\code{MBITES::Resource$get_site()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Resource" data-id="get_w">}\href{../../MBITES/html/Resource.html#method-get_w}{\code{MBITES::Resource$get_w()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mating_Resource$new(w, site)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-finalize"></a>}}
+\if{latex}{\out{\hypertarget{method-finalize}{}}}
+\subsection{Method \code{finalize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mating_Resource$finalize()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-reset"></a>}}
+\if{latex}{\out{\hypertarget{method-reset}{}}}
+\subsection{Method \code{reset()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mating_Resource$reset()}\if{html}{\out{</div>}}
+}
+
+}
+}

@@ -4,9 +4,8 @@
 \name{Human_NULL}
 \alias{Human_NULL}
 \title{NULL Human Class}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-Human_NULL
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 A \code{Human_NULL} can be used as a drop-in replacement when human dynamics do not need
@@ -44,3 +43,79 @@ to be simulated explicitly.
 
 \keyword{R6}
 \keyword{class}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{Human_NULL$new()}}
+\item \href{#method-finalize}{\code{Human_NULL$finalize()}}
+\item \href{#method-exit}{\code{Human_NULL$exit()}}
+\item \href{#method-oneDay_EventQ}{\code{Human_NULL$oneDay_EventQ()}}
+\item \href{#method-oneDay_ActivitySpace}{\code{Human_NULL$oneDay_ActivitySpace()}}
+\item \href{#method-pushProbe}{\code{Human_NULL$pushProbe()}}
+\item \href{#method-pushFeed}{\code{Human_NULL$pushFeed()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$new(id, w, feedingID, siteID, tileID)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-finalize"></a>}}
+\if{latex}{\out{\hypertarget{method-finalize}{}}}
+\subsection{Method \code{finalize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$finalize()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-exit"></a>}}
+\if{latex}{\out{\hypertarget{method-exit}{}}}
+\subsection{Method \code{exit()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$exit()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-oneDay_EventQ"></a>}}
+\if{latex}{\out{\hypertarget{method-oneDay_EventQ}{}}}
+\subsection{Method \code{oneDay_EventQ()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$oneDay_EventQ()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-oneDay_ActivitySpace"></a>}}
+\if{latex}{\out{\hypertarget{method-oneDay_ActivitySpace}{}}}
+\subsection{Method \code{oneDay_ActivitySpace()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$oneDay_ActivitySpace()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pushProbe"></a>}}
+\if{latex}{\out{\hypertarget{method-pushProbe}{}}}
+\subsection{Method \code{pushProbe()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$pushProbe(m_id, t)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pushFeed"></a>}}
+\if{latex}{\out{\hypertarget{method-pushFeed}{}}}
+\subsection{Method \code{pushFeed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$pushFeed()}\if{html}{\out{</div>}}
+}
+
+}
+}

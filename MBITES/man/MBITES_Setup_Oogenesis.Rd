@@ -4,8 +4,12 @@
 \alias{MBITES_Setup_Oogenesis}
 \title{MBITES: Setup Oogenesis}
 \usage{
-MBITES_Setup_Oogenesis(oogenesis_model, eggMaturationTime, eggsize_model,
-  refeeding)
+MBITES_Setup_Oogenesis(
+  oogenesis_model,
+  eggMaturationTime,
+  eggsize_model,
+  refeeding
+)
 }
 \description{
 This function sets up items related to oogenesis for MBITES (see \code{\link{MBITES-Oogenesis}} for more details).

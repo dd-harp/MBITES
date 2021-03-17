@@ -7,5 +7,5 @@
 oneDay_ActivitySpace_Human_NULL()
 }
 \description{
-Always add 100% of my risk to my home site.
+Always add 100\% of my risk to my home site.
 }

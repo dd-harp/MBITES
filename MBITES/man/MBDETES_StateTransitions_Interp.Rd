@@ -4,8 +4,17 @@
 \alias{MBDETES_StateTransitions_Interp}
 \title{MBDETES: State Transition Matrix from Interpolating Parameters}
 \usage{
-MBDETES_StateTransitions_Interp(BFAB_PAR, ELAB_PAR, BFSB_PAR, ELSB_PAR,
-  tF = 6/24, tB = 3/24, tR = 18/24, tL = 6/24, tO = 3/24)
+MBDETES_StateTransitions_Interp(
+  BFAB_PAR,
+  ELAB_PAR,
+  BFSB_PAR,
+  ELSB_PAR,
+  tF = 6/24,
+  tB = 3/24,
+  tR = 18/24,
+  tL = 6/24,
+  tO = 3/24
+)
 }
 \arguments{
 \item{BFAB_PAR}{from \code{\link{BFAB_PAR}}, gives paramters for B and R transitions}

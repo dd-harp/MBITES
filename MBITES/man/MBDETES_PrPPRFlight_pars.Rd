@@ -4,8 +4,7 @@
 \alias{MBDETES_PrPPRFlight_pars}
 \title{MBDETES: Probability to Survive Post-prandial Resting Flight (Parameter Calibration)}
 \usage{
-MBDETES_PrPPRFlight_pars(PPR_a = 15, PPR_b = 300, bm_a = 7.5,
-  bm_b = 2.5)
+MBDETES_PrPPRFlight_pars(PPR_a = 15, PPR_b = 300, bm_a = 7.5, bm_b = 2.5)
 }
 \arguments{
 \item{PPR_a}{shape parameters for ppr mortality}
