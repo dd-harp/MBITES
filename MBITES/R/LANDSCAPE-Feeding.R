@@ -18,88 +18,64 @@
 
 #' Landscape Feeding Resource Class
 #'
-#' A \code{Feeding_Resource} is a type of resource at a \code{\link{Site}} where mosquitoes can expect to find
-#' human or other vertebrate hosts when seeking a blood meal.
-#'
-#'
-#' @docType class
-#' @format An \code{\link{R6Class}} generator object
-#' @keywords R6 class
-#'
-#' @section **Constructor**:
-#'  * argument: im an agument!
-#'
-#' @section **Methods**:
-#'  * reset: function that resets the blood feeding site between simulation runs
-#'
-#' @section **Fields**:
-#'  * field: im a field!
+#' A \code{Feeding_Resource} is a type of resource at a \code{\link{Site}} where
+#' mosquitoes can expect to find human or other vertebrate hosts when seeking a
+#' blood meal.
 #'
 #' @export
-Feeding_Resource <- R6::R6Class(classname = "Feeding_Resource",
-                 portable = TRUE,
-                 cloneable = FALSE,
-                 lock_class = FALSE,
-                 lock_objects = FALSE,
-                 inherit = MBITES:::Resource,
+Feeding_Resource <- R6::R6Class(
+  classname = "Feeding_Resource",
+  portable = TRUE,
+  cloneable = FALSE,
+  lock_class = FALSE,
+  lock_objects = FALSE,
+  inherit = MBITES:::Resource,
 
-                 # public members
-                 public = list(
+  public = list(
+    #' @description
+    #' Create a feeding resource
+    #' @param w Relative weight of this resource on the site
+    #' @param site reference to the site that has this resource
+    #' @param enterP probability of a mosquito to successfully enter the house.
+    initialize = function(w, site, enterP) {
+      # futile.logger::flog.trace("Feeding_Resource being born at: self %s , private %s",pryr::address(self),pryr::address(private))
 
-                   # begin constructor
-                   initialize = function(w,site,enterP){
-                     # futile.logger::flog.trace("Feeding_Resource being born at: self %s , private %s",pryr::address(self),pryr::address(private))
+      super$initialize(w, site) # construct base-class parts
 
-                     super$initialize(w,site) # construct base-class parts
+      self$RiskQ = make_RiskQ()
 
-                     self$RiskQ = make_RiskQ()
+      private$enterP = enterP
 
-                     private$enterP = enterP
+    },
 
-                   }, # end constructor
+    #' @description
+    #' Release memory associated with feeding state.
+    finalize = function() {
+      # futile.logger::flog.trace("Feeding_Resource being killed at: self %s , private %s",pryr::address(self),pryr::address(private))
+      self$RiskQ = NULL
+    },
 
-                   # begin destructor
-                   finalize = function(){
-                     # futile.logger::flog.trace("Feeding_Resource being killed at: self %s , private %s",pryr::address(self),pryr::address(private))
-                     self$RiskQ = NULL
-                   } # end destructor
+    #' @description
+    #' Release resources for blood feeding simulation.
+    reset = function(){
+      self$RiskQ$clearQ()
+      # self$RiskQ <- NULL # wipe it out
+      # self$RiskQ <- make_RiskQ() # make it again
+      },
 
-                 ), # end public members
+    #' @description
+    #' Blood Feeding Resource: Get House Entry Probability
+    #'
+    #' Get the probability of a mosquito successfully enters this house.
+    #'  * This method is bound to \code{Feeding_Resource$get_enterP}.
+    get_enterP = function(){
+      return(private$enterP)
+    }
+  ),
 
-                 # private members
-                 private = list(
-                   enterP = numeric(1) # probability of a mosquito to successfully enter the house
-                 ) # end private members
-
-
-) # end Feeding_Resource class definition
-
-###############################################################################
-# Feeding Resource Methods
-###############################################################################
-
-#' reset between runs
-reset_Feeding_Resource <- function(){
-  self$RiskQ$clearQ()
-  # self$RiskQ <- NULL # wipe it out
-  # self$RiskQ <- make_RiskQ() # make it again
-}
-
-#' Blood Feeding Resource: Get House Entry Probability
-#'
-#' Get the probability of a mosquito successfully enters this house.
-#'  * This method is bound to \code{Feeding_Resource$get_enterP}.
-#'
-get_enterP_Feeding_Resource <- function(){
-  return(private$enterP)
-}
-
-Feeding_Resource$set(which = "public",name = "reset",
-          value = reset_Feeding_Resource, overwrite = TRUE
-)
-
-Feeding_Resource$set(which = "public",name = "get_enterP",
-          value = get_enterP_Feeding_Resource, overwrite = TRUE
+  # private members
+  private = list(enterP = numeric(1) # probability of a mosquito to successfully enter the house) # end private members
+  )
 )
 
 

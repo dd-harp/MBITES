@@ -26,6 +26,8 @@ This section lists every R6 class in the project. The sub-headings beneath each 
   - Mosquitoes (R6)
   - Humans (R6)
 
+  The Sites, Mosquitoes, and Humans aren't R vectors. They are a custom datatype implemented in C++ for efficiency. This type, called a HashMap, is especially quick at running an R apply over the Sites, Mosquitoes, or Humans. The function works just like a regular R apply function, except that it doesn't expect any return values, so it doesn't allocate memory for the applied function to return a value.
+
 * Site is an R6 class with [LANDSCAPE-Site.R]
 
   - resources

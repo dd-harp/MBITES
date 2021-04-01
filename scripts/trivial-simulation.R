@@ -104,7 +104,7 @@ rf <- MBDETES_PrRefeed_optim(G = BFAB_PAR()$G)
 #                                    rf_a = rf$par[1],rf_b = rf$par[2],
 #                                    PPR_a = PPR$par[1],PPR_b = PPR$par[2])
 
-# a good paramter set
+# a good parameter set
 MBITES:::Parameters$set_parameters(Bs_surv = 0.95,Os_surv = 0.95,B_surv = 0.99,O_surv = 0.99,
                                    Bs_succeed = 0.99,Os_succeed = 0.99,B_succeed = 0.95,O_succeed = 0.99,
                                    S_u = 0,disperse = 0.2)
@@ -132,9 +132,9 @@ library(ggplot2)
 # where the files can be found
 output_dir <- paste0(directory,"run1")
 
-mosquitos_df <- fromJSON(paste0(output_dir,"/mosquito_F_3.json"), flatten = TRUE)
+mosquitos_df <- fromJSON(paste0(output_dir,"/mosquito_F_1.json"), flatten = TRUE)
 mosquitos_df <- mosquitos_df[-which(sapply(mosquitos_df$id,is.null)),]
-humans_df <- fromJSON(paste0(output_dir,"/human_3.json"), flatten = TRUE)
+humans_df <- fromJSON(paste0(output_dir,"/human_1.json"), flatten = TRUE)
 humans_df <- humans_df[-which(sapply(humans_df$id,is.null)),]
 
 
