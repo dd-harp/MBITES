@@ -60,3 +60,6 @@ Collate:
     'TILE-Initialize.R'
     'TILE-Simulation.R'
     'zzz.R'
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

@@ -109,6 +109,7 @@ make_RiskQ <- function(){
   n_h <- 0L
   id <- integer(1)
   weight <- numeric(1)
+  # The time is a _duration spent at risk._
   time <- numeric(1)
   NEW <- TRUE
   # zoo blood hosts
@@ -230,7 +231,7 @@ make_RiskQ <- function(){
   # printQ: print the queue
   printQ <- function(){
     cat("printing a risk queue ... printing human hosts ... \n")
-    print(id)
+    print(paste(id, collapse=", "))
     print(weight)
     print(time)
     cat(" ... printing zoo hosts ... \n")

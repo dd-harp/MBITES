@@ -11,14 +11,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Overview
 
-There are several sources of information about this code. This code is described in a research paper, Wu, Sean L., et al. "Vector bionomics and vectorial capacity as emergent properties of mosquito behaviors and ecology." PLoS computational biology 16.4 (2020): e1007446. That paper details the model. The code, itself, has comments about what different parts represent. In this same repository, outside of the MBITES project directory, are examples of how to use the code. Despite all of that, I'd like to sketch the code in a different way.
-
-This document will summarize the structure of the code, meaning its R6 class structure, because that's how it's composed. It will also look at the sequence of calls that happen during a simulation time step. By the end of this, I hope to have a sense of how the code works.
+There are several sources of information about this code. This code is described in a research paper, Wu, Sean L., et al. "Vector bionomics and vectorial capacity as emergent properties of mosquito behaviors and ecology." PLoS computational biology 16.4 (2020): e1007446. That paper details the model. The code, itself, has comments about what different parts represent. In this same repository, outside of the MBITES project directory, are examples of how to use the code. Here, I would like to add a description of the architecture of the code.
 
 
-## MBITES Structure
+## MBITES Classes
 
 This section lists every R6 class in the project. The sub-headings beneath each class describe members of the class which, themselves, may be R6 classes. In addition, we call out queues, which contain events that will happen at a future time.
+
+![MBITES R6 Classes](./mbites_class.png)
 
 * Tile is an R6 class has [TILE-Class.R]
 
@@ -48,7 +48,7 @@ This section lists every R6 class in the project. The sub-headings beneath each 
   - resting spot (rspot)
   - current sugar resource
   - current mating resource
-  - day emmerged
+  - day emerged
   - time of next launch
   - time of current launch
   - ... lots more
@@ -111,9 +111,18 @@ This section lists every R6 class in the project. The sub-headings beneath each 
   - incubation in humans
   - incubation in mosquitoes
 
+## MBITES Structure
+
+The code creates instances of these R6 classes, and each instance has pointers to other instances.
+
+![MBITES R6 Object Structure](./mbites_structure.png)
+
+
 ## MBITES Sequence
 
+Once we know the structure, we can better understand the order in which a simulation calls functions in order to perform its job. Despite the object-oriented code, the pattern is largely structured programming, meaning top-down calls.
 
+![MBITES R6 Sequence](./mbites_sequence.png)
 
  1. simulation() [MBITES-Globals.R]
  
@@ -134,6 +143,7 @@ This section lists every R6 class in the project. The sub-headings beneath each 
    * mbites_oneBout() [MBITES-Bout.R]
    
      - attempt_B()
+       * humanEncounter() This is the place!
      - attempt_O()
      - attempt_M()
      - attempt_S()
@@ -154,4 +164,3 @@ This section lists every R6 class in the project. The sub-headings beneath each 
    * mbites_move() [MBITES-Bout.R]
    
      - private$site$move_mosquito()
-   
