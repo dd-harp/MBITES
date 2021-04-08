@@ -9,7 +9,7 @@ Description: More about what it does (maybe more than one line)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Imports: R6, jsonlite, spatstat, deSolve
 ByteCompile: true
@@ -60,3 +60,6 @@ Collate:
     'TILE-Initialize.R'
     'TILE-Simulation.R'
     'zzz.R'
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

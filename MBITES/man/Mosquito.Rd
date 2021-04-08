@@ -4,9 +4,8 @@
 \name{Mosquito}
 \alias{Mosquito}
 \title{MBITES: Mosquito Class}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-Mosquito
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 All mosquitoes inherit from the \code{Mosquito} abstract base class object.
@@ -35,3 +34,389 @@ All mosquitoes inherit from the \code{Mosquito} abstract base class object.
 
 \keyword{R6}
 \keyword{class}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-oneBout}{\code{Mosquito$oneBout()}}
+\item \href{#method-attempt_search}{\code{Mosquito$attempt_search()}}
+\item \href{#method-move}{\code{Mosquito$move()}}
+\item \href{#method-updateState}{\code{Mosquito$updateState()}}
+\item \href{#method-checkForResources}{\code{Mosquito$checkForResources()}}
+\item \href{#method-BloodFeedingSearchCheck}{\code{Mosquito$BloodFeedingSearchCheck()}}
+\item \href{#method-OvipositSearchCheck}{\code{Mosquito$OvipositSearchCheck()}}
+\item \href{#method-SugarSearchCheck}{\code{Mosquito$SugarSearchCheck()}}
+\item \href{#method-MatingSearchCheck}{\code{Mosquito$MatingSearchCheck()}}
+\item \href{#method-attempt_B}{\code{Mosquito$attempt_B()}}
+\item \href{#method-attempt_O}{\code{Mosquito$attempt_O()}}
+\item \href{#method-attempt_M}{\code{Mosquito$attempt_M()}}
+\item \href{#method-attempt_S}{\code{Mosquito$attempt_S()}}
+\item \href{#method-MBITES}{\code{Mosquito$MBITES()}}
+\item \href{#method-energetics}{\code{Mosquito$energetics()}}
+\item \href{#method-flightBurnEnergy}{\code{Mosquito$flightBurnEnergy()}}
+\item \href{#method-pSugarBout}{\code{Mosquito$pSugarBout()}}
+\item \href{#method-BloodEnergetics}{\code{Mosquito$BloodEnergetics()}}
+\item \href{#method-energyFromBlood}{\code{Mosquito$energyFromBlood()}}
+\item \href{#method-chooseSugarSource}{\code{Mosquito$chooseSugarSource()}}
+\item \href{#method-trackHistory}{\code{Mosquito$trackHistory()}}
+\item \href{#method-basicHistoryList}{\code{Mosquito$basicHistoryList()}}
+\item \href{#method-new}{\code{Mosquito$new()}}
+\item \href{#method-finalize}{\code{Mosquito$finalize()}}
+\item \href{#method-get_id}{\code{Mosquito$get_id()}}
+\item \href{#method-restingSpot}{\code{Mosquito$restingSpot()}}
+\item \href{#method-boutFailCheck}{\code{Mosquito$boutFailCheck()}}
+\item \href{#method-newSpot}{\code{Mosquito$newSpot()}}
+\item \href{#method-enterHouse}{\code{Mosquito$enterHouse()}}
+\item \href{#method-survival}{\code{Mosquito$survival()}}
+\item \href{#method-get_surviveFlightBaseProb}{\code{Mosquito$get_surviveFlightBaseProb()}}
+\item \href{#method-surviveFlight}{\code{Mosquito$surviveFlight()}}
+\item \href{#method-pEnergySurvival}{\code{Mosquito$pEnergySurvival()}}
+\item \href{#method-pTatter}{\code{Mosquito$pTatter()}}
+\item \href{#method-pChem}{\code{Mosquito$pChem()}}
+\item \href{#method-pSenesce}{\code{Mosquito$pSenesce()}}
+\item \href{#method-surviveHazards}{\code{Mosquito$surviveHazards()}}
+\item \href{#method-timing}{\code{Mosquito$timing()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-oneBout"></a>}}
+\if{latex}{\out{\hypertarget{method-oneBout}{}}}
+\subsection{Method \code{oneBout()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$oneBout()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-attempt_search"></a>}}
+\if{latex}{\out{\hypertarget{method-attempt_search}{}}}
+\subsection{Method \code{attempt_search()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$attempt_search()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-move"></a>}}
+\if{latex}{\out{\hypertarget{method-move}{}}}
+\subsection{Method \code{move()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$move()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-updateState"></a>}}
+\if{latex}{\out{\hypertarget{method-updateState}{}}}
+\subsection{Method \code{updateState()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$updateState()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-checkForResources"></a>}}
+\if{latex}{\out{\hypertarget{method-checkForResources}{}}}
+\subsection{Method \code{checkForResources()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$checkForResources()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-BloodFeedingSearchCheck"></a>}}
+\if{latex}{\out{\hypertarget{method-BloodFeedingSearchCheck}{}}}
+\subsection{Method \code{BloodFeedingSearchCheck()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$BloodFeedingSearchCheck()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OvipositSearchCheck"></a>}}
+\if{latex}{\out{\hypertarget{method-OvipositSearchCheck}{}}}
+\subsection{Method \code{OvipositSearchCheck()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$OvipositSearchCheck()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-SugarSearchCheck"></a>}}
+\if{latex}{\out{\hypertarget{method-SugarSearchCheck}{}}}
+\subsection{Method \code{SugarSearchCheck()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$SugarSearchCheck()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-MatingSearchCheck"></a>}}
+\if{latex}{\out{\hypertarget{method-MatingSearchCheck}{}}}
+\subsection{Method \code{MatingSearchCheck()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$MatingSearchCheck()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-attempt_B"></a>}}
+\if{latex}{\out{\hypertarget{method-attempt_B}{}}}
+\subsection{Method \code{attempt_B()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$attempt_B()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-attempt_O"></a>}}
+\if{latex}{\out{\hypertarget{method-attempt_O}{}}}
+\subsection{Method \code{attempt_O()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$attempt_O()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-attempt_M"></a>}}
+\if{latex}{\out{\hypertarget{method-attempt_M}{}}}
+\subsection{Method \code{attempt_M()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$attempt_M()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-attempt_S"></a>}}
+\if{latex}{\out{\hypertarget{method-attempt_S}{}}}
+\subsection{Method \code{attempt_S()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$attempt_S()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-MBITES"></a>}}
+\if{latex}{\out{\hypertarget{method-MBITES}{}}}
+\subsection{Method \code{MBITES()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$MBITES()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-energetics"></a>}}
+\if{latex}{\out{\hypertarget{method-energetics}{}}}
+\subsection{Method \code{energetics()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$energetics()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-flightBurnEnergy"></a>}}
+\if{latex}{\out{\hypertarget{method-flightBurnEnergy}{}}}
+\subsection{Method \code{flightBurnEnergy()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$flightBurnEnergy()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pSugarBout"></a>}}
+\if{latex}{\out{\hypertarget{method-pSugarBout}{}}}
+\subsection{Method \code{pSugarBout()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$pSugarBout()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-BloodEnergetics"></a>}}
+\if{latex}{\out{\hypertarget{method-BloodEnergetics}{}}}
+\subsection{Method \code{BloodEnergetics()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$BloodEnergetics()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-energyFromBlood"></a>}}
+\if{latex}{\out{\hypertarget{method-energyFromBlood}{}}}
+\subsection{Method \code{energyFromBlood()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$energyFromBlood()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-chooseSugarSource"></a>}}
+\if{latex}{\out{\hypertarget{method-chooseSugarSource}{}}}
+\subsection{Method \code{chooseSugarSource()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$chooseSugarSource()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-trackHistory"></a>}}
+\if{latex}{\out{\hypertarget{method-trackHistory}{}}}
+\subsection{Method \code{trackHistory()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$trackHistory()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-basicHistoryList"></a>}}
+\if{latex}{\out{\hypertarget{method-basicHistoryList}{}}}
+\subsection{Method \code{basicHistoryList()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$basicHistoryList()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$new(bDay, state, site, tileID)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-finalize"></a>}}
+\if{latex}{\out{\hypertarget{method-finalize}{}}}
+\subsection{Method \code{finalize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$finalize()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_id"></a>}}
+\if{latex}{\out{\hypertarget{method-get_id}{}}}
+\subsection{Method \code{get_id()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$get_id()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-restingSpot"></a>}}
+\if{latex}{\out{\hypertarget{method-restingSpot}{}}}
+\subsection{Method \code{restingSpot()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$restingSpot()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-boutFailCheck"></a>}}
+\if{latex}{\out{\hypertarget{method-boutFailCheck}{}}}
+\subsection{Method \code{boutFailCheck()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$boutFailCheck()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-newSpot"></a>}}
+\if{latex}{\out{\hypertarget{method-newSpot}{}}}
+\subsection{Method \code{newSpot()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$newSpot()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-enterHouse"></a>}}
+\if{latex}{\out{\hypertarget{method-enterHouse}{}}}
+\subsection{Method \code{enterHouse()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$enterHouse()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-survival"></a>}}
+\if{latex}{\out{\hypertarget{method-survival}{}}}
+\subsection{Method \code{survival()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$survival()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_surviveFlightBaseProb"></a>}}
+\if{latex}{\out{\hypertarget{method-get_surviveFlightBaseProb}{}}}
+\subsection{Method \code{get_surviveFlightBaseProb()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$get_surviveFlightBaseProb()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-surviveFlight"></a>}}
+\if{latex}{\out{\hypertarget{method-surviveFlight}{}}}
+\subsection{Method \code{surviveFlight()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$surviveFlight()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pEnergySurvival"></a>}}
+\if{latex}{\out{\hypertarget{method-pEnergySurvival}{}}}
+\subsection{Method \code{pEnergySurvival()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$pEnergySurvival()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pTatter"></a>}}
+\if{latex}{\out{\hypertarget{method-pTatter}{}}}
+\subsection{Method \code{pTatter()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$pTatter()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pChem"></a>}}
+\if{latex}{\out{\hypertarget{method-pChem}{}}}
+\subsection{Method \code{pChem()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$pChem()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pSenesce"></a>}}
+\if{latex}{\out{\hypertarget{method-pSenesce}{}}}
+\subsection{Method \code{pSenesce()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$pSenesce()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-surviveHazards"></a>}}
+\if{latex}{\out{\hypertarget{method-surviveHazards}{}}}
+\subsection{Method \code{surviveHazards()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$surviveHazards()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-timing"></a>}}
+\if{latex}{\out{\hypertarget{method-timing}{}}}
+\subsection{Method \code{timing()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mosquito$timing()}\if{html}{\out{</div>}}
+}
+
+}
+}

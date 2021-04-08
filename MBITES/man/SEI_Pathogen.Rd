@@ -4,9 +4,8 @@
 \name{SEI_Pathogen}
 \alias{SEI_Pathogen}
 \title{Generic SEI: Pathogen Class}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-SEI_Pathogen
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 This is a generic SEI pathogen class without superinfection. Incubation times can be set to 0 to recover SI behavior.
@@ -37,3 +36,60 @@ incubating or infectious states, but we keep the "SEI" designation for comprehen
 
 \keyword{R6}
 \keyword{class}
+\section{Super class}{
+\code{\link[MBITES:Generic_Pathogen]{MBITES::Generic_Pathogen}} -> \code{SEI_Pathogen}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{SEI_Pathogen$new()}}
+\item \href{#method-finalize}{\code{SEI_Pathogen$finalize()}}
+\item \href{#method-clone}{\code{SEI_Pathogen$clone()}}
+}
+}
+\if{html}{
+\out{<details open ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Generic_Pathogen" data-id="get_id">}\href{../../MBITES/html/Generic_Pathogen.html#method-get_id}{\code{MBITES::Generic_Pathogen$get_id()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Generic_Pathogen" data-id="get_parentID">}\href{../../MBITES/html/Generic_Pathogen.html#method-get_parentID}{\code{MBITES::Generic_Pathogen$get_parentID()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Generic_Pathogen" data-id="oneBout_mosquito">}\href{../../MBITES/html/Generic_Pathogen.html#method-oneBout_mosquito}{\code{MBITES::Generic_Pathogen$oneBout_mosquito()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Generic_Pathogen" data-id="oneDay_human">}\href{../../MBITES/html/Generic_Pathogen.html#method-oneDay_human}{\code{MBITES::Generic_Pathogen$oneDay_human()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$new(parentID = NULL)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-finalize"></a>}}
+\if{latex}{\out{\hypertarget{method-finalize}{}}}
+\subsection{Method \code{finalize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$finalize()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}

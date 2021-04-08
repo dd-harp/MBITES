@@ -4,8 +4,14 @@
 \alias{set_ttEvent_ppr_MBITES_Parameters}
 \title{MBITES Parameters: Set Post-prandial Resting Time}
 \usage{
-set_ttEvent_ppr_MBITES_Parameters(ppr_model = 1L, wait_ppr = NULL,
-  rate_ppr = NULL, tmin_ppr = NULL, mean_ppr = NULL, cv_ppr = NULL)
+set_ttEvent_ppr_MBITES_Parameters(
+  ppr_model = 1L,
+  wait_ppr = NULL,
+  rate_ppr = NULL,
+  tmin_ppr = NULL,
+  mean_ppr = NULL,
+  cv_ppr = NULL
+)
 }
 \description{
 Sets concrete implementations of length of the post-prandial resting bout. This method is called from \code{\link{MBITES_Setup}} and should

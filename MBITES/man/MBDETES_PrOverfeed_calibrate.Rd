@@ -4,8 +4,7 @@
 \alias{MBDETES_PrOverfeed_calibrate}
 \title{MBDETES: Overfeeding Probability (Parameter Calibration)}
 \usage{
-MBDETES_PrOverfeed_calibrate(of_a = 5, of_b = 5000, bm_a = 7.5,
-  bm_b = 2.5)
+MBDETES_PrOverfeed_calibrate(of_a = 5, of_b = 5000, bm_a = 7.5, bm_b = 2.5)
 }
 \arguments{
 \item{of_a}{shape parameters for overfeeding}

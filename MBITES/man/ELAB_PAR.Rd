@@ -4,8 +4,20 @@
 \alias{ELAB_PAR}
 \title{MBDETES: Parameters for Transitions from O}
 \usage{
-ELAB_PAR(A = 0.83, B0 = 0, B1 = 1, C1 = 0, C2 = 1, C4 = 0,
-  D1 = 0.95, D2 = 0.95, E = 0, F1 = 0.7, F2 = 0.8, F3 = 0.7)
+ELAB_PAR(
+  A = 0.83,
+  B0 = 0,
+  B1 = 1,
+  C1 = 0,
+  C2 = 1,
+  C4 = 0,
+  D1 = 0.95,
+  D2 = 0.95,
+  E = 0,
+  F1 = 0.7,
+  F2 = 0.8,
+  F3 = 0.7
+)
 }
 \arguments{
 \item{A}{probability of successful launch (maps to \code{O_succeed})}

@@ -4,9 +4,8 @@
 \name{HashMap}
 \alias{HashMap}
 \title{HashMap Class Definition}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-HashMap
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 Provide a R6 implementation of a hash table to store population vectors using native R environments.
@@ -41,3 +40,109 @@ Note that the 'keys' are integers, automatically coerced to characters in the ac
 
 \keyword{R6}
 \keyword{class}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{HashMap$new()}}
+\item \href{#method-finalize}{\code{HashMap$finalize()}}
+\item \href{#method-rm}{\code{HashMap$rm()}}
+\item \href{#method-rm_all}{\code{HashMap$rm_all()}}
+\item \href{#method-exists}{\code{HashMap$exists()}}
+\item \href{#method-ls}{\code{HashMap$ls()}}
+\item \href{#method-assign}{\code{HashMap$assign()}}
+\item \href{#method-get}{\code{HashMap$get()}}
+\item \href{#method-size}{\code{HashMap$size()}}
+\item \href{#method-apply}{\code{HashMap$apply()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{HashMap$new(N = 100L)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-finalize"></a>}}
+\if{latex}{\out{\hypertarget{method-finalize}{}}}
+\subsection{Method \code{finalize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{HashMap$finalize()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-rm"></a>}}
+\if{latex}{\out{\hypertarget{method-rm}{}}}
+\subsection{Method \code{rm()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{HashMap$rm(key)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-rm_all"></a>}}
+\if{latex}{\out{\hypertarget{method-rm_all}{}}}
+\subsection{Method \code{rm_all()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{HashMap$rm_all()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-exists"></a>}}
+\if{latex}{\out{\hypertarget{method-exists}{}}}
+\subsection{Method \code{exists()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{HashMap$exists(key)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ls"></a>}}
+\if{latex}{\out{\hypertarget{method-ls}{}}}
+\subsection{Method \code{ls()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{HashMap$ls()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-assign"></a>}}
+\if{latex}{\out{\hypertarget{method-assign}{}}}
+\subsection{Method \code{assign()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{HashMap$assign(key, value)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get"></a>}}
+\if{latex}{\out{\hypertarget{method-get}{}}}
+\subsection{Method \code{get()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{HashMap$get(key)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-size"></a>}}
+\if{latex}{\out{\hypertarget{method-size}{}}}
+\subsection{Method \code{size()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{HashMap$size(key)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-apply"></a>}}
+\if{latex}{\out{\hypertarget{method-apply}{}}}
+\subsection{Method \code{apply()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{HashMap$apply(tag, return = FALSE, ...)}\if{html}{\out{</div>}}
+}
+
+}
+}

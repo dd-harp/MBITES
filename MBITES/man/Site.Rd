@@ -4,9 +4,8 @@
 \name{Site}
 \alias{Site}
 \title{Landscape Site Class}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-Site
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 A landscape consists of a set of \code{Site} objects, each of which may have one or more resources present.
@@ -38,3 +37,269 @@ A landscape consists of a set of \code{Site} objects, each of which may have one
 
 \keyword{R6}
 \keyword{class}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{Site$new()}}
+\item \href{#method-finalize}{\code{Site$finalize()}}
+\item \href{#method-clear_ActivitySpace}{\code{Site$clear_ActivitySpace()}}
+\item \href{#method-oneDay_AquaticEcology}{\code{Site$oneDay_AquaticEcology()}}
+\item \href{#method-reset}{\code{Site$reset()}}
+\item \href{#method-move_mosquito}{\code{Site$move_mosquito()}}
+\item \href{#method-sample_feed}{\code{Site$sample_feed()}}
+\item \href{#method-sample_aqua}{\code{Site$sample_aqua()}}
+\item \href{#method-sample_sugar}{\code{Site$sample_sugar()}}
+\item \href{#method-sample_mate}{\code{Site$sample_mate()}}
+\item \href{#method-get_feed}{\code{Site$get_feed()}}
+\item \href{#method-get_aqua}{\code{Site$get_aqua()}}
+\item \href{#method-get_sugar}{\code{Site$get_sugar()}}
+\item \href{#method-get_mate}{\code{Site$get_mate()}}
+\item \href{#method-has_feed}{\code{Site$has_feed()}}
+\item \href{#method-has_aqua}{\code{Site$has_aqua()}}
+\item \href{#method-has_sugar}{\code{Site$has_sugar()}}
+\item \href{#method-has_mate}{\code{Site$has_mate()}}
+\item \href{#method-add_feed}{\code{Site$add_feed()}}
+\item \href{#method-add_aqua}{\code{Site$add_aqua()}}
+\item \href{#method-add_sugar}{\code{Site$add_sugar()}}
+\item \href{#method-add_mate}{\code{Site$add_mate()}}
+\item \href{#method-get_id}{\code{Site$get_id()}}
+\item \href{#method-get_tileID}{\code{Site$get_tileID()}}
+\item \href{#method-get_type}{\code{Site$get_type()}}
+\item \href{#method-get_haz}{\code{Site$get_haz()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$new(id, xy, tileID, type, move, move_id, haz)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-finalize"></a>}}
+\if{latex}{\out{\hypertarget{method-finalize}{}}}
+\subsection{Method \code{finalize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$finalize()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clear_ActivitySpace"></a>}}
+\if{latex}{\out{\hypertarget{method-clear_ActivitySpace}{}}}
+\subsection{Method \code{clear_ActivitySpace()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$clear_ActivitySpace()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-oneDay_AquaticEcology"></a>}}
+\if{latex}{\out{\hypertarget{method-oneDay_AquaticEcology}{}}}
+\subsection{Method \code{oneDay_AquaticEcology()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$oneDay_AquaticEcology()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-reset"></a>}}
+\if{latex}{\out{\hypertarget{method-reset}{}}}
+\subsection{Method \code{reset()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$reset()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-move_mosquito"></a>}}
+\if{latex}{\out{\hypertarget{method-move_mosquito}{}}}
+\subsection{Method \code{move_mosquito()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$move_mosquito()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-sample_feed"></a>}}
+\if{latex}{\out{\hypertarget{method-sample_feed}{}}}
+\subsection{Method \code{sample_feed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$sample_feed()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-sample_aqua"></a>}}
+\if{latex}{\out{\hypertarget{method-sample_aqua}{}}}
+\subsection{Method \code{sample_aqua()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$sample_aqua()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-sample_sugar"></a>}}
+\if{latex}{\out{\hypertarget{method-sample_sugar}{}}}
+\subsection{Method \code{sample_sugar()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$sample_sugar()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-sample_mate"></a>}}
+\if{latex}{\out{\hypertarget{method-sample_mate}{}}}
+\subsection{Method \code{sample_mate()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$sample_mate()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_feed"></a>}}
+\if{latex}{\out{\hypertarget{method-get_feed}{}}}
+\subsection{Method \code{get_feed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$get_feed(i)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_aqua"></a>}}
+\if{latex}{\out{\hypertarget{method-get_aqua}{}}}
+\subsection{Method \code{get_aqua()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$get_aqua(i)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_sugar"></a>}}
+\if{latex}{\out{\hypertarget{method-get_sugar}{}}}
+\subsection{Method \code{get_sugar()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$get_sugar(i)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_mate"></a>}}
+\if{latex}{\out{\hypertarget{method-get_mate}{}}}
+\subsection{Method \code{get_mate()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$get_mate(i)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-has_feed"></a>}}
+\if{latex}{\out{\hypertarget{method-has_feed}{}}}
+\subsection{Method \code{has_feed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$has_feed()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-has_aqua"></a>}}
+\if{latex}{\out{\hypertarget{method-has_aqua}{}}}
+\subsection{Method \code{has_aqua()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$has_aqua()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-has_sugar"></a>}}
+\if{latex}{\out{\hypertarget{method-has_sugar}{}}}
+\subsection{Method \code{has_sugar()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$has_sugar()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-has_mate"></a>}}
+\if{latex}{\out{\hypertarget{method-has_mate}{}}}
+\subsection{Method \code{has_mate()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$has_mate()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-add_feed"></a>}}
+\if{latex}{\out{\hypertarget{method-add_feed}{}}}
+\subsection{Method \code{add_feed()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$add_feed(Feeding_Resource)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-add_aqua"></a>}}
+\if{latex}{\out{\hypertarget{method-add_aqua}{}}}
+\subsection{Method \code{add_aqua()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$add_aqua(Aqua_Resource)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-add_sugar"></a>}}
+\if{latex}{\out{\hypertarget{method-add_sugar}{}}}
+\subsection{Method \code{add_sugar()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$add_sugar(Sugar_Resource)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-add_mate"></a>}}
+\if{latex}{\out{\hypertarget{method-add_mate}{}}}
+\subsection{Method \code{add_mate()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$add_mate(Mating_Resource)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_id"></a>}}
+\if{latex}{\out{\hypertarget{method-get_id}{}}}
+\subsection{Method \code{get_id()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$get_id()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_tileID"></a>}}
+\if{latex}{\out{\hypertarget{method-get_tileID}{}}}
+\subsection{Method \code{get_tileID()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$get_tileID()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_type"></a>}}
+\if{latex}{\out{\hypertarget{method-get_type}{}}}
+\subsection{Method \code{get_type()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$get_type()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_haz"></a>}}
+\if{latex}{\out{\hypertarget{method-get_haz}{}}}
+\subsection{Method \code{get_haz()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Site$get_haz()}\if{html}{\out{</div>}}
+}
+
+}
+}

@@ -4,9 +4,8 @@
 \name{Aqua_Resource_Emerge}
 \alias{Aqua_Resource_Emerge}
 \title{Aquatic Ecology: Emerge Model Class}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-Aqua_Resource_Emerge
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 Class that implements the 'Emerge' model of aquatic ecology, inheriting the interface of \code{\link{Aqua_Resource}}.
@@ -37,3 +36,62 @@ Class that implements the 'Emerge' model of aquatic ecology, inheriting the inte
 
 \keyword{R6}
 \keyword{class}
+\section{Super classes}{
+\code{\link[MBITES:Resource]{MBITES::Resource}} -> \code{\link[MBITES:Aqua_Resource]{MBITES::Aqua_Resource}} -> \code{Aqua_Resource_Emerge}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{Aqua_Resource_Emerge$new()}}
+\item \href{#method-finalize}{\code{Aqua_Resource_Emerge$finalize()}}
+\item \href{#method-one_day}{\code{Aqua_Resource_Emerge$one_day()}}
+\item \href{#method-push_imago}{\code{Aqua_Resource_Emerge$push_imago()}}
+}
+}
+\if{html}{
+\out{<details open ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Resource" data-id="get_site">}\href{../../MBITES/html/Resource.html#method-get_site}{\code{MBITES::Resource$get_site()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Resource" data-id="get_w">}\href{../../MBITES/html/Resource.html#method-get_w}{\code{MBITES::Resource$get_w()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Resource" data-id="reset">}\href{../../MBITES/html/Resource.html#method-reset}{\code{MBITES::Resource$reset()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="Aqua_Resource" data-id="get_habitatID">}\href{../../MBITES/html/Aqua_Resource.html#method-get_habitatID}{\code{MBITES::Aqua_Resource$get_habitatID()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Aqua_Resource_Emerge$new(w, site, lambda)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-finalize"></a>}}
+\if{latex}{\out{\hypertarget{method-finalize}{}}}
+\subsection{Method \code{finalize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Aqua_Resource_Emerge$finalize()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-one_day"></a>}}
+\if{latex}{\out{\hypertarget{method-one_day}{}}}
+\subsection{Method \code{one_day()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Aqua_Resource_Emerge$one_day()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-push_imago"></a>}}
+\if{latex}{\out{\hypertarget{method-push_imago}{}}}
+\subsection{Method \code{push_imago()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Aqua_Resource_Emerge$push_imago()}\if{html}{\out{</div>}}
+}
+
+}
+}

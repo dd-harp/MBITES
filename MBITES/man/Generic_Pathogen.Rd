@@ -4,9 +4,8 @@
 \name{Generic_Pathogen}
 \alias{Generic_Pathogen}
 \title{Pathogen: Generic Class}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-Generic_Pathogen
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 i'm a class!
@@ -34,3 +33,87 @@ i'm a class!
 
 \keyword{R6}
 \keyword{class}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{Generic_Pathogen$new()}}
+\item \href{#method-finalize}{\code{Generic_Pathogen$finalize()}}
+\item \href{#method-oneDay_human}{\code{Generic_Pathogen$oneDay_human()}}
+\item \href{#method-oneBout_mosquito}{\code{Generic_Pathogen$oneBout_mosquito()}}
+\item \href{#method-get_id}{\code{Generic_Pathogen$get_id()}}
+\item \href{#method-get_parentID}{\code{Generic_Pathogen$get_parentID()}}
+\item \href{#method-clone}{\code{Generic_Pathogen$clone()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pathogen$new(parentID = NULL)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-finalize"></a>}}
+\if{latex}{\out{\hypertarget{method-finalize}{}}}
+\subsection{Method \code{finalize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pathogen$finalize()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-oneDay_human"></a>}}
+\if{latex}{\out{\hypertarget{method-oneDay_human}{}}}
+\subsection{Method \code{oneDay_human()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pathogen$oneDay_human()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-oneBout_mosquito"></a>}}
+\if{latex}{\out{\hypertarget{method-oneBout_mosquito}{}}}
+\subsection{Method \code{oneBout_mosquito()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pathogen$oneBout_mosquito()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_id"></a>}}
+\if{latex}{\out{\hypertarget{method-get_id}{}}}
+\subsection{Method \code{get_id()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pathogen$get_id()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_parentID"></a>}}
+\if{latex}{\out{\hypertarget{method-get_parentID}{}}}
+\subsection{Method \code{get_parentID()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pathogen$get_parentID()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pathogen$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}

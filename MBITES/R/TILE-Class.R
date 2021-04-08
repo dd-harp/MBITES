@@ -13,7 +13,7 @@
 
 #' Tile Class
 #'
-#' A \code{Tile} consists of a set of \code{\link{Site}} objects defininng where events occur,
+#' A \code{Tile} consists of a set of \code{\link{Site}} objects defining where events occur,
 #' and the agents that enact the dynamics on the tile.
 #'
 #'

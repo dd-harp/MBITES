@@ -4,9 +4,8 @@
 \name{Generic_Pedigree}
 \alias{Generic_Pedigree}
 \title{PATHOGEN Generic Pedigree}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-Generic_Pedigree
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 This class is a singleton object in the \code{MBITES} package namespace that stores global values needed for generic pathogen simulation.
@@ -35,3 +34,56 @@ It can be accessed by \code{MBITES:::Pedigree}.
 
 \keyword{R6}
 \keyword{class}
+\section{Super class}{
+\code{\link[MBITES:HashMap]{MBITES::HashMap}} -> \code{Generic_Pedigree}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{Generic_Pedigree$new()}}
+\item \href{#method-finalize}{\code{Generic_Pedigree$finalize()}}
+\item \href{#method-get_pathogen_id}{\code{Generic_Pedigree$get_pathogen_id()}}
+}
+}
+\if{html}{
+\out{<details ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="HashMap" data-id="apply">}\href{../../MBITES/html/HashMap.html#method-apply}{\code{MBITES::HashMap$apply()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="HashMap" data-id="assign">}\href{../../MBITES/html/HashMap.html#method-assign}{\code{MBITES::HashMap$assign()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="HashMap" data-id="exists">}\href{../../MBITES/html/HashMap.html#method-exists}{\code{MBITES::HashMap$exists()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="HashMap" data-id="get">}\href{../../MBITES/html/HashMap.html#method-get}{\code{MBITES::HashMap$get()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="HashMap" data-id="ls">}\href{../../MBITES/html/HashMap.html#method-ls}{\code{MBITES::HashMap$ls()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="HashMap" data-id="rm">}\href{../../MBITES/html/HashMap.html#method-rm}{\code{MBITES::HashMap$rm()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="HashMap" data-id="rm_all">}\href{../../MBITES/html/HashMap.html#method-rm_all}{\code{MBITES::HashMap$rm_all()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="MBITES" data-topic="HashMap" data-id="size">}\href{../../MBITES/html/HashMap.html#method-size}{\code{MBITES::HashMap$size()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pedigree$new()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-finalize"></a>}}
+\if{latex}{\out{\hypertarget{method-finalize}{}}}
+\subsection{Method \code{finalize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pedigree$finalize()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_pathogen_id"></a>}}
+\if{latex}{\out{\hypertarget{method-get_pathogen_id}{}}}
+\subsection{Method \code{get_pathogen_id()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pedigree$get_pathogen_id()}\if{html}{\out{</div>}}
+}
+
+}
+}
