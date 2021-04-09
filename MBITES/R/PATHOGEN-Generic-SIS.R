@@ -14,70 +14,62 @@
 
 #' Generic SEI: Pathogen Class
 #'
-#' This is a generic SEI pathogen class without superinfection. Incubation times can be set to 0 to recover SI behavior.
-#' Pathogen classes do not need explicit "recovery" dynamics as clearing them from a queue or vector in the host is akin
-#' to killing this genetic clone and resetting the host to a "susceptible" state. Technically the pathogen only exists in
-#' incubating or infectious states, but we keep the "SEI" designation for comprehension.
-#'
-#' @docType class
-#' @format An \code{\link{R6Class}} generator object
-#' @keywords R6 class
-#'
-#' @section **Constructor**:
-#'  * argument: im an agument!
-#'
-#' @section **Methods**:
-#'  * method: i'm a method!
-#'
-#' @section **Fields**:
-#'  * field: i'm a field!
+#' This is a generic SEI pathogen class without superinfection. Incubation times
+#' can be set to 0 to recover SI behavior. Pathogen classes do not need explicit
+#' "recovery" dynamics as clearing them from a queue or vector in the host is
+#' akin to killing this genetic clone and resetting the host to a "susceptible"
+#' state. Technically the pathogen only exists in incubating or infectious
+#' states, but we keep the "SEI" designation for comprehension.
 #'
 #' @export
-SEI_Pathogen <- R6::R6Class(classname = "SEI_Pathogen",
-                 portable = TRUE,
-                 cloneable = TRUE,
-                 lock_class = FALSE,
-                 lock_objects = FALSE,
-                 inherit = MBITES:::Generic_Pathogen,
+SEI_Pathogen <- R6::R6Class(
+  classname = "SEI_Pathogen",
+  portable = TRUE,
+  cloneable = TRUE,
+  lock_class = FALSE,
+  lock_objects = FALSE,
+  inherit = Generic_Pathogen,
 
-                 # public members
-                 public = list(
+  public = list(
+    #' @description
+    #' Create a new SEI_Pathogen object.
+    #' @param parentID The ID for the parent pathogen in lineage.
+    initialize = function(parentID = NULL) {
+      super$initialize(parentID) # initialize base parts
 
-                   # begin constructor
-                   initialize = function(parentID = NULL){
+      private$b = PathogenParameters$get_b()
+      private$c = PathogenParameters$get_c()
 
-                     super$initialize(parentID) # initialize base parts
+      # futile.logger::flog.trace("SEI_Pathogen being born at self: %s , private: %s",pryr::address(self),pryr::address(private))
+    },
 
-                     private$b = MBITES:::PathogenParameters$get_b()
-                     private$c = MBITES:::PathogenParameters$get_c()
+    #' @description
+    #' Destroy an SEI_Pathogen object.
+    finalize = function() {
+      super$finalize() # destruct base parts
 
-                     # futile.logger::flog.trace("SEI_Pathogen being born at self: %s , private: %s",pryr::address(self),pryr::address(private))
-                   }, # end constructor
+      # futile.logger::flog.trace("SEI_Pathogen being killed at self: %s , private: %s",pryr::address(self),pryr::address(private))
+    }
 
-                   # begin destructor
-                   finalize = function(){
+  ),
 
-                     super$finalize() # destruct base parts
+  private = list(
+    infectious = FALSE,
+    # state: SI?
+    incubating = 0,
+    # how long i have been incubating
+    incubation_h = integer(1),
+    # incubation in humans
+    incubation_m = integer(1),
+    # incubation in mosquitoes (EIP)
 
-                     # futile.logger::flog.trace("SEI_Pathogen being killed at self: %s , private: %s",pryr::address(self),pryr::address(private))
-                   } # end destructor
+    # transmission efficiency
+    b = numeric(1),
+    # mosy -> human
+    c = numeric(1) # human -> mosy
 
-                 ),
-
-                 # private members
-                 private = list(
-
-                   infectious = FALSE, # state: SI?
-                   incubating = 0, # how long i have been incubating
-                   incubation_h = integer(1), # incubation in humans
-                   incubation_m = integer(1), # incubation in mosquitoes (EIP)
-
-                   # transmission efficiency
-                   b = numeric(1), # mosy -> human
-                   c = numeric(1) # human -> mosy
-
-                 )
-) # end SEI_Pathogen class definition
+  )
+)
 
 
 ###############################################################################

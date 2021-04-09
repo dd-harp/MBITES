@@ -195,7 +195,9 @@ set_output_MBITES_Globals <- function(directory,runID){
     dir.create(directory)
   }
   dirOut = paste0(directory,"run",runID)
-  dir.create(dirOut)
+  if (!dir.exists(dirOut)) {
+    dir.create(dirOut)
+  }
 
   # setup connection objects
   private$mosquito_f_out = file(description = paste0(dirOut,"/mosquito_F_",runID,".json"),open = "wt")
