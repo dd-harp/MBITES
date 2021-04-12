@@ -2,165 +2,391 @@
 title: "MBITES Design"
 author: "Andrew Dolgert"
 date: "2021-03-17"
-output: html_document
+output:  html_document
+editor_options: 
+  markdown: 
+    wrap: 80
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{css, echo=FALSE}
+.blood {
+  color: #8A0303;
+  font-weight: bold;
+}
+.human {
+  color: #4b5320;
+  font-weight: bold;
+}
+```
+
 ## Overview
 
-There are several sources of information about this code. This code is described in a research paper, Wu, Sean L., et al. "Vector bionomics and vectorial capacity as emergent properties of mosquito behaviors and ecology." PLoS computational biology 16.4 (2020): e1007446. That paper details the model. The code, itself, has comments about what different parts represent. In this same repository, outside of the MBITES project directory, are examples of how to use the code. Here, I would like to add a description of the architecture of the code.
-
+There are several sources of information about this code. This code is described
+in a research paper, Wu, Sean L., et al. "Vector bionomics and vectorial
+capacity as emergent properties of mosquito behaviors and ecology." PLoS
+computational biology 16.4 (2020): e1007446. That paper details the model. The
+code, itself, has comments about what different parts represent. In this same
+repository, outside of the MBITES project directory, are examples of how to use
+the code. Here, I would like to add a description of the architecture of the
+code.
 
 ## MBITES Classes
 
-This section lists every R6 class in the project. The sub-headings beneath each class describe members of the class which, themselves, may be R6 classes. In addition, we call out queues, which contain events that will happen at a future time.
+This section lists every R6 class in the project. The sub-headings beneath each
+class describe members of the class which, themselves, may be R6 classes. In
+addition, we call out queues, which contain events that will happen at a future
+time.
 
 ![MBITES R6 Classes](./mbites_class.png)
 
-* Tile is an R6 class has [TILE-Class.R]
+-   Tile is an R6 class has [TILE-Class.R]
 
-  - Sites (R6)
-  - Mosquitoes (R6)
-  - Humans (R6)
+    -   Sites (R6)
+    -   Mosquitoes (R6)
+    -   Humans (R6)
 
-  The Sites, Mosquitoes, and Humans aren't R vectors. They are a custom datatype implemented in C++ for efficiency. This type, called a HashMap, is especially quick at running an R apply over the Sites, Mosquitoes, or Humans. The function works just like a regular R apply function, except that it doesn't expect any return values, so it doesn't allocate memory for the applied function to return a value.
+    The Sites, Mosquitoes, and Humans aren't R vectors. They are a custom
+    datatype implemented in C++ for efficiency. This type, called a HashMap, is
+    especially quick at running an R apply over the Sites, Mosquitoes, or
+    Humans. The function works just like a regular R apply function, except that
+    it doesn't expect any return values, so it doesn't allocate memory for the
+    applied function to return a value.
 
-* Site is an R6 class with [LANDSCAPE-Site.R]
+-   Site is an R6 class with [LANDSCAPE-Site.R]
 
-  - resources
-    * feeding resources, and weights
-    * aquatic resources, and weights
-    * sugar resources, and weights
-    * mating resources, and weights
-  - x-y coordinates
-  - ID of enclosing tile
-  - type of the site
+    -   resources
 
-* Mosquito [MBITES-Mosquito.R]
+        -   feeding resources, and weights
+        -   aquatic resources, and weights
+        -   sugar resources, and weights
+        -   mating resources, and weights
 
-  - id
-  - alive
-  - reference to tile
-  - reference to site
-  - resting spot (rspot)
-  - current sugar resource
-  - current mating resource
-  - day emerged
-  - time of next launch
-  - time of current launch
-  - ... lots more
-  - event history
+    -   x-y coordinates
 
-* Mosquito_Female, inherits Mosquito
+    -   ID of enclosing tile
 
-  - state is blood feeding, oviposition, mating, sugar
-  - list of current resources
-  - egg batches
-  
-* Mosquito_Male, inherits Mosquito, has no members.
+    -   type of the site
 
-* Resource is an R6 class with [LANDSCAPE-Resource.R]
+-   Mosquito [MBITES-Mosquito.R]
 
-  - relative weight
-  - reference to enclosing site
-  
-  * Mating resource, R6 class
-  
-    - QUEUE MatingQ
-  
-  * Aqua resource, R6 class
-  
-    - QUEUE EggQ
-  
-    - Aqua resource emerge, R6 class
-    
-      o QUEUE ImagoQ
-  
-  * Sugar resource, R6 class
-  
-  * Feeding resource, R6 class
-  
-    - QUEUE RiskQ, of zoo hosts.
-  
-* MBITES_Globals [MBITES-Globals.R]
+    -   id
+    -   alive
+    -   reference to tile
+    -   reference to site
+    -   resting spot (rspot)
+    -   current sugar resource
+    -   current mating resource
+    -   day emerged
+    -   time of next launch
+    -   time of current launch
+    -   ... lots more
+    -   event history
 
-  - counter of mosquito IDs
-  - logging objects
-  - counter of human IDs
-  - counter of tile IDs
+-   Mosquito_Female, inherits Mosquito
 
-* Human [HUMAN-Null.R]
+    -   state is blood feeding, oviposition, mating, sugar
+    -   list of current resources
+    -   egg batches
 
-  - biting weight
-  - site of feeding, site, tile
-  - bitten yet
-  - mosquitoes that bit me and times when bitten
-  - probe-only or not
+-   Mosquito_Male, inherits Mosquito, has no members.
 
-* Generic pathogen, parent of SEI Pathogen [PATHOGEN-Generic-Class.R]
+-   Resource is an R6 class with [LANDSCAPE-Resource.R]
 
-  - an ID
-  
-* SEI_Pathogen [PATHOGEN-Generic-SIS.R]
+    -   relative weight
 
-  - infectious, true or false
-  - incubating duration
-  - incubation in humans
-  - incubation in mosquitoes
+    -   reference to enclosing site
+
+    -   Mating resource, R6 class
+
+        -   QUEUE MatingQ
+
+    -   Aqua resource, R6 class
+
+        -   QUEUE EggQ
+
+        -   Aqua resource emerge, R6 class
+
+            o QUEUE ImagoQ
+
+    -   Sugar resource, R6 class
+
+    -   Feeding resource, R6 class
+
+        -   QUEUE RiskQ, of zoo hosts.
+
+-   MBITES_Globals [MBITES-Globals.R]
+
+    -   counter of mosquito IDs
+    -   logging objects
+    -   counter of human IDs
+    -   counter of tile IDs
+
+-   Human [HUMAN-Null.R]
+
+    -   biting weight
+    -   site of feeding, site, tile
+    -   bitten yet
+    -   mosquitoes that bit me and times when bitten
+    -   probe-only or not
+
+-   Generic pathogen, parent of SEI Pathogen [PATHOGEN-Generic-Class.R]
+
+    -   an ID
+
+-   SEI_Pathogen [PATHOGEN-Generic-SIS.R]
+
+    -   infectious, true or false
+    -   incubating duration
+    -   incubation in humans
+    -   incubation in mosquitoes
 
 ## MBITES Structure
 
-The code creates instances of these R6 classes, and each instance has pointers to other instances.
+The code creates instances of these R6 classes, and each instance has pointers
+to other instances.
 
 ![MBITES R6 Object Structure](./mbites_structure.png)
 
-
 ## MBITES Sequence
 
-Once we know the structure, we can better understand the order in which a simulation calls functions in order to perform its job. Despite the object-oriented code, the pattern is largely structured programming, meaning top-down calls.
+Once we know the structure, we can better understand the order in which a
+simulation calls functions in order to perform its job. Despite the
+object-oriented code, the pattern is largely structured programming, meaning
+top-down calls.
 
 ![MBITES R6 Sequence](./mbites_sequence.png)
 
- 1. simulation() [MBITES-Globals.R]
- 
- 2. simulate_MBITES_Globals [MBITES-Globals.R]
- 
- 3. oneDay_Tile [TILE-Simulation.R]
-    
-    * oneDay_ActivitySpace on humans
-    
-    * oneDay_AquaticEcology on Sites
-    
-    * Mosquitoes$apply(tag="MBITES")
-    
-    * Humans$apply(tag="oneDay_EventQ")
- 
- * mbites_MBITES() [MBITES-Bout.R]
- 
-   * mbites_oneBout() [MBITES-Bout.R]
-   
-     - attempt_B()
-       * humanEncounter() This is the place!
-     - attempt_O()
-     - attempt_M()
-     - attempt_S()
-     - restingSpot() [MBITES-Resting.R]
-     - updateState() [MBITES-Bout.R]
-       o energetics()
-       o survival()
-       o Oogenesis() [MBITES-Oogenesis.R]
-       o checkEggMaturation() [MBITES-Oogenesis.R]
-       o checkRefeed [MBITES-Oogenesis.R]
-       o timing() [MBITES-Timing.R]
-       o checkEstivation()
-       o pathogenDynamics() [PATHOGEN-*.R]
-     - trackHistory()
-  
-   * mbites_attempt_search() [MBITES-Bout.R]
-   
-   * mbites_move() [MBITES-Bout.R]
-   
-     - private$site$move_mosquito()
+The diagram is nice, but let's walk through the functions in more detail in order to find any reference to blood-feeding or human movement.
+
+1.  `simulation()` [MBITES-Globals.R:172]
+
+2.  `simulate_MBITES_Globals` [MBITES-Globals.R:118]
+
+3.  `Tile$oneDay() = oneDay_Tile [TILE-Simulation.R:22]` Called by
+    simulate_MBITES_Globals
+
+    -   `private$Sites$apply(tag="clear_ActivitySpace")`
+
+    -   <span class="human">`oneDay_ActivitySpace` on humans</span>
+
+        -   Gets feeding site at site in tile, and adds human ID to RiskQ.
+
+    -   `oneDay_AquaticEcology` on Sites, where it's called
+        `oneDay_AquaticEcology_Site`.
+
+        -   Resource's `one_day()`. Doesn't call on the Aqua_Resource class but
+            on its child class, Aqua_Resource_Emerge.
+
+            -   `Aqua_Resource_Emerge$one_day_Emerge()` adds a number of
+                emerging mosquitoes to ImagoQ.
+
+        -   Resource's `push_imago()`
+
+            -   `Aqua_Resource_Emerge$push_imago_Emerge()` Creates new mosquito
+                instances and puts them into tiles.
+
+    -   `Mosquitoes$apply(tag="MBITES")` is `mbites_MBITES()` in
+        MBITES-Bout.R:560. Bound to Female_Mosquito.
+
+        -   `oneBout()` MBITES-Bout.R:69
+
+            -   `attempt_search()` in MBITES-Bout.R
+
+                -   `self$move()` is `mbites_move()` in MBITES-Bout.R
+
+                    -   `site$move_mosquito()` is `move_mosquito_Site()` in
+                        LANDSCAPE-Site.R. Samples a movement kernel to return a
+                        nearby Site.
+
+                -   get probabilities of success for B, O, S, M.
+
+            -   `attempt_B()` in MBITES-Bout.R
+
+                -   <span class="blood">`site$sample_feed()` is `sample_feed_Site()` in
+                    Landscape-Site.R:213.</span>
+
+                -   <span class="blood">`self$chooseHost()` in MBITES-HostEncounter.R:41 which
+                    samples the `RiskQ`</span>
+
+                -   <span class="blood">`self$humanEncounter()` is `mbites_humanEncounter()`in in
+                    MBITES-HostEncounter.R:68.</span>
+
+                    -   `self$trackProbe()` in MBITES-Logging.R. Seems to do
+                        nothing.
+
+                    -   `self$probeHost()`\# PATHOGEN-XX.R (mosy -\> host
+                        transmission). Calls one of two implementations.
+
+                        -   <span class="human">`get_human()$pushProbe()` in PATHOGEN-Null.R</span>
+
+                        -   `probeHost_SEI()` in PATHOGEN-Generic-SIS.R.
+
+                            -   `pathogen$m2h_transmission()` in
+                                PATHOGEN-Generic-SIS.R. Determines if it's past
+                                incubation.
+
+                            -   `pathogen$clone()`
+
+                            -   `pathogen$mosquito2human()` sets incubation
+                                period in the pathogen. Doesn't do anything
+                                else.
+
+                            -   <span class="human">`get_human()$add_pathogen()` method in
+                                PATHOGEN-Generic-SIS.R that gets added to the
+                                Human instance. Sets a pathogen method on the
+                                human.</span>
+
+                    -   `self$trackFeed()` this is about logging.
+
+                    -   <span class="blood">`self$feedHost()` \# PATHOGEN-XX.R</span>
+
+                        -   <span class="blood">`bloodFeed_SEI()` in PATHOGEN-Generic-SIS.R. Maybe?
+                            It's not linked in the source code.</span>
+
+                            -   <span class="human">`human$get_pathogen()`</span>
+
+                            -   `pathogen$h2m_transmission()`
+
+                            -   `pathogen$human2mosquito()` depends on
+                                incubation state.
+
+                            -   `pathogen$push2pedigree()` calls
+                                `Pedigree$assign(key, value)`
+
+                    -   <span class="blood">`self$BloodMeal()` \# MBITES-BloodMeal.R. This is
+                        `mbites_BloodMeal()` which is added to the mosquito.</span>
+
+                        -   `self$Overfeeding()` \# MBITES-BloodMeal.R. Samples
+                            whether it overfed.
+
+                        -   `self$BloodEnergetics()` \# called
+                            `mbites_BloodEnergetics()` in
+                            MBITES-Energetics.R:115. Added to the mosquito.
+
+                            -   `self$energyFromBlood()` gets a parameter.
+
+                -   <span class="blood">`self$zooEncounter()` is `mbites_zooEncounter()` in
+                    MBITES-HostEncounter.R:115</span>
+
+                    -   `self$trackProbe()`
+
+                    -   `self$trackFeed()`
+
+                    -   `self$BloodMeal()` \# MBITES-Energetics.R
+
+            -   `attempt_O()` in MBITES-Bout.R
+
+                -   `self$chooseHabitat()` \# `mbites_chooseHabitat()` in
+                    MBITES-Oviposition.R. Added to mosquito instance.
+
+                    -   `site$sample_aqua()` in LANDSCAPE-Site picks an aquatic
+                        habitat.
+
+                -   `self$layEggs()` \# MBITES-Oviposition.R
+
+                    -   `private$aqua_resource$EggQ$add2Q(private$batch,private$tNow)`
+
+            -   `attempt_M()` in MBITES-Bout.R
+
+                -   `self$chooseMate()` \# MBITES-Mating.R
+
+                    -   `site$sample_mate()`
+
+                    -   `mating_resource$MatingQ$sampleQ()`
+
+                -   `self$mating()` \# MBITES-Mating.R. Checks maturation.
+
+            -   `attempt_S()` in MBITES-Bout.R
+
+                -   `self$chooseSugarSource()`\# MBITES-Energetics.R
+                    `mbites_chooseSugarSource()` added to Mosquito.
+
+                    -   `private$site$sample_sugar()`
+
+                -   `self$sugarMeal()` \# MBITES-Energetics.R is
+                    `mbites_sugarMeal()`
+
+            -   `restingSpot()` is `mbites_restingSpot()` in MBITES-Resting.R.
+
+                -   `self$PPRFlight()`\# MBITES-BloodMeal.R
+
+                -   `self$boutFailCheck()`
+
+                -   `self$newSpot()`
+
+                -   `self$enterHouse()`
+
+            -   `updateState()` in MBITES-Bout.R
+
+                -   `energetics()` is `mbites_energetics()` in
+                    MBITES-Energetics.R
+
+                    -   `self$flightBurnEnergy()` sets a parameter.
+
+                    -   `self$queueSugarBout()` samples for sugar bout.
+
+                -   `survival()` in MBITES-Survival.R
+
+                    -   `self$surviveFlight()` is `mbites_surviveFlight()` is
+                        bunches of sampling.
+
+                    -   `self$surviveHazards()` is `mbites_surviveHazards()`
+                        which does a draw.
+
+                -   `Oogenesis()` in MBITES-Oogenesis.R is either
+                    `mbites_oogenesis1()` or `mbites_oogenesis2()`. Adds batches
+                    to the mosquito itself. The link is set in MBITES-Setup.R.
+
+                -   `checkEggMaturation()` in MBITES-Oogenesis.R. Checks gravid
+                    and sets O or B.
+
+                -   `checkRefeed()`in MBITES-Oogenesis.R. Switches state to B.
+
+                -   `self$checkForResources()` in MBITES-Bout.R
+
+                    -   <span class="blood">`self$BloodFeedingSearchCheck()` in MBITES-Bout.R. Checks if the local site has blood hosts present. Sets this in private$search. !!! If they aren't present, triggers a search.</span>
+
+                        -   <span class="blood">`site$has_feed()`</span>
+
+                    -   `self$OvipositSearchCheck()` in MBITES-Bout.R. If no aqua, triggers dispersal.
+
+                        -   `site$has_aqua()`
+
+                    -   `self$MatingSearchCheck()` in MBITES-Bout.R. If no mate, triggers dispersal.
+
+                        -   `site$has_mate()`
+
+                    -   `self$SugarSearchCheck()` in MBITES-Bout.R. If no sugar, triggers dispersal.
+
+                        -   `site$has_sugar()`
+
+                -   `self$timing()` in MBITES-Timing.R. This samples for bout
+                    timing.
+
+                -   `self$findSwarm()` in MBITES-Timing.R as
+                    `mbites_findSwarm()` launch and swarms emerging.
+
+                -   `self$checkEstivation()` in MBITES-Timing.R
+
+                -   `self$pathogenDynamics()` in PATHOGEN-XX.R is
+                    `pathogenDynamics_SEI()` in PATHOGEN-Generic-SIS.R:214
+
+                    -   `pathogen$oneBout()` is `oneBout_mosquito_SEI()` in
+                        PATHOGEN-Generic-SIS.R:203 which advances incubation
+                        period by the time.
+
+            -   `trackHistory()`
+
+    -   `Humans$apply(tag="oneDay_EventQ")` Doesn't do anything in HUMAN-Null.R.
+
+4.  `Tile$get_mosquitoes()$apply(tag = "exit", endSim = TRUE)` Called by
+    simulate_MBITES_Globals. `mbites_exit_Mosquito_Female()`
+
+5.  `Tile$get_humans()$apply(tag = "exit", pretty)` Called by
+    simulate_MBITES_Globals. Removes humans from the tile's HashMap.
+    Calls `mbites_exit_Mosquito_Female()` and both samples time to next
+    bout and removes mosquito from Tile's HashMap.

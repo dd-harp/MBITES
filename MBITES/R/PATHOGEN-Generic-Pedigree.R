@@ -13,53 +13,36 @@
 
 #' PATHOGEN Generic Pedigree
 #'
-#' This class is a singleton object in the \code{MBITES} package namespace that stores global values needed for generic pathogen simulation.
-#' It can be accessed by \code{MBITES:::Pedigree}.
+#' This class is a singleton object in the \code{MBITES} package namespace that
+#' provides a unique integer ID for each pathogen.
+#' It can be accessed by the global \code{MBITES:::Pedigree}.
 #'
-#'
-#'
-#'
-#' @docType class
-#' @format An \code{\link{R6Class}} generator object
-#' @keywords R6 class
-#'
-#' @section **Constructor**:
-#'  * argument: im an agument!
-#'
-#' @section **Methods**:
-#'  * method: im a method!
-#'
-#' @section **Fields**:
-#'  * field: im a field!
-#'
-Generic_Pedigree <- R6::R6Class(classname = "Generic_Pedigree",
-                 portable = TRUE,
-                 cloneable = FALSE,
-                 lock_class = FALSE,
-                 lock_objects = FALSE,
-                 inherit = MBITES:::HashMap,
+Generic_Pedigree <- R6::R6Class(
+  classname = "Generic_Pedigree",
+  portable = TRUE,
+  cloneable = FALSE,
+  lock_class = FALSE,
+  lock_objects = FALSE,
+  inherit = HashMap,
 
-                 # public members
-                 public = list(
+  # public members
+  public = list(
+    # begin constructor
+    initialize = function() {
+      # futile.logger::flog.trace("Generic_Pedigree being born at self: %s , private: %s",pryr::address(self),pryr::address(private))
+    },
+    # end constructor
 
-                   # begin constructor
-                   initialize = function(){
-                     # futile.logger::flog.trace("Generic_Pedigree being born at self: %s , private: %s",pryr::address(self),pryr::address(private))
-                   }, # end constructor
+    # begin destructor
+    finalize = function() {
+      # futile.logger::flog.trace("Generic_Pedigree being killed at self: %s , private: %s",pryr::address(self),pryr::address(private))
+    } # end destructor
 
-                   # begin destructor
-                   finalize = function(){
-                     # futile.logger::flog.trace("Generic_Pedigree being killed at self: %s , private: %s",pryr::address(self),pryr::address(private))
-                   } # end destructor
+  ),
+  # end public members
 
-                 ), # end public members
-
-                 # private members
-                 private = list(
-
-                   pathogen_id = 0L
-
-                 ) # end private members
+  # private members
+  private = list(pathogen_id = 0L) # end private members
 ) # end Generic_Pedigree class definition
 
 
@@ -73,5 +56,5 @@ Generic_Pedigree$set(which = "public",name = "get_pathogen_id",
 )
 
 
-# assign to MBITES namespace (a bit hacky)
+# Create a global object in the MBITES namespace.
 Pedigree <- Generic_Pedigree$new()

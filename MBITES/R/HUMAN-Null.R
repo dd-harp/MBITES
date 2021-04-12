@@ -122,7 +122,7 @@ exit_Human_NULL <- function(){
           bite_times = private$mosquito_t,
           bloodfeed_bool = private$bloodFeed
       ), pretty = MBITES:::Globals$pretty),",\n",sep="",file=MBITES:::Globals$get_human_out())
-  # remove the human
+  # remove the human from the Hash map.
   MBITES:::Globals$get_tile(private$tileID)$get_humans()$rm(private$id)
 }
 
