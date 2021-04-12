@@ -49,6 +49,17 @@ SEI_Pathogen <- R6::R6Class(
       super$finalize() # destruct base parts
 
       # futile.logger::flog.trace("SEI_Pathogen being killed at self: %s , private: %s",pryr::address(self),pryr::address(private))
+    },
+
+    # pathogen method: overwrite oneDay_mosquito
+    oneBout <- function(){
+      # if not infectious advance the incubation period to the time of next launch
+      if(!infectious){
+        private$incubating = private$incubating + private$tNext
+        if(private$incubating >= private$incubation_m){
+          private$infectious = TRUE
+        }
+      }
     }
 
   ),
@@ -76,7 +87,8 @@ SEI_Pathogen <- R6::R6Class(
 # Push Pathogen to Pedigree
 ###############################################################################
 
-# if using the SEI generic model; anyone with parentID = 0 needs to look up the ancestor pathogen.
+# If using the SEI generic model; anyone with parentID = 0 needs to look up the
+# ancestor pathogen.
 ancestor_SEI <- function(){
   ancestor = list(id=0L,parentID=NaN,hID=-1L,tEvent=0,event="ancestor")
   MBITES:::Pedigree$assign(key=0L,value=new)
@@ -199,20 +211,24 @@ human2mosquito_SEI <- function(){
   private$incubation_m = MBITES:::PathogenParameters$get_mosquito_incubation()
 }
 
-# pathogen method: overwrite oneDay_mosquito
-oneBout_mosquito_SEI <- function(){
-  # if not infectious advance the incubation period to the time of next launch
-  if(!infectious){
-    private$incubating = private$incubating + private$tNext
-    if(private$incubating >= private$incubation_m){
-      private$infectious = TRUE
-    }
-  }
-}
-
 # mosquito method: update dynamics after the bout.
 pathogenDynamics_SEI <- function(){
   if(!is.null(private$pathogen)){
     private$pathogen$oneBout()
   }
+}
+
+
+Pathogen_SEI_SETUP <- function(){
+  Mosquito_Female$set(which = "public",name = "probeHost",
+                      value = probeHost_SEI, overwrite = TRUE
+  )
+
+  Mosquito_Female$set(which = "public",name = "feedHost",
+                      value = bloodFeed_SEI, overwrite = TRUE
+  )
+
+  Mosquito_Female$set(which = "public",name = "pathogenDynamics",
+                      value = pathogenDynamics_SEI, overwrite = TRUE
+  )
 }
