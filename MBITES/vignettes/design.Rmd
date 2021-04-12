@@ -2,7 +2,7 @@
 title: "MBITES Design"
 author: "Andrew Dolgert"
 date: "2021-03-17"
-output: html_document
+output:  html_document
 editor_options: 
   markdown: 
     wrap: 80
@@ -10,6 +10,17 @@ editor_options:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{css, echo=FALSE}
+.blood {
+  color: #8A0303;
+  font-weight: bold;
+}
+.human {
+  color: #4b5320;
+  font-weight: bold;
+}
 ```
 
 ## Overview
@@ -149,6 +160,8 @@ top-down calls.
 
 ![MBITES R6 Sequence](./mbites_sequence.png)
 
+The diagram is nice, but let's walk through the functions in more detail in order to find any reference to blood-feeding or human movement.
+
 1.  `simulation()` [MBITES-Globals.R:172]
 
 2.  `simulate_MBITES_Globals` [MBITES-Globals.R:118]
@@ -158,7 +171,7 @@ top-down calls.
 
     -   `private$Sites$apply(tag="clear_ActivitySpace")`
 
-    -   `oneDay_ActivitySpace` on humans
+    -   <span class="human">`oneDay_ActivitySpace` on humans</span>
 
         -   Gets feeding site at site in tile, and adds human ID to RiskQ.
 
@@ -193,14 +206,14 @@ top-down calls.
 
             -   `attempt_B()` in MBITES-Bout.R
 
-                -   `site$sample_feed()` is `sample_feed_Site()` in
-                    Landscape-Site.R:213.
+                -   <span class="blood">`site$sample_feed()` is `sample_feed_Site()` in
+                    Landscape-Site.R:213.</span>
 
-                -   `self$chooseHost()` in MBITES-HostEncounter.R:41 which
-                    samples the `RiskQ`
+                -   <span class="blood">`self$chooseHost()` in MBITES-HostEncounter.R:41 which
+                    samples the `RiskQ`</span>
 
-                -   `self$humanEncounter()` is `mbites_humanEncounter()`in in
-                    MBITES-HostEncounter.R:68.
+                -   <span class="blood">`self$humanEncounter()` is `mbites_humanEncounter()`in in
+                    MBITES-HostEncounter.R:68.</span>
 
                     -   `self$trackProbe()` in MBITES-Logging.R. Seems to do
                         nothing.
@@ -208,7 +221,7 @@ top-down calls.
                     -   `self$probeHost()`\# PATHOGEN-XX.R (mosy -\> host
                         transmission). Calls one of two implementations.
 
-                        -   `get_human()$pushProbe()` in PATHOGEN-Null.R
+                        -   <span class="human">`get_human()$pushProbe()` in PATHOGEN-Null.R</span>
 
                         -   `probeHost_SEI()` in PATHOGEN-Generic-SIS.R.
 
@@ -222,19 +235,19 @@ top-down calls.
                                 period in the pathogen. Doesn't do anything
                                 else.
 
-                            -   `get_human()$add_pathogen()` method in
+                            -   <span class="human">`get_human()$add_pathogen()` method in
                                 PATHOGEN-Generic-SIS.R that gets added to the
                                 Human instance. Sets a pathogen method on the
-                                human.
+                                human.</span>
 
                     -   `self$trackFeed()` this is about logging.
 
-                    -   `self$feedHost()` \# PATHOGEN-XX.R
+                    -   <span class="blood">`self$feedHost()` \# PATHOGEN-XX.R</span>
 
-                        -   `bloodFeed_SEI()` in PATHOGEN-Generic-SIS.R. Maybe?
-                            It's not linked in the source code.
+                        -   <span class="blood">`bloodFeed_SEI()` in PATHOGEN-Generic-SIS.R. Maybe?
+                            It's not linked in the source code.</span>
 
-                            -   `human$get_pathogen()`
+                            -   <span class="human">`human$get_pathogen()`</span>
 
                             -   `pathogen$h2m_transmission()`
 
@@ -244,8 +257,8 @@ top-down calls.
                             -   `pathogen$push2pedigree()` calls
                                 `Pedigree$assign(key, value)`
 
-                    -   `self$BloodMeal()` \# MBITES-BloodMeal.R. This is
-                        `mbites_BloodMeal()` which is added to the mosquito.
+                    -   <span class="blood">`self$BloodMeal()` \# MBITES-BloodMeal.R. This is
+                        `mbites_BloodMeal()` which is added to the mosquito.</span>
 
                         -   `self$Overfeeding()` \# MBITES-BloodMeal.R. Samples
                             whether it overfed.
@@ -256,8 +269,8 @@ top-down calls.
 
                             -   `self$energyFromBlood()` gets a parameter.
 
-                -   `self$zooEncounter()` is `mbites_zooEncounter()` in
-                    MBITES-HostEncounter.R:115
+                -   <span class="blood">`self$zooEncounter()` is `mbites_zooEncounter()` in
+                    MBITES-HostEncounter.R:115</span>
 
                     -   `self$trackProbe()`
 
@@ -335,9 +348,9 @@ top-down calls.
 
                 -   `self$checkForResources()` in MBITES-Bout.R
 
-                    -   `self$BloodFeedingSearchCheck()` in MBITES-Bout.R. Checks if the local site has blood hosts present. Sets this in private$search. !!! If they aren't present, triggers a search.
+                    -   <span class="blood">`self$BloodFeedingSearchCheck()` in MBITES-Bout.R. Checks if the local site has blood hosts present. Sets this in private$search. !!! If they aren't present, triggers a search.</span>
 
-                        -   `site$has_feed()`
+                        -   <span class="blood">`site$has_feed()`</span>
 
                     -   `self$OvipositSearchCheck()` in MBITES-Bout.R. If no aqua, triggers dispersal.
 
@@ -371,7 +384,9 @@ top-down calls.
     -   `Humans$apply(tag="oneDay_EventQ")` Doesn't do anything in HUMAN-Null.R.
 
 4.  `Tile$get_mosquitoes()$apply(tag = "exit", endSim = TRUE)` Called by
-    simulate_MBITES_Globals
+    simulate_MBITES_Globals. `mbites_exit_Mosquito_Female()`
 
 5.  `Tile$get_humans()$apply(tag = "exit", pretty)` Called by
-    simulate_MBITES_Globals
+    simulate_MBITES_Globals. Removes humans from the tile's HashMap.
+    Calls `mbites_exit_Mosquito_Female()` and both samples time to next
+    bout and removes mosquito from Tile's HashMap.
