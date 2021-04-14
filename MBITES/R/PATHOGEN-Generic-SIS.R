@@ -83,7 +83,7 @@ SEI_Pathogen <- R6::R6Class(
     #' @description
     #' Decide whether this pathogen is infectious. Returns a boolean.
     m2h_transmission = function(){
-      # havent passed incubation period
+      # haven't passed incubation period
       if(!private$infectious){
         return(FALSE)
         # have passed incubation; check for successful transmission
@@ -204,21 +204,19 @@ probeHost_SEI <- function(){
 # mosquito method
 feedHost_SEI <- function(){
   # no superinfection, so only do this if i don't have any pathogens in me
-  if(is.null(private$pathogen)){
-    host <- MBITES:::Globals$get_tile(private$tileID)$get_human(private$hostID)
-    host$pushFeed()
-    hPathogen <- host$get_pathogen("SEI_Pathogen")
-    if(!is.null(hPathogen)){
-      # if it was actually infectious
-      if(hPathogen$h2m_transmission()){
-        # generate a new pathogen and push it to the pedigree (recombination occurs in mosquito)
-        mPathogen = SEI_Pathogen$new(parentID = hPathogen$get_id())
-        mPathogen$human2mosquito()
-        private$pathogen = mPathogen
-        private$pathogen$push2pedigree(hID=private$hostID,mID$private$id,tEvent=private$tNow,event="H2M")
-      }
-    }  # else no pathogen to transfer
-  }
+  host <- MBITES:::Globals$get_tile(private$tileID)$get_human(private$hostID)
+  host$pushFeed()
+  hPathogen <- host$get_pathogen("SEI_Pathogen")
+  if(is.null(private$pathogen) && !is.null(hPathogen)){
+    # if it was actually infectious
+    if(hPathogen$h2m_transmission()){
+      # generate a new pathogen and push it to the pedigree (recombination occurs in mosquito)
+      mPathogen = SEI_Pathogen$new(parentID = hPathogen$get_id())
+      mPathogen$human2mosquito()
+      private$pathogen = mPathogen
+      private$pathogen$push2pedigree(hID=private$hostID,mID$private$id,tEvent=private$tNow,event="H2M")
+    }  # else mosquito got lucky
+  }  # else mosquito had a pathogen or human didn't have one.
 }
 
 # mosquito method: update dynamics after the bout.
@@ -230,6 +228,7 @@ pathogenDynamics_SEI <- function(){
 
 
 PathogenSEI_SETUP <- function(){
+  flog.debug("Setting up SEI pathogen hooks on Mosquito.")
   Mosquito_Female$set(which = "public",name = "probeHost",
                       value = probeHost_SEI, overwrite = TRUE
   )

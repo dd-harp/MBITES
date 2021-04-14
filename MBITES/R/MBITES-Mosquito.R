@@ -20,124 +20,126 @@
 #'
 #' All mosquitoes inherit from the \code{Mosquito} abstract base class object.
 #'
-#' @docType class
-#' @format An \code{\link{R6Class}} generator object
-#' @keywords R6 class
-#'
-#' @section **Constructor**:
-#'  * argument: im an agument!
-#'
-#' @section **Methods**:
-#'  * method: im a method!
-#'
-#' @section **Fields**:
-#'  * id: integer id (obtained from \code{\link{MBITES_Globals}})
-#'  * field: im a field!
-#'
 #' @export
-Mosquito <- R6::R6Class(classname = "Mosquito",
-                 portable = TRUE,
-                 cloneable = FALSE,
-                 lock_class = FALSE,
-                 lock_objects = FALSE,
+Mosquito <- R6::R6Class(
+  classname = "Mosquito",
+  portable = TRUE,
+  cloneable = FALSE,
+  lock_class = FALSE,
+  lock_objects = FALSE,
 
-                 # public members
-                 public = list(
+  public = list(
+    initialize = function(bDay, state, site, tileID) {
+      # set up parameters
+      private$id = MBITES:::Globals$get_mosquito_id()
 
-                   # begin constructor
-                   initialize = function(bDay, state, site, tileID){
+      private$alive = TRUE
 
-                     # set up parameters
-                     private$id = MBITES:::Globals$get_mosquito_id()
+      private$site = site
+      private$tileID = tileID
 
-                     private$alive = TRUE
+      private$bDay = bDay
+      private$tNow = bDay
+      private$tNext = bDay
 
-                     private$site = site
-                     private$tileID = tileID
+      private$search = TRUE
+      private$state = state
+      private$starved = FALSE
 
-                     private$bDay = bDay
-                     private$tNow = bDay
-                     private$tNext = bDay
+      # set up history
+      private$timeHist[1] = bDay
+      private$siteHist[1] = site$get_id()
+      private$stateHist[1] = state
+      private$searchHist[1] = TRUE
 
-                     private$search = TRUE
-                     private$state = state
-                     private$starved = FALSE
+      # logging
+      # # futile.logger::flog.trace("Mosquito %s being born at: self %s , private %s",private$id,pryr::address(self),pryr::address(private))
+    },
 
-                     # set up history
-                     private$timeHist[1] = bDay
-                     private$siteHist[1] = site$get_id()
-                     private$stateHist[1] = state
-                     private$searchHist[1] = TRUE
+    #' @description
+    #' Get the integer ID of the mosquito.
+    get_id_Mosquito = function(){
+      return(private$id)
+    },
 
-                     # logging
-                     # # futile.logger::flog.trace("Mosquito %s being born at: self %s , private %s",private$id,pryr::address(self),pryr::address(private))
+    finalize = function() {
+      # # futile.logger::flog.trace("Mosquito %s being killed at: self %s , private %s",private$id,pryr::address(self),pryr::address(private))
+    }
 
-                   }, # end constructor
+  ),
 
-                   # begin destructor
-                   finalize = function(){
-                     # logging
-                     # # futile.logger::flog.trace("Mosquito %s being killed at: self %s , private %s",private$id,pryr::address(self),pryr::address(private))
-                   }
+  private = list(
+    # basic parameters
+    id             = integer(1),
+    # character id
+    alive          = logical(1),
+    # am i alive?
 
-                 ), # end public members
+    # location
+    tileID         = integer(1),
+    # id of the tile i am in
+    site           = NULL,
+    # reference to my current site
+    rspot          = "v",
+    # my current resting spot
 
-                 # private members
-                 private = list(
+    # resources
+    sugar_resource      = NULL,
+    # reference to my current sugar resource
+    mating_resource       = NULL,
+    # reference to my current mating swarm resource
 
-                   # basic parameters
-                   id             = integer(1), # character id
-                   alive          = logical(1), # am i alive?
+    # timing
+    bDay          = numeric(1),
+    # the day i emerged
+    tNext         = numeric(1),
+    # time of my next launch
+    tNow          = numeric(1),
+    # time of my current launch
 
-                   # location
-                   tileID         = integer(1), # id of the tile i am in
-                   site           = NULL, # reference to my current site
-                   rspot          = "v", # my current resting spot
+    # behavioral state parameters
+    search         = logical(1),
+    # next launch is for search or attempt bout?
+    searchNow      = logical(1),
+    # is my current bout a search bout?
+    state          = character(1),
+    # my current behavioral state
+    starved        = FALSE,
+    # am i starved for sugar?
+    boutFail       = 0L,
+    # counter
 
-                   # resources
-                   sugar_resource      = NULL, # reference to my current sugar resource
-                   mating_resource       = NULL, # reference to my current mating swarm resource
+    # energetics
+    energy         = 1,
+    # my current energy
+    mature         = FALSE,
+    # am i mature?
 
-                   # timing
-                   bDay          = numeric(1), # the day i emerged
-                   tNext         = numeric(1), # time of my next launch
-                   tNow          = numeric(1), # time of my current launch
+    # survival (mosquitoes start out at full life)
+    damage_physical = 0,
+    # physical damage
+    damage_chemical = 0,
+    # chemical damage
 
-                   # behavioral state parameters
-                   search         = logical(1), # next launch is for search or attempt bout?
-                   searchNow      = logical(1), # is my current bout a search bout?
-                   state          = character(1), # my current behavioral state
-                   starved        = FALSE, # am i starved for sugar?
-                   boutFail       = 0L, # counter
+    # resource ids
+    sugarID        = integer(1),
+    # id of my sugar  source
+    mateID         = integer(1),
+    # id of my mate
 
-                   # energetics
-                   energy         = 1, # my current energy
-                   mature         = FALSE, # am i mature?
-
-                   # survival (mosquitoes start out at full life)
-                   damage_physical = 0, # physical damage
-                   damage_chemical = 0, # chemical damage
-
-                   # resource ids
-                   sugarID        = integer(1), # id of my sugar  source
-                   mateID         = integer(1), # id of my mate
-
-                   # history
-                   nEvent         = 1L, # number of bouts + emergence (birthday) (increment at the beginning of the trackHistory function)
-                   timeHist       = numeric(30), # history of event times (t)
-                   siteHist       = integer(30), # history of sites visited (s)
-                   searchHist     = logical(30), # history of searching?
-                   stateHist      = character(30), # history of behavioral states (b)
-                   cod            = character(1) # for mosquito autopsies
-                 ) # end private members
-)
-
-get_id_Mosquito <- function(){
-  return(private$id)
-}
-
-Mosquito$set(which = "public",name = "get_id",
-    value = get_id_Mosquito, overwrite = TRUE
+    # history
+    nEvent         = 1L,
+    # number of bouts + emergence (birthday) (increment at the beginning of the trackHistory function)
+    timeHist       = numeric(30),
+    # history of event times (t)
+    siteHist       = integer(30),
+    # history of sites visited (s)
+    searchHist     = logical(30),
+    # history of searching?
+    stateHist      = character(30),
+    # history of behavioral states (b)
+    cod            = character(1) # for mosquito autopsies
+  )
 )
 
 
@@ -149,83 +151,88 @@ Mosquito$set(which = "public",name = "get_id",
 #'
 #' Female mosquitoes inherit from the \code{\link{Mosquito}} abstract base class object.
 #'
-#' @docType class
-#' @format An \code{\link{R6Class}} generator object
-#' @keywords R6 class
-#'
-#' @section **Constructor**:
-#'  * argument: im an agument!
-#'
-#' @section **Methods**:
-#'  * method: im a method!
-#'
-#' @section **Fields**:
-#'  * id: integer id (obtained from \code{\link{MBITES_Globals}})
-#'  * field: im a field!
-#'
 #' @export
-Mosquito_Female <- R6::R6Class(classname = "Mosquito_Female",
-                 portable = TRUE,
-                 cloneable = FALSE,
-                 lock_class = FALSE,
-                 lock_objects = FALSE,
-                 inherit = MBITES:::Mosquito,
+Mosquito_Female <- R6::R6Class(
+  classname = "Mosquito_Female",
+  portable = TRUE,
+  cloneable = FALSE,
+  lock_class = FALSE,
+  lock_objects = FALSE,
+  inherit = MBITES:::Mosquito,
 
-                 # public members
-                 public = list(
+  public = list(
+    initialize = function(bDay, site, tileID) {
+      super$initialize(bDay,
+                       MBITES:::Parameters$get_defaultState_F(),
+                       site,
+                       tileID) # construct the base-class parts
 
-                   # begin constructor
-                   initialize = function(bDay, site, tileID){
+      private$energyPreG = MBITES:::Parameters$get_energyPreG()
 
-                     super$initialize(bDay,MBITES:::Parameters$get_defaultState_F(),site,tileID) # construct the base-class parts
+      # only search if i need to (or if dispersion makes me go anyway)
+      private$search = FALSE
+      switch(
+        private$state,
+        B = {
+          self$BloodFeedingSearchCheck()
+        },
+        O = {
+          self$OvipositSearchCheck()
+        },
+        M = {
+          self$MatingSearchCheck()
+        },
+        S = {
+          self$SugarSearchCheck()
+        },
+        {
+          stop("behavioral state should be one of B, O, M, S: ",
+               private$state, "\n")
+        }
+      )
 
-                     private$energyPreG = MBITES:::Parameters$get_energyPreG()
+    },
 
-                     # only search if i need to (or if dispersion makes me go anyway)
-                     private$search = FALSE
-                     switch(private$state,
-                       B = {self$BloodFeedingSearchCheck()},
-                       O = {self$OvipositSearchCheck()},
-                       M = {self$MatingSearchCheck()},
-                       S = {self$SugarSearchCheck()},
-                       {stop("illegal behavioral state: ",private$state,"\n")}
-                     )
+    # pathogenDynamics
+    pathogenDynamics = function() {
+      # futile.logger::flog.warn("default 'pathogenDynamics' being called for mosquito: ",private$id)
+    }
 
-                   }, # end constructor
+  ),
 
-                   # pathogenDynamics
-                   pathogenDynamics = function(){
-                     # futile.logger::flog.warn("default 'pathogenDynamics' being called for mosquito: ",private$id)
-                   }
+  private = list(
+    # resources
+    aqua_resource        = NULL,
+    # reference to my current aquatic habitat resource
+    feeding_resource     = NULL,
+    # reference to my current blood feeding resource
 
-                 ), # end public members
+    # behavioral state parameters
+    mated          = FALSE,
+    # have i mated yet?
+    gravid         = FALSE,
+    # am i gravid to oviposit?
 
-                 # private members
-                 private = list(
+    # energetics
+    energyPreG    = numeric(1),
+    # pre-gonotrophic energy requirement
 
-                   # resources
-                   aqua_resource        = NULL, # reference to my current aquatic habitat resource
-                   feeding_resource     = NULL, # reference to my current blood feeding resource
+    # bloodfeeding and oogenesis
+    bloodfed       = FALSE,
+    # have i fed on blood this bout?
+    batch          = 0,
+    # size of my egg batch
+    eggT           = 2e16,
+    # time my egg batch is ready
+    eggP           = numeric(1),
+    bmSize         = 0,
+    # size of my blood meal
 
-                   # behavioral state parameters
-                   mated          = FALSE, # have i mated yet?
-                   gravid         = FALSE, # am i gravid to oviposit?
+    # host ids
+    hostID         = integer(1) # id of my blood host
 
-                   # energetics
-                   energyPreG    = numeric(1), # pre-gonotrophic energy requirement
-
-                   # bloodfeeding and oogenesis
-                   bloodfed       = FALSE, # have i fed on blood this bout?
-                   batch          = 0, # size of my egg batch
-                   eggT           = 2e16, # time my egg batch is ready
-                   eggP           = numeric(1),
-                   bmSize         = 0, # size of my blood meal
-
-                   # host ids
-                   hostID         = integer(1) # id of my blood host
-
-                 ) # end private members
-) # end class definition
+  )
+)
 
 
 ###############################################################################
@@ -236,41 +243,24 @@ Mosquito_Female <- R6::R6Class(classname = "Mosquito_Female",
 #'
 #' Male mosquitoes inherit from the \code{\link{Mosquito}} abstract base class object.
 #'
-#' @docType class
-#' @format An \code{\link{R6Class}} generator object
-#' @keywords R6 class
-#'
-#' @section **Constructor**:
-#'  * argument: im an agument!
-#'
-#' @section **Methods**:
-#'  * method: im a method!
-#'
-#' @section **Fields**:
-#'  * id: integer id (obtained from \code{\link{MBITES_Globals}})
-#'  * field: im a field!
-#'
 #' @export
-Mosquito_Male <- R6::R6Class(classname = "Mosquito_Male",
-                 portable = TRUE,
-                 cloneable = FALSE,
-                 lock_class = FALSE,
-                 lock_objects = FALSE,
-                 inherit = MBITES:::Mosquito,
+Mosquito_Male <- R6::R6Class(
+  classname = "Mosquito_Male",
+  portable = TRUE,
+  cloneable = FALSE,
+  lock_class = FALSE,
+  lock_objects = FALSE,
+  inherit = MBITES:::Mosquito,
 
-                 # public members
-                 public = list(
+  public = list(
+    initialize = function(bDay, site, tileID) {
+      super$initialize(bDay,
+                       MBITES:::Parameters$get_defaultState_M(),
+                       site,
+                       tileID) # construct the base-class parts
+    }
 
-                   # begin constructor
-                   initialize = function(bDay, site, tileID){
+  ),
 
-                     super$initialize(bDay,MBITES:::Parameters$get_defaultState_M(),site,tileID) # construct the base-class parts
-
-
-                   } # end constructor
-
-                 ),
-
-                 # private members
-                 private = list()
+  private = list()
 )
