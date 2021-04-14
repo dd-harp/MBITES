@@ -7,5 +7,6 @@
 oneDay_EventQ_Human_NULL()
 }
 \description{
-For the null human model, the daily time step does nothing.
+For the null human model, the daily time step executes a daily time step
+for each pathogen it has.
 }

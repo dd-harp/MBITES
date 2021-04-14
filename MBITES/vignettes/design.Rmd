@@ -25,14 +25,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Overview
 
-There are several sources of information about this code. This code is described
-in a research paper, Wu, Sean L., et al. "Vector bionomics and vectorial
-capacity as emergent properties of mosquito behaviors and ecology." PLoS
-computational biology 16.4 (2020): e1007446. That paper details the model. The
-code, itself, has comments about what different parts represent. In this same
-repository, outside of the MBITES project directory, are examples of how to use
-the code. Here, I would like to add a description of the architecture of the
-code.
+There are several sources of information about this code. This code is described in a research paper, Wu, Sean L., et al. "Vector bionomics and vectorial capacity as emergent properties of mosquito behaviors and ecology." PLoS computational biology 16.4 (2020): e1007446. That paper details the model. The code, itself, has comments about what different parts represent. In this same repository, outside of the MBITES project directory, are examples of how to use the code. Here, I would like to add a description of the architecture of the code.
+
+This code uses a particular approach to object-oriented design. It has two traits: the use of IDs, more often than references, and the use of dynamic method assignment to support variation in pathogen type. You will see that the four main classes (mosquito, human, resource, and pathogen) has an ID, and they refer to each other by looking up IDs within the larger simulation, which is the Tile object. More interesting is the dynamic method assignment.
+
+During initialization, this code reads parameters and decides which pathogen to simulate. Depending on the pathogen, it decides which methods to assign to the Human and Mosquito classes. These methods control the daily time step of the pathogen and what happens during probing (mosquito-to-human transmission) and blood feeding (human-to-mosquito transmission).
+
 
 ## MBITES Classes
 

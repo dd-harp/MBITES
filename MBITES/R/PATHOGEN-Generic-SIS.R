@@ -51,8 +51,10 @@ SEI_Pathogen <- R6::R6Class(
       # futile.logger::flog.trace("SEI_Pathogen being killed at self: %s , private: %s",pryr::address(self),pryr::address(private))
     },
 
-    # pathogen method: overwrite oneDay_mosquito
-    oneBout <- function(){
+    #' @description
+    #' During a bout, a pathogen is responsible for getting closer to infectious
+    #' Pathogen method: overwrites oneDay_mosquito in the generic class.
+    oneBout_mosquito = function(){
       # if not infectious advance the incubation period to the time of next launch
       if(!infectious){
         private$incubating = private$incubating + private$tNext
@@ -60,6 +62,85 @@ SEI_Pathogen <- R6::R6Class(
           private$infectious = TRUE
         }
       }
+    },
+
+    #' @description
+    #' Generic SEI: Push a Pathogen to the Pedigree
+    #'
+    #' During a transmission event, record the transfer of the pathogen
+    #' from human to mosquito or vice versa.
+    #'
+    #' @param hID id of the human involved in this transmission event
+    #' @param mID id of the mosquito involved in this transmission event
+    #' @param tEvent time of the event
+    #' @param event "M2H" or "H2M" for mosquito to human and human to mosquito transmission, respectively
+    #'
+    push2pedigree = function(hID,mID,tEvent,event){
+      new = list(id=private$id,parentID=private$parentID,hID=hID,tEvent=tEvent,event=event)
+      MBITES:::Pedigree$assign(key=private$id,value=new)
+    },
+
+    #' @description
+    #' Decide whether this pathogen is infectious. Returns a boolean.
+    m2h_transmission = function(){
+      # havent passed incubation period
+      if(!private$infectious){
+        return(FALSE)
+        # have passed incubation; check for successful transmission
+      } else {
+        if(runif(1) < private$b){
+          return(TRUE)
+        } else {
+          return(FALSE)
+        }
+      }
+    },
+
+    #' @description
+    #' Tell this pathogen that it is living inside a human.
+    mosquito2human = function(){
+      private$infectious = FALSE
+      private$incubating = 0L
+      private$incubation_h = MBITES:::PathogenParameters$get_human_incubation()
+    },
+
+    #' @description
+    #' A day in the life of a pathogen when it's in a human.
+    #' @param human Reference to the human who has this pathogen.
+    #' Overwrites function in the generic pathogen class.
+    oneDay_human = function(human){
+      malaria_clearance <- 200  # days
+      # if not infectious advance the incubation period by one day
+      private$incubating = private$incubating + 1L
+      if(private$incubating >= private$incubation_h &&
+         private$incubating < private$incubation_h + 1){
+        private$infectious = TRUE
+      } else if (private$incubating > malaria_clearance) {
+        human$remove_pathogen(self)
+      }
+    },
+
+    #' @description
+    #' Determine whether a human can transmit this pathogen to a mosquito.
+    #' Returns a bool.
+    h2m_transmission = function(){
+      # havent passed incubation period
+      if(!private$infectious){
+        return(FALSE)
+        # have passed incubation; check for successful transmission
+      } else {
+        if(runif(1) < private$c){
+          return(TRUE)
+        } else {
+          return(FALSE)
+        }
+      }
+    },
+
+    #' @description
+    #' Initialize this for new creation in a mosquito.
+    human2mosquito = function(){
+      private$incubation_m = MBITES:::PathogenParameters$get_mosquito_incubation()
     }
 
   ),
@@ -94,78 +175,26 @@ ancestor_SEI <- function(){
   MBITES:::Pedigree$assign(key=0L,value=new)
 }
 
-#' Generic SEI: Push a Pathogen to the Pedigree
-#'
-#' During a transmission event, push a pathogen to the pedigree.
-#'
-#' @param pathogen object of class \code{\link{SEI_Pathogen}}
-#' @param hID id of the human involved in this transmission event
-#' @param mID id of the mosquito involved in this transmission event
-#' @param tEvent time of the event
-#' @param event "M2H" or "H2M" for mosquito to human and human to mosquito transmission, respectively
-#'
-push2pedigree_SEI <- function(hID,mID,tEvent,event){
-  new = list(id=private$id,parentID=private$parentID,hID=hID,tEvent=tEvent,event=event)
-  MBITES:::Pedigree$assign(key=private$id,value=new)
-}
-
 
 ###############################################################################
 # Host Probing (probeHost): Mosquito -> Human Transmission
 #   and other human dynamics
 ###############################################################################
 
-# mosquito method
+#' Conditional transfer of pathogen from mosquito to human during probing.
+#' Mosquito method.
 probeHost_SEI <- function(){
   if(private$pathogen$m2h_transmission()){
     # based on pf dynamics; recombination occurs in the mosquito, therefore a simple clone
     # of the object is all that's needed for the human.
     pathogen = pathogen$clone()
     pathogen$mosquito2human()
-    MBITES:::Globals$get_tile(private$tileID)$get_human(private$hostID)$add_pathogen(pathogen)
+    host <- MBITES:::Globals$get_tile(private$tileID)$get_human(private$hostID)
+    host$add_pathogen(pathogen)
+    host$pushProbe(m_id=private$id,t=private$tNow)
   }
 }
 
-# pathogen method
-m2h_transmission_SEI <- function(){
-  # havent passed incubation period
-  if(!private$infectious){
-    return(FALSE)
-  # have passed incubation; check for successful transmission
-  } else {
-    if(runif(1) < private$b){
-      return(TRUE)
-    } else {
-      return(FALSE)
-    }
-  }
-}
-
-# pathogen method
-mosquito2human_SEI <- function(){
-  private$infectious = FALSE
-  private$incubating = 0L
-  private$incubation_h = MBITES:::PathogenParameters$get_human_incubation()
-}
-
-# pathogen method
-oneDay_human_SEI <- function(){
-  # if not infectious advance the incubation period by one day
-  if(!infectious){
-    private$incubating = private$incubating + 1L
-    if(private$incubating >= private$incubation_h){
-      private$infectious = TRUE
-    }
-  }
-}
-
-# human method
-add_pathogen_SEI <- function(pathogen){
-  # no superinfection
-  if(is.null(private$pathogen)){
-    private$pathogen = pathogen
-  }
-}
 
 ###############################################################################
 # Host Feeding (feedHost): Human -> Mosquito Transmission
@@ -173,11 +202,12 @@ add_pathogen_SEI <- function(pathogen){
 ###############################################################################
 
 # mosquito method
-bloodFeed_SEI <- function(){
+feedHost_SEI <- function(){
   # no superinfection, so only do this if i don't have any pathogens in me
   if(is.null(private$pathogen)){
-    hPathogen = MBITES:::Globals$get_tile(private$tileID)$get_human(private$hostID)$get_pathogen()
-    # only if the human had a pathogen
+    host <- MBITES:::Globals$get_tile(private$tileID)$get_human(private$hostID)
+    host$pushFeed()
+    hPathogen <- host$get_pathogen("SEI_Pathogen")
     if(!is.null(hPathogen)){
       # if it was actually infectious
       if(hPathogen$h2m_transmission()){
@@ -187,28 +217,8 @@ bloodFeed_SEI <- function(){
         private$pathogen = mPathogen
         private$pathogen$push2pedigree(hID=private$hostID,mID$private$id,tEvent=private$tNow,event="H2M")
       }
-    }
+    }  # else no pathogen to transfer
   }
-}
-
-# pathogen method
-h2m_transmission_SEI <- function(){
-  # havent passed incubation period
-  if(!private$infectious){
-    return(FALSE)
-  # have passed incubation; check for successful transmission
-  } else {
-    if(runif(1) < private$c){
-      return(TRUE)
-    } else {
-      return(FALSE)
-    }
-  }
-}
-
-# pathogen method
-human2mosquito_SEI <- function(){
-  private$incubation_m = MBITES:::PathogenParameters$get_mosquito_incubation()
 }
 
 # mosquito method: update dynamics after the bout.
@@ -219,13 +229,13 @@ pathogenDynamics_SEI <- function(){
 }
 
 
-Pathogen_SEI_SETUP <- function(){
+PathogenSEI_SETUP <- function(){
   Mosquito_Female$set(which = "public",name = "probeHost",
                       value = probeHost_SEI, overwrite = TRUE
   )
 
   Mosquito_Female$set(which = "public",name = "feedHost",
-                      value = bloodFeed_SEI, overwrite = TRUE
+                      value = feedHost_SEI, overwrite = TRUE
   )
 
   Mosquito_Female$set(which = "public",name = "pathogenDynamics",

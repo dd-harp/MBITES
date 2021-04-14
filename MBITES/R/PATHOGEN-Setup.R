@@ -49,6 +49,10 @@ PATHOGEN_Setup <- function(pathogen_model){
       PathogenNull_SETUP()
     },
 
+    SEI = {
+      PathogenSEI_SETUP()
+    },
+
     {stop("invalid entry for 'pathogen_model'\n")}
   )
 

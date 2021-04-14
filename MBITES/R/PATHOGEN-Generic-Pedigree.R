@@ -14,7 +14,9 @@
 #' PATHOGEN Generic Pedigree
 #'
 #' This class is a singleton object in the \code{MBITES} package namespace that
-#' provides a unique integer ID for each pathogen.
+#' provides a unique integer ID for each pathogen and holds a map from
+#' pathogen ID to a list describing each pathogen transmission event.
+#'
 #' It can be accessed by the global \code{MBITES:::Pedigree}.
 #'
 Generic_Pedigree <- R6::R6Class(
@@ -25,34 +27,29 @@ Generic_Pedigree <- R6::R6Class(
   lock_objects = FALSE,
   inherit = HashMap,
 
-  # public members
   public = list(
-    # begin constructor
+    #' @description
+    #' Nothing during initialization.
     initialize = function() {
       # futile.logger::flog.trace("Generic_Pedigree being born at self: %s , private: %s",pryr::address(self),pryr::address(private))
     },
-    # end constructor
 
-    # begin destructor
+    #' @description
+    #' Get a unique ID for a new pathogen instance.
+    get_pathogen_id = function(){
+      private$pathogen_id = private$pathogen_id + 1L
+      return(private$pathogen_id)
+    },
+
+    #' @description
+    #' Nothing during destruction
     finalize = function() {
       # futile.logger::flog.trace("Generic_Pedigree being killed at self: %s , private: %s",pryr::address(self),pryr::address(private))
-    } # end destructor
+    }
 
   ),
-  # end public members
 
-  # private members
   private = list(pathogen_id = 0L) # end private members
-) # end Generic_Pedigree class definition
-
-
-get_pathogen_id_Generic_Pedigree <- function(){
-  private$pathogen_id = private$pathogen_id + 1L
-  return(private$pathogen_id)
-}
-
-Generic_Pedigree$set(which = "public",name = "get_pathogen_id",
-  value = get_pathogen_id_Generic_Pedigree, overwrite = TRUE
 )
 
 

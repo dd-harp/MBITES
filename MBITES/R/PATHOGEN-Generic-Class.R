@@ -24,8 +24,8 @@
 #'
 #' All pathogen modules need to implement the following methods in mosquitoes:
 #'  * pathogenDynamics
-#'  * probeHost
-#'  * feedHost
+#'  * probeHost - human-to-mosquito transmission
+#'  * feedHost - mosquito-to-human transmission
 #'
 #' All pathogen modules need to implement the following methods in pathogens:
 #'  * oneDay_human
@@ -65,7 +65,8 @@ Generic_Pathogen <- R6::R6Class(
 
     #' @description
     #' Simulate one day in the life.
-    oneDay_human = function() {
+    #' @param human A reference to the human that has this pathogen.
+    oneDay_human = function(human) {
       stop("oneDay_human should never be called from abstract base class 'Generic_Pathogen'!")
     },
 

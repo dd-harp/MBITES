@@ -55,57 +55,108 @@ NULL
 #'  * bloodFeed: \code{FALSE} corresponds to probing-only events, \code{TRUE} corresponds to combined probe-bloodfeed events.
 #'
 #' @export
-Human_NULL <- R6::R6Class(classname = "Human_NULL",
-                 portable = TRUE,
-                 cloneable = FALSE,
-                 lock_class = FALSE,
-                 lock_objects = FALSE,
+Human_NULL <- R6::R6Class(
+  classname = "Human_NULL",
+  portable = TRUE,
+  cloneable = FALSE,
+  lock_class = FALSE,
+  lock_objects = FALSE,
 
-                 # public members
-                 public = list(
+  public = list(
+    #' @description
+    #' Construct a human
+    #' @param id Integer identifier of human.
+    #' @param w biting weight of human.
+    #' @param feedingID where it is a feeding site
+    #' @param siteID site for human
+    #' @param tileID The tile that has that site.
+    initialize = function(id, w, feedingID, siteID, tileID) {
+      # futile.logger::flog.trace("Human_NULL %i being born at self: %s , private: %s",id,pryr::address(self),pryr::address(private))
 
-                   # begin constructor
-                   initialize = function(id,w,feedingID,siteID,tileID){
-                     # futile.logger::flog.trace("Human_NULL %i being born at self: %s , private: %s",id,pryr::address(self),pryr::address(private))
+      # basic parameters
+      private$id = id
+      private$w = w
 
-                     # basic parameters
-                     private$id = id
-                     private$w = w
+      # location fields
+      private$feedingID = feedingID
+      private$siteID = siteID
+      private$tileID = tileID
 
-                     # location fields
-                     private$feedingID = feedingID
-                     private$siteID = siteID
-                     private$tileID = tileID
+    },
 
-                   }, # end constructor
+    #' @description
+    #' Add a pathogen to this human's pathogens.
+    #' @param pathogen The pathogen to add to the list.
+    add_pathogen = function(pathogen) {
+      # no superinfection
+      if (length(private$pathogens) == 0) {
+        private$pathogens = list(pathogen)
+      }  # else forget the pathogen transfer.
+      invisible(self)
+    },
 
-                   # begin destructor
-                   finalize = function(){
-                     # futile.logger::flog.trace("Human_NULL %i being killed at self: %s , private: %s",private$id,pryr::address(self),pryr::address(private))
-                   } # end destructor
+    #' @description
+    #' Get a pathogen of a certain type.
+    #' @param kind The class of the pathogen as a string.
+    #' Will return the first pathogen of this kind.
+    get_pathogen = function(kind) {
+      for (pathogen in private$pathogens) {
+        if (kind %in% class(pathogen)) {
+          return(pathogen)
+        }
+      }
+      NULL
+    },
 
-                 ),
+    #' @description
+    #' Take a pathogen from this human's list of pathogens.
+    #' @param pathogen The pathogen to remove.
+    remove_pathogen = function(pathogen) {
+      to_remove <- integer(0)
+      for (ridx in 1:length(private$pathogens)) {
+        if (identical(pathogen, private$pathogens[[ridx]])) {
+          to_remove <- c(ridx, to_remove)
+        }
+      }
+      private$pathogens <- private$pathogens[-to_remove]
+      invisible(self)
+    },
 
-                 # private members
-                 private = list(
+    #' @description
+    #' Destructor
+    finalize = function() {
+      # futile.logger::flog.trace("Human_NULL %i being killed at self: %s , private: %s",private$id,pryr::address(self),pryr::address(private))
+    }
 
-                   # local fields
-                   id                  = integer(1), # my id
-                   w                   = numeric(1), # my biting weight
+  ),
 
-                   # location fields
-                   feedingID           = integer(1),
-                   siteID              = integer(1),
-                   tileID              = integer(1),
+  # private members
+  private = list(
+    # local fields
+    id                  = integer(1),
+    # my id
+    w                   = numeric(1),
+    # my biting weight
 
-                   # biting dynamics
-                   UNBITTEN            = TRUE, # have i been bitten yet?
-                   mosquito_id         = integer(1), # vector of mosquitoes that have bitten me
-                   mosquito_t          = numeric(1), # vector of times i was bitten
-                   bloodFeed           = logical(1) # F for probing-only events, T for blood feeding events
+    # location fields
+    feedingID           = integer(1),
+    siteID              = integer(1),
+    tileID              = integer(1),
 
-                 )
-) # end Human_NULL class definition
+    # biting dynamics
+    UNBITTEN            = TRUE,
+    # have i been bitten yet?
+    mosquito_id         = integer(1),
+    # vector of mosquitoes that have bitten me
+    mosquito_t          = numeric(1),
+    # vector of times i was bitten
+    bloodFeed           = logical(1),
+    # F for probing-only events, T for blood feeding events
+
+    # A human can have multiple pathogens
+    pathogens           = list()
+  )
+)
 
 
 ###############################################################################
@@ -137,9 +188,14 @@ Human_NULL$set(which = "public",name = "exit",
 
 #' Null Human: Daily Event Queue Simulation
 #'
-#' For the null human model, the daily time step does nothing.
+#' For the null human model, the daily time step executes a daily time step
+#' for each pathogen it has.
 #'
-oneDay_EventQ_Human_NULL <- function(){}
+oneDay_EventQ_Human_NULL <- function(){
+  for (pathogen in private$pathogens) {
+    pathogen$oneDay_human(self)
+  }
+}
 
 #' Null Human: Daily Activity Space Simulation
 #'
@@ -147,7 +203,9 @@ oneDay_EventQ_Human_NULL <- function(){}
 #'
 oneDay_ActivitySpace_Human_NULL <- function(){
   # add all my risk to my home site
-  MBITES:::Globals$get_tile(private$tileID)$get_sites()$get(private$siteID)$get_feed(private$feedingID)$RiskQ$add2Q(private$id,private$w,1)
+  MBITES:::Globals$get_tile(private$tileID)$get_sites()$get(
+    private$siteID)$get_feed(private$feedingID)$RiskQ$add2Q(
+      private$id,private$w,1)
 }
 
 # set methods
@@ -166,7 +224,9 @@ Human_NULL$set(which = "public",name = "oneDay_ActivitySpace",
 
 #' Null Human: Push Host Probing Event to History
 #'
-#' If using the null human and pathogen model this function logs host probing events on this \code{\link{Human_NULL}}.
+#' If using the null human and pathogen model this function logs host probing
+#' events on this \code{\link{Human_NULL}}.
+#'
 #'  * This method is bound to \code{Human_NULL$pushProbe}
 #'
 #' @param m_id id of the \code{\link{Mosquito_Female}}
