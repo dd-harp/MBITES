@@ -96,16 +96,15 @@ Human_NULL <- R6::R6Class(
     },
 
     #' @description
-    #' Get a pathogen of a certain type.
-    #' @param kind The class of the pathogen as a string.
-    #' Will return the first pathogen of this kind.
-    get_pathogen = function(kind) {
-      for (pathogen in private$pathogens) {
-        if (kind %in% class(pathogen)) {
-          return(pathogen)
-        }
-      }
-      NULL
+    #' Decide which pathogens from the host will transmit to the mosquito.
+    #' @param mPathogens The mosquito pathogens that it already has.
+    #' Returns a list of new pathogens to add to the mosquito.
+    #' This list may contain NULL values when no pathogen is added.
+    feedHost = function(mPathogens) {
+      self$pushFeed()
+      lapply(private$pathogens, FUN=function(hPathogen) {
+        hPathogen.feedHost(host, mPathogens)
+      })
     },
 
     #' @description

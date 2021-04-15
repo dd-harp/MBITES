@@ -58,8 +58,16 @@ Mosquito <- R6::R6Class(
 
     #' @description
     #' Get the integer ID of the mosquito.
-    get_id_Mosquito = function(){
+    get_id = function(){
       return(private$id)
+    },
+
+    #' @description
+    #' Get a pathogen of a certain type.
+    #' @param kind The class of the pathogen as a string.
+    #' Will return the first pathogen of this kind.
+    on_pathogens = function(fun) {
+      lapply(private$pathogens, FUN=fun)
     },
 
     finalize = function() {
@@ -88,6 +96,7 @@ Mosquito <- R6::R6Class(
     # reference to my current sugar resource
     mating_resource       = NULL,
     # reference to my current mating swarm resource
+    pathogens = list(),
 
     # timing
     bDay          = numeric(1),
@@ -193,9 +202,33 @@ Mosquito_Female <- R6::R6Class(
 
     },
 
+    #' @description
+    #' Probe the host and tell pathogens you are probing.
+    probeHost = function() {
+      host <- MBITES:::Globals$get_tile(private$tileID)$get_human(private$hostID)
+      for (pathogen in private$pathogens) {
+        pathogen$probeHost(self, host)
+      }
+    },
+
+    #' @description
+    #' Feed on the host and tell the pathogens you are feeding.
+    feedHost = function() {
+      host <- MBITES:::Globals$get_tile(private$tileID)$get_human(private$hostID)
+      to_add <- host$feedHost(private$pathogens)
+      for (mPathogen in to_add) {
+        if (!is.null(mPathogen)) {
+          private$pathogens[[length(private$pathogens) + 1]] <- mPathogen
+        }
+      }
+    },
+
     # pathogenDynamics
     pathogenDynamics = function() {
       # futile.logger::flog.warn("default 'pathogenDynamics' being called for mosquito: ",private$id)
+      for (pathogen in private$pathogens) {
+        pathogen$oneBout(private$tNext)
+      }
     }
 
   ),

@@ -54,10 +54,10 @@ SEI_Pathogen <- R6::R6Class(
     #' @description
     #' During a bout, a pathogen is responsible for getting closer to infectious
     #' Pathogen method: overwrites oneDay_mosquito in the generic class.
-    oneBout_mosquito = function(){
+    oneBout = function(tNext){
       # if not infectious advance the incubation period to the time of next launch
-      if(!infectious){
-        private$incubating = private$incubating + private$tNext
+      if(!private$infectious){
+        private$incubating = private$incubating + tNext
         if(private$incubating >= private$incubation_m){
           private$infectious = TRUE
         }
@@ -78,6 +78,23 @@ SEI_Pathogen <- R6::R6Class(
     push2pedigree = function(hID,mID,tEvent,event){
       new = list(id=private$id,parentID=private$parentID,hID=hID,tEvent=tEvent,event=event)
       MBITES:::Pedigree$assign(key=private$id,value=new)
+    },
+
+    #' @description
+    #' Conditional transfer of pathogen from mosquito to human during probing.
+    #' @param mosquito Reference to the mosquito object.
+    #' @param human Reference to the human object.
+    probeHost = function(mosquito, human){
+      has_SEI = function(p) {"pathogen_SEI" %in% class(p)}
+
+      if(self$m2h_transmission()){
+        # based on pf dynamics; recombination occurs in the mosquito, therefore a simple clone
+        # of the object is all that's needed for the human.
+        pathogen = self$clone()
+        pathogen$mosquito2human()
+        host$add_pathogen(pathogen)
+        host$pushProbe(m_id=mosquito$get_id(),t=private$tNow)
+      }
     },
 
     #' @description
@@ -138,6 +155,27 @@ SEI_Pathogen <- R6::R6Class(
     },
 
     #' @description
+    #' Decide whether this pathogen will enter the given mosquito.
+    #' @param host The human host.
+    #' @param mPathogens The pathogens already in the mosquito.
+    feedHost = function(host, mPathogens){
+      # no superinfection, so only do this if i don't have any pathogens in me
+      is_SEI <- function(p) { "SEI_Pathogen" %in% class(p) }
+      has_SEI <- any(as.logical(mosquito$on_pathogens(is_SEI)))
+
+      if(!has_SEI && self$h2m_transmission()){
+        # generate a new pathogen and push it to the pedigree (recombination occurs in mosquito)
+        mPathogen = SEI_Pathogen$new(parentID = self$get_id())
+        mPathogen$human2mosquito()
+        mPathogen$push2pedigree(
+          hID=host$get_id(),mPathogen$get_id(),tEvent=private$tNow,event="H2M"
+        )
+        return(mPathogen)
+      }  # else mosquito had the pathogen already.
+      NULL
+    },
+
+    #' @description
     #' Initialize this for new creation in a mosquito.
     human2mosquito = function(){
       private$incubation_m = MBITES:::PathogenParameters$get_mosquito_incubation()
@@ -159,7 +197,6 @@ SEI_Pathogen <- R6::R6Class(
     b = numeric(1),
     # mosy -> human
     c = numeric(1) # human -> mosy
-
   )
 )
 
@@ -176,68 +213,6 @@ ancestor_SEI <- function(){
 }
 
 
-###############################################################################
-# Host Probing (probeHost): Mosquito -> Human Transmission
-#   and other human dynamics
-###############################################################################
-
-#' Conditional transfer of pathogen from mosquito to human during probing.
-#' Mosquito method.
-probeHost_SEI <- function(){
-  if(private$pathogen$m2h_transmission()){
-    # based on pf dynamics; recombination occurs in the mosquito, therefore a simple clone
-    # of the object is all that's needed for the human.
-    pathogen = pathogen$clone()
-    pathogen$mosquito2human()
-    host <- MBITES:::Globals$get_tile(private$tileID)$get_human(private$hostID)
-    host$add_pathogen(pathogen)
-    host$pushProbe(m_id=private$id,t=private$tNow)
-  }
-}
-
-
-###############################################################################
-# Host Feeding (feedHost): Human -> Mosquito Transmission
-#   and other mosquito dynamics
-###############################################################################
-
-# mosquito method
-feedHost_SEI <- function(){
-  # no superinfection, so only do this if i don't have any pathogens in me
-  host <- MBITES:::Globals$get_tile(private$tileID)$get_human(private$hostID)
-  host$pushFeed()
-  hPathogen <- host$get_pathogen("SEI_Pathogen")
-  if(is.null(private$pathogen) && !is.null(hPathogen)){
-    # if it was actually infectious
-    if(hPathogen$h2m_transmission()){
-      # generate a new pathogen and push it to the pedigree (recombination occurs in mosquito)
-      mPathogen = SEI_Pathogen$new(parentID = hPathogen$get_id())
-      mPathogen$human2mosquito()
-      private$pathogen = mPathogen
-      private$pathogen$push2pedigree(hID=private$hostID,mID$private$id,tEvent=private$tNow,event="H2M")
-    }  # else mosquito got lucky
-  }  # else mosquito had a pathogen or human didn't have one.
-}
-
-# mosquito method: update dynamics after the bout.
-pathogenDynamics_SEI <- function(){
-  if(!is.null(private$pathogen)){
-    private$pathogen$oneBout()
-  }
-}
-
-
 PathogenSEI_SETUP <- function(){
   flog.debug("Setting up SEI pathogen hooks on Mosquito.")
-  Mosquito_Female$set(which = "public",name = "probeHost",
-                      value = probeHost_SEI, overwrite = TRUE
-  )
-
-  Mosquito_Female$set(which = "public",name = "feedHost",
-                      value = feedHost_SEI, overwrite = TRUE
-  )
-
-  Mosquito_Female$set(which = "public",name = "pathogenDynamics",
-                      value = pathogenDynamics_SEI, overwrite = TRUE
-  )
 }

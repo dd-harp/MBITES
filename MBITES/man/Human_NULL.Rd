@@ -53,7 +53,7 @@ to be simulated explicitly.
 \itemize{
 \item \href{#method-new}{\code{Human_NULL$new()}}
 \item \href{#method-add_pathogen}{\code{Human_NULL$add_pathogen()}}
-\item \href{#method-get_pathogen}{\code{Human_NULL$get_pathogen()}}
+\item \href{#method-feedHost}{\code{Human_NULL$feedHost()}}
 \item \href{#method-remove_pathogen}{\code{Human_NULL$remove_pathogen()}}
 \item \href{#method-finalize}{\code{Human_NULL$finalize()}}
 \item \href{#method-exit}{\code{Human_NULL$exit()}}
@@ -106,19 +106,20 @@ Add a pathogen to this human's pathogens.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_pathogen"></a>}}
-\if{latex}{\out{\hypertarget{method-get_pathogen}{}}}
-\subsection{Method \code{get_pathogen()}}{
-Get a pathogen of a certain type.
+\if{html}{\out{<a id="method-feedHost"></a>}}
+\if{latex}{\out{\hypertarget{method-feedHost}{}}}
+\subsection{Method \code{feedHost()}}{
+Decide which pathogens from the host will transmit to the mosquito.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$get_pathogen(kind)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$feedHost(mPathogens)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{kind}}{The class of the pathogen as a string.
-Will return the first pathogen of this kind.}
+\item{\code{mPathogens}}{The mosquito pathogens that it already has.
+Returns a list of new pathogens to add to the mosquito.
+This list may contain NULL values when no pathogen is added.}
 }
 \if{html}{\out{</div>}}
 }

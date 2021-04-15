@@ -24,12 +24,14 @@ states, but we keep the "SEI" designation for comprehension.
 \itemize{
 \item \href{#method-new}{\code{SEI_Pathogen$new()}}
 \item \href{#method-finalize}{\code{SEI_Pathogen$finalize()}}
-\item \href{#method-oneBout_mosquito}{\code{SEI_Pathogen$oneBout_mosquito()}}
+\item \href{#method-oneBout}{\code{SEI_Pathogen$oneBout()}}
 \item \href{#method-push2pedigree}{\code{SEI_Pathogen$push2pedigree()}}
+\item \href{#method-probeHost}{\code{SEI_Pathogen$probeHost()}}
 \item \href{#method-m2h_transmission}{\code{SEI_Pathogen$m2h_transmission()}}
 \item \href{#method-mosquito2human}{\code{SEI_Pathogen$mosquito2human()}}
 \item \href{#method-oneDay_human}{\code{SEI_Pathogen$oneDay_human()}}
 \item \href{#method-h2m_transmission}{\code{SEI_Pathogen$h2m_transmission()}}
+\item \href{#method-feedHost}{\code{SEI_Pathogen$feedHost()}}
 \item \href{#method-human2mosquito}{\code{SEI_Pathogen$human2mosquito()}}
 \item \href{#method-clone}{\code{SEI_Pathogen$clone()}}
 }
@@ -70,13 +72,13 @@ Destroy an SEI_Pathogen object.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-oneBout_mosquito"></a>}}
-\if{latex}{\out{\hypertarget{method-oneBout_mosquito}{}}}
-\subsection{Method \code{oneBout_mosquito()}}{
+\if{html}{\out{<a id="method-oneBout"></a>}}
+\if{latex}{\out{\hypertarget{method-oneBout}{}}}
+\subsection{Method \code{oneBout()}}{
 During a bout, a pathogen is responsible for getting closer to infectious
 Pathogen method: overwrites oneDay_mosquito in the generic class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$oneBout_mosquito()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$oneBout(tNext)}\if{html}{\out{</div>}}
 }
 
 }
@@ -102,6 +104,25 @@ from human to mosquito or vice versa.
 \item{\code{tEvent}}{time of the event}
 
 \item{\code{event}}{"M2H" or "H2M" for mosquito to human and human to mosquito transmission, respectively}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-probeHost"></a>}}
+\if{latex}{\out{\hypertarget{method-probeHost}{}}}
+\subsection{Method \code{probeHost()}}{
+Conditional transfer of pathogen from mosquito to human during probing.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$probeHost(mosquito, human)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{mosquito}}{Reference to the mosquito object.}
+
+\item{\code{human}}{Reference to the human object.}
 }
 \if{html}{\out{</div>}}
 }
@@ -154,6 +175,25 @@ Returns a bool.
 \if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$h2m_transmission()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-feedHost"></a>}}
+\if{latex}{\out{\hypertarget{method-feedHost}{}}}
+\subsection{Method \code{feedHost()}}{
+Decide whether this pathogen will enter the given mosquito.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$feedHost(host, mPathogens)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{host}}{The human host.}
+
+\item{\code{mPathogens}}{The pathogens already in the mosquito.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-human2mosquito"></a>}}

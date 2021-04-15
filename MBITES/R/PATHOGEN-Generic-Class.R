@@ -72,9 +72,9 @@ Generic_Pathogen <- R6::R6Class(
 
     #' @description
     #' Simulate interaction with mosquito.
-    oneBout_mosquito = function() {
+    oneBout = function() {
       stop(
-        "oneBout_mosquito should never be called from abstract base class 'Generic_Pathogen'!"
+        "oneBout should never be called from abstract base class 'Generic_Pathogen'!"
       )
     },
 

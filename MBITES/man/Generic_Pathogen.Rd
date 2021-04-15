@@ -14,7 +14,7 @@ Pathogen: Generic Class
 \item \href{#method-new}{\code{Generic_Pathogen$new()}}
 \item \href{#method-finalize}{\code{Generic_Pathogen$finalize()}}
 \item \href{#method-oneDay_human}{\code{Generic_Pathogen$oneDay_human()}}
-\item \href{#method-oneBout_mosquito}{\code{Generic_Pathogen$oneBout_mosquito()}}
+\item \href{#method-oneBout}{\code{Generic_Pathogen$oneBout()}}
 \item \href{#method-get_id}{\code{Generic_Pathogen$get_id()}}
 \item \href{#method-get_parentID}{\code{Generic_Pathogen$get_parentID()}}
 \item \href{#method-clone}{\code{Generic_Pathogen$clone()}}
@@ -65,12 +65,12 @@ Simulate one day in the life.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-oneBout_mosquito"></a>}}
-\if{latex}{\out{\hypertarget{method-oneBout_mosquito}{}}}
-\subsection{Method \code{oneBout_mosquito()}}{
+\if{html}{\out{<a id="method-oneBout"></a>}}
+\if{latex}{\out{\hypertarget{method-oneBout}{}}}
+\subsection{Method \code{oneBout()}}{
 Simulate interaction with mosquito.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Generic_Pathogen$oneBout_mosquito()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Generic_Pathogen$oneBout()}\if{html}{\out{</div>}}
 }
 
 }
