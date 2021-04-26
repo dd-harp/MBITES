@@ -103,7 +103,7 @@ Human_NULL <- R6::R6Class(
     feedHost = function(mPathogens) {
       self$pushFeed()
       lapply(private$pathogens, FUN=function(hPathogen) {
-        hPathogen.feedHost(host, mPathogens)
+        hPathogen$feedHost(host, mPathogens)
       })
     },
 
