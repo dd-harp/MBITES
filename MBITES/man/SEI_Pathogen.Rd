@@ -24,6 +24,7 @@ states, but we keep the "SEI" designation for comprehension.
 \itemize{
 \item \href{#method-new}{\code{SEI_Pathogen$new()}}
 \item \href{#method-finalize}{\code{SEI_Pathogen$finalize()}}
+\item \href{#method-initial_age}{\code{SEI_Pathogen$initial_age()}}
 \item \href{#method-oneBout}{\code{SEI_Pathogen$oneBout()}}
 \item \href{#method-push2pedigree}{\code{SEI_Pathogen$push2pedigree()}}
 \item \href{#method-probeHost}{\code{SEI_Pathogen$probeHost()}}
@@ -72,6 +73,15 @@ Destroy an SEI_Pathogen object.
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-initial_age"></a>}}
+\if{latex}{\out{\hypertarget{method-initial_age}{}}}
+\subsection{Method \code{initial_age()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$initial_age(days_previous)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-oneBout"></a>}}
 \if{latex}{\out{\hypertarget{method-oneBout}{}}}
 \subsection{Method \code{oneBout()}}{
@@ -114,7 +124,7 @@ from human to mosquito or vice versa.
 \subsection{Method \code{probeHost()}}{
 Conditional transfer of pathogen from mosquito to human during probing.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$probeHost(mosquito, human)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$probeHost(mosquito, host)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -182,13 +192,15 @@ Returns a bool.
 \subsection{Method \code{feedHost()}}{
 Decide whether this pathogen will enter the given mosquito.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$feedHost(host, mPathogens)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$feedHost(host, mosquito, mPathogens)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{host}}{The human host.}
+
+\item{\code{mosquito}}{The mosquito R6 object.}
 
 \item{\code{mPathogens}}{The pathogens already in the mosquito.}
 }

@@ -1,4 +1,4 @@
-# Simulation where people have a Plasmodium-equivalen standin pathogen.
+# Simulation where people have a Plasmodium-equivalent standin pathogen.
 #
 rm(list = ls());gc()
 library(here)
@@ -6,7 +6,8 @@ library(here)
 library(MBITES)
 library(futile.logger)
 
-flog.threshold(DEBUG)
+MBITES::local_logging("trace", "mbites.log")
+set.seed(91324724)
 
 ###############################################################################
 # Make landscape initialization object
@@ -44,7 +45,7 @@ landscape[[3]]$aqua[[1]] = list(w=1,lambda=1)
 # Make human initialization object
 ###############################################################################
 
-nHumans = 2L
+nHumans = 10L
 if (nHumans > 9L) {
   initial_pr <- 0.4
   pr_vals <- rbinom(nHumans, 1L, initial_pr)
@@ -177,25 +178,13 @@ initial_pathogen_id <- p_ancestor$get_id()
 for (hidx in which(humans$pr == 1L)) {
   h <- human_hash$get(hidx)
   p <- SEI_Pathogen$new(initial_pathogen_id)
+  p$initial_age(sample(1L:200L, 1))  # give them random previous infection dates
   h$add_pathogen(p)
 }
 
 # run simulation
 set_output(directory = directory,runID = 1)
 
-simulation(tMax = 365*5,pretty = TRUE)
-
-# tile_cnt <- MBITES:::Globals$get_n_tiles()
-# tile <- MBITES:::Globals$get_tile(1)
-# site_cnt <- length(tile$get_sites())
-# site1 <- tile$get_site(1)
-# site1
-# ls(site1)
-# site1$has_feed()
-# f1 <- site1$get_feed(1)
-# ls(f1)
-# # site1$get_feed(2)  # subscript out of bounds.
-# f1$RiskQ$printQ()
-# ls(f1$RiskQ)
-# # 365 * 5
-# f1$RiskQ$typewtsQ()
+duration_days <- 365  # 365 * 5
+simday <- function() simulation(tMax = duration_days, pretty = TRUE)
+simday()

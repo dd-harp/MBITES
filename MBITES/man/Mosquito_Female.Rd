@@ -9,7 +9,8 @@ MBITES: Female Mosquito Class
 MBITES: Female Mosquito Class
 }
 \details{
-Female mosquitoes inherit from the \code{\link{Mosquito}} abstract base class object.
+Female mosquitoes inherit from the \code{\link{Mosquito}} abstract base class
+object.
 }
 \section{Super class}{
 \code{\link[MBITES:Mosquito]{MBITES::Mosquito}} -> \code{Mosquito_Female}
@@ -232,7 +233,7 @@ Female mosquitoes inherit from the \code{\link{Mosquito}} abstract base class ob
 \if{html}{\out{<a id="method-probeHost"></a>}}
 \if{latex}{\out{\hypertarget{method-probeHost}{}}}
 \subsection{Method \code{probeHost()}}{
-Probe the host and tell pathogens you are probing.
+Probe the host and possibly infect that host with pathogens.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$probeHost()}\if{html}{\out{</div>}}
 }
@@ -242,7 +243,7 @@ Probe the host and tell pathogens you are probing.
 \if{html}{\out{<a id="method-feedHost"></a>}}
 \if{latex}{\out{\hypertarget{method-feedHost}{}}}
 \subsection{Method \code{feedHost()}}{
-Feed on the host and tell the pathogens you are feeding.
+Feed on the host and possibly acquire a pathogen from that host.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Mosquito_Female$feedHost()}\if{html}{\out{</div>}}
 }

@@ -54,6 +54,7 @@ to be simulated explicitly.
 \item \href{#method-new}{\code{Human_NULL$new()}}
 \item \href{#method-add_pathogen}{\code{Human_NULL$add_pathogen()}}
 \item \href{#method-feedHost}{\code{Human_NULL$feedHost()}}
+\item \href{#method-get_id}{\code{Human_NULL$get_id()}}
 \item \href{#method-remove_pathogen}{\code{Human_NULL$remove_pathogen()}}
 \item \href{#method-finalize}{\code{Human_NULL$finalize()}}
 \item \href{#method-exit}{\code{Human_NULL$exit()}}
@@ -111,18 +112,30 @@ Add a pathogen to this human's pathogens.
 \subsection{Method \code{feedHost()}}{
 Decide which pathogens from the host will transmit to the mosquito.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$feedHost(mPathogens)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$feedHost(mosquito, mPathogens)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{mosquito}}{The mosquito feeding on this host.}
+
 \item{\code{mPathogens}}{The mosquito pathogens that it already has.
 Returns a list of new pathogens to add to the mosquito.
 This list may contain NULL values when no pathogen is added.}
 }
 \if{html}{\out{</div>}}
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_id"></a>}}
+\if{latex}{\out{\hypertarget{method-get_id}{}}}
+\subsection{Method \code{get_id()}}{
+Get this Human's ID
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$get_id()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-remove_pathogen"></a>}}

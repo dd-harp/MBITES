@@ -91,21 +91,33 @@ Human_NULL <- R6::R6Class(
       # no superinfection
       if (length(private$pathogens) == 0) {
         private$pathogens = list(pathogen)
+        logtrace(paste("add_pathogen human", self$get_id()))
       }  # else forget the pathogen transfer.
       invisible(self)
     },
 
     #' @description
     #' Decide which pathogens from the host will transmit to the mosquito.
+    #' @param mosquito The mosquito feeding on this host.
     #' @param mPathogens The mosquito pathogens that it already has.
     #' Returns a list of new pathogens to add to the mosquito.
     #' This list may contain NULL values when no pathogen is added.
-    feedHost = function(mPathogens) {
-      self$pushFeed()
-      lapply(private$pathogens, FUN=function(hPathogen) {
-        hPathogen$feedHost(host, mPathogens)
+    feedHost = function(mosquito, mPathogens) {
+      pathogen_cnt <- length(private$pathogens)
+      mosquito_pathogens <- lapply(private$pathogens, FUN=function(hPathogen) {
+        hPathogen$feedHost(self, mosquito, mPathogens)
       })
+      self$pushFeed()
+      mpath_cnt <- sum(vapply(mosquito_pathogens,
+                              function(x) !is.null(x), logical(1)))
+      logtrace(paste("feedhost m", mosquito$get_id(), "h", self$get_id(),
+                     "hpathogens", pathogen_cnt, "toadd", mpath_cnt))
+      mosquito_pathogens
     },
+
+    #' @description
+    #' Get this Human's ID
+    get_id = function() { private$id },
 
     #' @description
     #' Take a pathogen from this human's list of pathogens.
@@ -118,6 +130,9 @@ Human_NULL <- R6::R6Class(
         }
       }
       private$pathogens <- private$pathogens[-to_remove]
+      logtrace(paste("h", self$get_id(), "remove",
+                     paste(to_remove, collapse=", "),
+                     length(private$pathogens)))
       invisible(self)
     },
 

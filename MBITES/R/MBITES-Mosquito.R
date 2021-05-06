@@ -52,8 +52,8 @@ Mosquito <- R6::R6Class(
       private$stateHist[1] = state
       private$searchHist[1] = TRUE
 
-      # logging
-      # # futile.logger::flog.trace("Mosquito %s being born at: self %s , private %s",private$id,pryr::address(self),pryr::address(private))
+      # logging # futile.logger::flog.trace("Mosquito %s being born at: self %s
+      # , private %s",private$id,pryr::address(self),pryr::address(private))
     },
 
     #' @description
@@ -71,7 +71,8 @@ Mosquito <- R6::R6Class(
     },
 
     finalize = function() {
-      # # futile.logger::flog.trace("Mosquito %s being killed at: self %s , private %s",private$id,pryr::address(self),pryr::address(private))
+      # # futile.logger::flog.trace("Mosquito %s being killed at: self %s ,
+      # private %s",private$id,pryr::address(self),pryr::address(private))
     }
 
   ),
@@ -138,7 +139,8 @@ Mosquito <- R6::R6Class(
 
     # history
     nEvent         = 1L,
-    # number of bouts + emergence (birthday) (increment at the beginning of the trackHistory function)
+    # number of bouts + emergence (birthday) (increment at the beginning of the
+    # trackHistory function)
     timeHist       = numeric(30),
     # history of event times (t)
     siteHist       = integer(30),
@@ -158,7 +160,8 @@ Mosquito <- R6::R6Class(
 
 #' MBITES: Female Mosquito Class
 #'
-#' Female mosquitoes inherit from the \code{\link{Mosquito}} abstract base class object.
+#' Female mosquitoes inherit from the \code{\link{Mosquito}} abstract base class
+#' object.
 #'
 #' @export
 Mosquito_Female <- R6::R6Class(
@@ -203,29 +206,39 @@ Mosquito_Female <- R6::R6Class(
     },
 
     #' @description
-    #' Probe the host and tell pathogens you are probing.
+    #' Probe the host and possibly infect that host with pathogens.
     probeHost = function() {
       host <- MBITES:::Globals$get_tile(private$tileID)$get_human(private$hostID)
+      if (is.null(host)) {
+        stop(paste("the host is null", private$hostID))
+      }
+      logtrace(paste("mosquito_probe_host", self$get_id(),
+                     length(private$pathogens), host$get_id()))
       for (pathogen in private$pathogens) {
         pathogen$probeHost(self, host)
       }
     },
 
     #' @description
-    #' Feed on the host and tell the pathogens you are feeding.
+    #' Feed on the host and possibly acquire a pathogen from that host.
     feedHost = function() {
       host <- MBITES:::Globals$get_tile(private$tileID)$get_human(private$hostID)
-      to_add <- host$feedHost(private$pathogens)
+      to_add <- host$feedHost(self, private$pathogens)
+      logtrace(paste("mosquito_feed_host", self$get_id(),
+               class(to_add), paste(to_add, collapse=",")))
       for (mPathogen in to_add) {
         if (!is.null(mPathogen)) {
           private$pathogens[[length(private$pathogens) + 1]] <- mPathogen
         }
       }
+      logtrace(paste("mosquito_feed_host", self$get_id(),
+                     length(private$pathogens)))
     },
 
     # pathogenDynamics
     pathogenDynamics = function() {
-      # futile.logger::flog.warn("default 'pathogenDynamics' being called for mosquito: ",private$id)
+      # futile.logger::flog.warn("default 'pathogenDynamics' being called for
+      # mosquito: ",private$id)
       for (pathogen in private$pathogens) {
         pathogen$oneBout(private$tNext)
       }
@@ -274,7 +287,8 @@ Mosquito_Female <- R6::R6Class(
 
 #' MBITES: Male Mosquito Class
 #'
-#' Male mosquitoes inherit from the \code{\link{Mosquito}} abstract base class object.
+#' Male mosquitoes inherit from the \code{\link{Mosquito}} abstract base class
+#' object.
 #'
 #' @export
 Mosquito_Male <- R6::R6Class(

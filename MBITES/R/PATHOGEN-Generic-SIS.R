@@ -51,6 +51,10 @@ SEI_Pathogen <- R6::R6Class(
       # futile.logger::flog.trace("SEI_Pathogen being killed at self: %s , private: %s",pryr::address(self),pryr::address(private))
     },
 
+    initial_age = function(days_previous) {
+      private$incubating <- as.integer(days_previous)
+    },
+
     #' @description
     #' During a bout, a pathogen is responsible for getting closer to infectious
     #' Pathogen method: overwrites oneDay_mosquito in the generic class.
@@ -84,7 +88,7 @@ SEI_Pathogen <- R6::R6Class(
     #' Conditional transfer of pathogen from mosquito to human during probing.
     #' @param mosquito Reference to the mosquito object.
     #' @param human Reference to the human object.
-    probeHost = function(mosquito, human){
+    probeHost = function(mosquito, host){
       has_SEI = function(p) {"pathogen_SEI" %in% class(p)}
 
       if(self$m2h_transmission()){
@@ -93,7 +97,11 @@ SEI_Pathogen <- R6::R6Class(
         pathogen = self$clone()
         pathogen$mosquito2human()
         host$add_pathogen(pathogen)
-        host$pushProbe(m_id=mosquito$get_id(),t=private$tNow)
+        m_id <- mosquito$get_id()
+        host$pushProbe(m_id=m_id,t=private$tNow)
+        logtrace(paste("m2h", m_id, host$get_id()))
+      } else {
+        logtrace(paste("probe_no_transmit", mosquito$get_id(), host$get_id()))
       }
     },
 
@@ -129,11 +137,14 @@ SEI_Pathogen <- R6::R6Class(
       malaria_clearance <- 200  # days
       # if not infectious advance the incubation period by one day
       private$incubating = private$incubating + 1L
-      if(private$incubating >= private$incubation_h &&
-         private$incubating < private$incubation_h + 1){
-        private$infectious = TRUE
-      } else if (private$incubating > malaria_clearance) {
+      if(private$incubating > malaria_clearance){
+        logtrace(paste("human_clear_pathogen", private$incubating))
         human$remove_pathogen(self)
+      } else if (private$incubating >= private$incubation_h) {
+        private$infectious = TRUE
+        logtrace(paste("human_pathogen_infectious", private$incubating))
+      } else {
+        logtrace(paste("human_pathogen_age", private$incubating))
       }
     },
 
@@ -157,22 +168,27 @@ SEI_Pathogen <- R6::R6Class(
     #' @description
     #' Decide whether this pathogen will enter the given mosquito.
     #' @param host The human host.
+    #' @param mosquito The mosquito R6 object.
     #' @param mPathogens The pathogens already in the mosquito.
-    feedHost = function(host, mPathogens){
+    feedHost = function(host, mosquito, mPathogens){
       # no superinfection, so only do this if i don't have any pathogens in me
       is_SEI <- function(p) { "SEI_Pathogen" %in% class(p) }
-      has_SEI <- any(as.logical(mosquito$on_pathogens(is_SEI)))
+      sei_list <- mosquito$on_pathogens(is_SEI)
+      has_SEI <- any(as.logical(sei_list))
 
+      mPathogen <- NULL
       if(!has_SEI && self$h2m_transmission()){
         # generate a new pathogen and push it to the pedigree (recombination occurs in mosquito)
-        mPathogen = SEI_Pathogen$new(parentID = self$get_id())
+        mPathogen <- SEI_Pathogen$new(parentID = self$get_id())
         mPathogen$human2mosquito()
         mPathogen$push2pedigree(
           hID=host$get_id(),mPathogen$get_id(),tEvent=private$tNow,event="H2M"
         )
-        return(mPathogen)
-      }  # else mosquito had the pathogen already.
-      NULL
+        logtrace(paste("h2m", "yes_transmit", host$get_id(), self$get_id()))
+      } else {
+        logtrace(paste("h2m", "no_transmit", host$get_id(), self$get_id()))
+      }
+      mPathogen
     },
 
     #' @description

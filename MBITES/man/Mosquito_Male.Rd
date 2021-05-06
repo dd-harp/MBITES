@@ -4,7 +4,8 @@
 \alias{Mosquito_Male}
 \title{MBITES: Male Mosquito Class}
 \description{
-Male mosquitoes inherit from the \code{\link{Mosquito}} abstract base class object.
+Male mosquitoes inherit from the \code{\link{Mosquito}} abstract base class
+object.
 }
 \section{Super class}{
 \code{\link[MBITES:Mosquito]{MBITES::Mosquito}} -> \code{Mosquito_Male}

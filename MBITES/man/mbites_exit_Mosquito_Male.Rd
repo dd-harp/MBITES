@@ -10,8 +10,10 @@ mbites_exit_Mosquito_Male(endSim = FALSE)
 \item{pretty}{prettify JSON output}
 }
 \description{
-If the mosquito is dead, write out its history to a JSON-formatted file and then delete from the container object (\code{\link{HashMap}}).
+If the mosquito is dead, write out its history to a JSON-formatted file and
+then delete from the container object (\code{\link{HashMap}}).
 \itemize{
-\item This method is bound to \code{Mosquito_Male$exit}
+\item This method
+is bound to \code{Mosquito_Male$exit}
 }
 }
