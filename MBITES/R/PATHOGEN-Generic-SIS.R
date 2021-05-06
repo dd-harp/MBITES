@@ -59,11 +59,15 @@ SEI_Pathogen <- R6::R6Class(
     #' During a bout, a pathogen is responsible for getting closer to infectious
     #' Pathogen method: overwrites oneDay_mosquito in the generic class.
     oneBout = function(tNext){
+      if (is.null(private$time_created)) {
+        private$time_created <- MBITES:::Globals$get_tNow()
+      }
       # if not infectious advance the incubation period to the time of next launch
       if(!private$infectious){
         private$incubating = private$incubating + tNext
-        if(private$incubating >= private$incubation_m){
+        if(!private$infectious && private$incubating >= private$incubation_m){
           private$infectious = TRUE
+          private$time_became_infectious = MBITES:::Globals$get_tNow()
         }
       }
     },
@@ -99,7 +103,8 @@ SEI_Pathogen <- R6::R6Class(
         host$add_pathogen(pathogen)
         m_id <- mosquito$get_id()
         host$pushProbe(m_id=m_id,t=private$tNow)
-        logtrace(paste("m2h", m_id, host$get_id()))
+        private$human_id <- host$get_id()
+        logtrace(paste("m2h", m_id, private$human_id))
       } else {
         logtrace(paste("probe_no_transmit", mosquito$get_id(), host$get_id()))
       }
@@ -135,13 +140,19 @@ SEI_Pathogen <- R6::R6Class(
     #' Overwrites function in the generic pathogen class.
     oneDay_human = function(human){
       malaria_clearance <- 200  # days
+      if (is.null(private$time_created)) {
+        private$time_created <- MBITES:::Globals$get_tNow()
+      }
       # if not infectious advance the incubation period by one day
       private$incubating = private$incubating + 1L
       if(private$incubating > malaria_clearance){
         logtrace(paste("human_clear_pathogen", private$incubating))
         human$remove_pathogen(self)
-      } else if (private$incubating >= private$incubation_h) {
+        self$exit()
+      } else if (!private$infectious &&
+                 private$incubating >= private$incubation_h) {
         private$infectious = TRUE
+        private$time_became_infectious = MBITES:::Globals$get_tNow()
         logtrace(paste("human_pathogen_infectious", private$incubating))
       } else {
         logtrace(paste("human_pathogen_age", private$incubating))
@@ -184,6 +195,7 @@ SEI_Pathogen <- R6::R6Class(
         mPathogen$push2pedigree(
           hID=host$get_id(),mPathogen$get_id(),tEvent=private$tNow,event="H2M"
         )
+        private$mosquito_id <- mosquito$get_id()
         logtrace(paste("h2m", "yes_transmit", host$get_id(), self$get_id()))
       } else {
         logtrace(paste("h2m", "no_transmit", host$get_id(), self$get_id()))
@@ -195,6 +207,26 @@ SEI_Pathogen <- R6::R6Class(
     #' Initialize this for new creation in a mosquito.
     human2mosquito = function(){
       private$incubation_m = MBITES:::PathogenParameters$get_mosquito_incubation()
+    },
+
+    exit = function() {
+      cat(
+        jsonlite::toJSON(
+          x = list(
+            id = private$id,
+            parent_id = private$parentID,
+            human_id = private$human_id,
+            mosquito_id = private$mosquito_id,
+            birth = private$time_created,
+            time_infectious = private$time_became_infectious,
+            death = MBITES:::Globals$get_tNow()
+          ),
+          pretty = MBITES:::Globals$pretty
+        ),
+        ",\n",
+        sep = "",
+        file = MBITES:::Globals$get_pathogen_out()
+      )
     }
 
   ),
@@ -209,6 +241,10 @@ SEI_Pathogen <- R6::R6Class(
     incubation_m = integer(1),
     # incubation in mosquitoes (EIP)
 
+    mosquito_id = NULL,
+    human_id = NULL,
+    time_created = NULL,
+    time_became_infectious = NULL,
     # transmission efficiency
     b = numeric(1),
     # mosy -> human

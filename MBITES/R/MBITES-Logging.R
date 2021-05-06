@@ -99,6 +99,10 @@ mbites_exit_Mosquito_Female <- function(endSim=FALSE){
     jsonlite::toJSON(x = out, pretty = MBITES:::Globals$pretty),
     ",\n",sep="",file=MBITES:::Globals$get_mosquito_f_out()
     )
+
+  for (pathogen in private$pathogens) {
+    pathogen$exit()
+  }
   # remove this mosquito from the hash table
   MBITES:::Globals$get_tile(private$tileID)$get_mosquitoes()$rm(private$id)
 }
@@ -125,6 +129,7 @@ mbites_exit_Mosquito_Male <- function(endSim=FALSE){
   }
   cat(jsonlite::toJSON(x = self$basicHistoryList(), pretty = MBITES:::Globals$pretty),",\n",sep="",file=MBITES:::Globals$get_mosquito_m_out())
   # remove this mosquito from the hash table
+
   MBITES:::Globals$get_tile(private$tileID)$get_mosquitoes()$rm(private$id)
 }
 
