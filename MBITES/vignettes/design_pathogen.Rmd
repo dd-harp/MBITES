@@ -1,0 +1,53 @@
+---
+title: "Malaria-like Pathogen"
+output: html_notebook
+---
+
+## Introduction
+
+MBITES simulates human and mosquito behavior, and it can pass pathogens
+back and forth during mosquito probing and bloodfeeding. This document
+describes the implementation of pathogens in MBITES. It also describes the
+specific pathogen implementation that represents Plasmodium falciparum.
+
+## Mosquito and Human R6 Classes
+
+MBITES represents mosquitoes and humans as R6 classes. Both of these classes
+have a private member called `pathogens` that is a list of pathogens. It starts
+empty, and every time the human or mosquito receives a pathogen, it's added
+to the list.
+
+## Time steps
+
+During the `oneDay` time step of the human, it calls the `oneDay` time step of its pathogens, if it has any. When a pathogen on a human reaches its end of infectiousness, it can remove itself from the host.
+
+During the `oneBout` time step of the mosquito, it calls the `oneBout` time step of its pathogens, if it has any. During this time step, the pathogen becomes infectious after its incubation period. It stays with the host until the host dies.
+
+
+## Transfer of pathogens
+
+In MBITES, the blood-feeding bout is a mosquito method. It has a `probe()`
+section and a `feed()` section. During the `probe()`, the mosquito can give
+pathogens to the human. During the `feed()`, the human can give pathogens to
+the mosquito.
+
+### Host probing
+
+During a host encounter (`mbites_humanEncounter`), a mosquito can probe the host, the mosquito can pass pathogens to the human. The sequence of steps starts with the mosquito.
+
+1. The mosquito `probeHost()` looks at its pathogens, if it has any, and calls `probeHost(self, host)` on each pathogen.
+
+2. The pathogen's `probeHost(mosquito, host)` looks at the host's current pathogens and decides whether to add itself to the host's pathogens.
+
+3. The host adds that pathogen it's given with `add_pathogen(pathogen)`.
+
+
+### Host feeding
+
+During a feeding bout, the mosquito will check whether it can feed. If so, it follows these steps.
+
+1. The mosquito `feedHost()` asks the host whether it will return any pathogens.
+
+2. The human `feedHost(mosquito, mosquito_pathogens)` asks its pathogens, if they have any, whether they would like to spread to this mosquito.
+
+3. The pathogen `feedHost(host, mosquito, mosquito_pathogens)`, looks at the pathogens already in the mosquito and decides whether it wants to join them.

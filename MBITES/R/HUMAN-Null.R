@@ -88,12 +88,17 @@ Human_NULL <- R6::R6Class(
     #' Add a pathogen to this human's pathogens.
     #' @param pathogen The pathogen to add to the list.
     add_pathogen = function(pathogen) {
-      # no superinfection
-      if (length(private$pathogens) == 0) {
-        private$pathogens = list(pathogen)
-        logtrace(paste("add_pathogen human", self$get_id()))
-      }  # else forget the pathogen transfer.
+      private$pathogens <- c(private$pathogens, pathogen)
+      logtrace(paste("add_pathogen human", self$get_id()))
       invisible(self)
+    },
+
+    #' @description
+    #' Get a pathogen of a certain type.
+    #' @param kind The class of the pathogen as a string.
+    #' Will return the first pathogen of this kind.
+    on_pathogens = function(fun) {
+      lapply(private$pathogens, FUN=fun)
     },
 
     #' @description
