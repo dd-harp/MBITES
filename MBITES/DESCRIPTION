@@ -49,6 +49,7 @@ Collate:
     'MBITES-Setup.R'
     'MBITES-Survival.R'
     'MBITES-Timing.R'
+    'MBITES-Tracing.R'
     'MBITES.R'
     'PATHOGEN-Generic-Class.R'
     'PATHOGEN-Generic-Parameters.R'

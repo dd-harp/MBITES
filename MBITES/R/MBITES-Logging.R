@@ -18,10 +18,11 @@
 # Mosquito Base Class History Logging
 ###############################################################################
 
-#' MBITES: Track History
+#' Adds the last bout to a history list in the mosquito instance.
 #'
-#' At the end of each bout (\code{\link{mbites_oneBout}}), track the mosquito's history. If the mosquito
-#' is dead, write out the history to a JSON-formatted file
+#' At the end of each bout (\code{\link{mbites_oneBout}}), track the mosquito's
+#' history. If the mosquito is dead, write out the history to a JSON-formatted
+#' file
 #'  * This method is bound to \code{Mosquito_Female$trackHistory}
 #'
 mbites_trackHistory <- function(){
@@ -38,15 +39,16 @@ mbites_trackHistory <- function(){
     private$stateHist = c(private$stateHist,character(lVec))
   }
 
-  # add to history
-  private$timeHist[private$nEvent] = private$tNext # set to tNext because that's everything that could have happened up to that next launch
+  # add to history. set to tNext because that's everything that could have
+  # happened up to that next launch
+  private$timeHist[private$nEvent] = private$tNext
   private$siteHist[private$nEvent] = private$site$get_id()
   private$searchHist[private$nEvent] = private$search
   private$stateHist[private$nEvent] = private$state
 
 }
 
-#' MBITES: Basic History List
+#' Converts history-saving members of mosquito instance to a list object.
 #'
 #' Return a named list of the basic history object.
 #'  * This method is bound to \code{Mosquito$basicHistoryList}
@@ -65,8 +67,10 @@ mbites_basicHistoryList <- function(){
 
 #' MBITES: Export History and Remove Self (Female)
 #'
-#' If the mosquito is dead, write out its history to a JSON-formatted file and then delete from the container object (\code{\link{HashMap}}).
-#'  * This method is bound to \code{Mosquito_Female$exit}
+#' If the mosquito is dead, write out its history to a JSON-formatted file and
+#' then delete from the container object (\code{\link{HashMap}}).
+#'  * This method
+#' is bound to \code{Mosquito_Female$exit}
 #'
 #' @param pretty prettify JSON output
 #'
@@ -91,15 +95,24 @@ mbites_exit_Mosquito_Female <- function(endSim=FALSE){
     out = c(out,self$eggHistList())
   }
   # write out
-  cat(jsonlite::toJSON(x = out, pretty = MBITES:::Globals$pretty),",\n",sep="",file=MBITES:::Globals$get_mosquito_f_out())
+  cat(
+    jsonlite::toJSON(x = out, pretty = MBITES:::Globals$pretty),
+    ",\n",sep="",file=MBITES:::Globals$get_mosquito_f_out()
+    )
+
+  for (pathogen in private$pathogens) {
+    pathogen$exit()
+  }
   # remove this mosquito from the hash table
   MBITES:::Globals$get_tile(private$tileID)$get_mosquitoes()$rm(private$id)
 }
 
 #' MBITES: Export History and Remove Self (Male)
 #'
-#' If the mosquito is dead, write out its history to a JSON-formatted file and then delete from the container object (\code{\link{HashMap}}).
-#'  * This method is bound to \code{Mosquito_Male$exit}
+#' If the mosquito is dead, write out its history to a JSON-formatted file and
+#' then delete from the container object (\code{\link{HashMap}}).
+#'  * This method
+#' is bound to \code{Mosquito_Male$exit}
 #'
 #' @param pretty prettify JSON output
 #'
@@ -116,6 +129,7 @@ mbites_exit_Mosquito_Male <- function(endSim=FALSE){
   }
   cat(jsonlite::toJSON(x = self$basicHistoryList(), pretty = MBITES:::Globals$pretty),",\n",sep="",file=MBITES:::Globals$get_mosquito_m_out())
   # remove this mosquito from the hash table
+
   MBITES:::Globals$get_tile(private$tileID)$get_mosquitoes()$rm(private$id)
 }
 
@@ -167,7 +181,7 @@ Mosquito_Female$set(which = "public",name = "trackRest",
 
 #' track probing
 trackProbe_Mosquito_Female <- function(){
-  # check we have not overran vector
+  # check we have not overrun vector
   lVec = length(private$feedTime)
   if(private$nFeed > lVec){
     private$feedTime = c(private$feedTime,numeric(lVec))
@@ -195,7 +209,7 @@ trackRest_Mosquito_Female <- function(){
   # increment number of events
   private$nEvent = private$nEvent + 1L
 
-  # check we have not overran vector
+  # check we have not overrun vector
   lVec = length(private$timeHist)
   if(private$nEvent > lVec){
     private$timeHist = c(private$timeHist,numeric(lVec))

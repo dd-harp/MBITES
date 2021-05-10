@@ -69,6 +69,10 @@ MBITES_Globals <- R6::R6Class(classname = "MBITES_Globals",
                       close(private$human_out)
                      }
 
+                     if(!is.null(private$pathogen_out)){
+                       close(private$pathogen_out)
+                     }
+
                      # tile globals
                      private$tile_id = 0L
                      private$tiles = NULL
@@ -99,6 +103,7 @@ MBITES_Globals <- R6::R6Class(classname = "MBITES_Globals",
                    human_id           = 0L, # global counter of IDs
                    human_out          = NULL, # connection object for logging human histories
 
+                   pathogen_out       = NULL, # connection object for pathogen.
                    # tile globals
                    tile_id            = 0L, # global counter of tile IDs
                    tiles              = list() # references to all the tiles
@@ -124,6 +129,7 @@ simulate_MBITES_Globals <- function(tMax,pretty=TRUE){
     cat("[",sep="",file=private$mosquito_f_out)
     cat("[",sep="",file=private$mosquito_m_out)
     cat("[",sep="",file=private$human_out)
+    cat("[",sep="",file=private$pathogen_out)
   }
 
   # run simulation
@@ -151,16 +157,19 @@ simulate_MBITES_Globals <- function(tMax,pretty=TRUE){
     cat("{}]",sep="",file=private$mosquito_f_out)
     cat("{}]",sep="",file=private$mosquito_m_out)
     cat("{}]",sep="",file=private$human_out)
+    cat("{}]",sep="",file=private$pathogen_out)
   } else {
     cat("{}",sep="",file=private$mosquito_f_out)
     cat("{}",sep="",file=private$mosquito_m_out)
     cat("{}",sep="",file=private$human_out)
+    cat("{}",sep="",file=private$pathogen_out)
   }
 
   # close old connections
   if(!is.null(private$mosquito_f_out)){close(private$mosquito_f_out)}
   if(!is.null(private$mosquito_m_out)){close(private$mosquito_m_out)}
   if(!is.null(private$human_out)){close(private$human_out)}
+  if(!is.null(private$pathogen_out)){close(private$pathogen_out)}
 }
 
 MBITES_Globals$set(which = "public",name = "simulate",
@@ -203,6 +212,7 @@ set_output_MBITES_Globals <- function(directory,runID){
   private$mosquito_f_out = file(description = paste0(dirOut,"/mosquito_F_",runID,".json"),open = "wt")
   private$mosquito_m_out = file(description = paste0(dirOut,"/mosquito_M_",runID,".json"),open = "wt")
   private$human_out = file(description = paste0(dirOut,"/human_",runID,".json"),open = "wt")
+  private$pathogen_out = file(description = paste0(dirOut,"/pathogen_",runID,".json"),open = "wt")
 
 }
 
@@ -297,7 +307,11 @@ hardreset_MBITES_Globals <- function(){
     # close(private$human_out)
   }
 
-  # tile globals
+  if(!is.null(private$pathogen_out)){
+    private$pathogen_out = NULL
+  }
+
+    # tile globals
   private$tile_id = 0L
   private$tiles = list()
 
@@ -371,6 +385,10 @@ get_human_out_MBITES_Globals <- function(){
   return(private$human_out)
 }
 
+get_pathogen_out_MBITES_Globals <- function(){
+  return(private$pathogen_out)
+}
+
 # set methods: general accesors
 MBITES_Globals$set(which = "public",name = "increment_tNow",
   value = increment_tNow_MBITES_Globals, overwrite = TRUE
@@ -399,6 +417,10 @@ MBITES_Globals$set(which = "public",name = "get_mosquito_m_out",
 
 MBITES_Globals$set(which = "public",name = "get_human_out",
           value = get_human_out_MBITES_Globals, overwrite = TRUE
+)
+
+MBITES_Globals$set(which = "public",name = "get_pathogen_out",
+                   value = get_pathogen_out_MBITES_Globals, overwrite = TRUE
 )
 
 

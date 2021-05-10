@@ -2,7 +2,7 @@
 % Please edit documentation in R/MBITES-Logging.R
 \name{mbites_basicHistoryList}
 \alias{mbites_basicHistoryList}
-\title{MBITES: Basic History List}
+\title{Converts history-saving members of mosquito instance to a list object.}
 \usage{
 mbites_basicHistoryList()
 }

@@ -13,173 +13,213 @@
 
 #' MBITES Parameters Singleton
 #'
-#' This class is a singleton object in the \code{MBITES} package namespace that stores parameters needed for the MBITES simulation.
-#' It can be accessed by \code{MBITES:::MBITES_Pars}.
-#'
-#'
-#'
-#'
-#' @docType class
-#' @format An \code{\link{R6Class}} generator object
-#' @keywords R6 class
-#'
-#' @section **Constructor**:
-#'  * argument: im an agument!
-#'
-#' @section **Methods**:
-#'  * method: im a method!
-#'
-#' @section **Fields**:
-#'  * id: integer identifier of site
-#'  * field: im a field!
-#'
-MBITES_Parameters <- R6::R6Class(classname = "MBITES_Parameters",
-                 portable = TRUE,
-                 cloneable = FALSE,
-                 lock_class = FALSE,
-                 lock_objects = FALSE,
+#' This class is a singleton object in the \code{MBITES} package namespace that
+#' stores parameters needed for the MBITES simulation. It can be accessed by
+#' \code{MBITES:::MBITES_Pars}.
+MBITES_Parameters <- R6::R6Class(
+  classname = "MBITES_Parameters",
+  portable = TRUE,
+  cloneable = FALSE,
+  lock_class = FALSE,
+  lock_objects = FALSE,
 
-                 public = list(
+  public = list(
+    initialize = function() {
+      # futile.logger::flog.trace("MBITES_Parameters being born at: self %s ,
+      # private %s",pryr::address(self),pryr::address(private))
+    },
 
-                   # begin constructor
-                   initialize = function(){
-                     # futile.logger::flog.trace("MBITES_Parameters being born at: self %s , private %s",pryr::address(self),pryr::address(private))
-                   }, # end constructor
+    finalize = function() {
+      # futile.logger::flog.trace("MBITES_Parameters being killed at: self %s ,
+      # private %s",pryr::address(self),pryr::address(private))
+    },
 
-                   # begin destructor
-                   finalize = function(){
-                     # futile.logger::flog.trace("MBITES_Parameters being killed at: self %s , private %s",pryr::address(self),pryr::address(private))
-                   }, # end destructor
+    # time to event samplers
+    # 'struct' of function (pointers to functions in c++)
+    ttEvent = list(
+      # time to event closures (must be given implementations before simulation
+      # starts) attempt bouts
+      BoutB = function() {
+        stop("BoutB requires a concrete implementation!")
+      },
+      BoutO = function() {
+        stop("BoutO requires a concrete implementation!")
+      },
+      BoutM = function() {
+        stop("BoutM requires a concrete implementation!")
+      },
+      BoutS = function() {
+        stop("BoutS requires a concrete implementation!")
+      },
+      # search bouts
+      BoutBs = function() {
+        stop("BoutBs requires a concrete implementation!")
+      },
+      BoutOs = function() {
+        stop("BoutOs requires a concrete implementation!")
+      },
+      BoutMs = function() {
+        stop("BoutMs requires a concrete implementation!")
+      },
+      BoutSs = function() {
+        stop("BoutSs requires a concrete implementation!")
+      },
+      # estivation
+      Estivate = function() {
+        stop("Estivate requires a concrete implementation!")
+      },
+      # post-prandial resting
+      ppr = function() {
+        stop("ppr requires a concrete implementation!")
+      }
+    )
 
-                   # time to event samplers
-                   # 'struct' of function (pointers to functions in c++)
-                   ttEvent = list(
-                     # time to event closures (must be given implementations before simulation starts)
-                     # attempt bouts
-                     BoutB = function(){stop("BoutB requires a concrete implementation!")},
-                     BoutO = function(){stop("BoutO requires a concrete implementation!")},
-                     BoutM = function(){stop("BoutM requires a concrete implementation!")},
-                     BoutS = function(){stop("BoutS requires a concrete implementation!")},
-                     # search bouts
-                     BoutBs = function(){stop("BoutBs requires a concrete implementation!")},
-                     BoutOs = function(){stop("BoutOs requires a concrete implementation!")},
-                     BoutMs = function(){stop("BoutMs requires a concrete implementation!")},
-                     BoutSs = function(){stop("BoutSs requires a concrete implementation!")},
-                     # estivation
-                     Estivate = function(){stop("Estivate requires a concrete implementation!")},
-                     # post-prandial resting
-                     ppr = function(){stop("ppr requires a concrete implementation!")}
-                   )
+  ),
 
-                 ),
+  private = list(
+    aqua_model           = "emerge",
 
-                 private = list(
+    # Search behavior
+    disperse             = numeric(1),
+    # P(move) even if resources present when i do checks
 
-                   aqua_model           = "emerge",
+    # Post-bout Landing, House Entering, and Resting
+    boutFail_p           = numeric(1),
+    # 1/number of failed bouts until mosquito gives up and searches
+    b_wts                = numeric(5),
+    # weights on {i,r,v,w,l}
+    o_wts                = numeric(5),
+    m_wts                = numeric(5),
+    s_wts                = numeric(5),
+    InAndOut             = matrix(0L, 5, 5),
+    # weights on transitioning between resting spots
 
-                   # Search behavior
-                   disperse             = numeric(1), # P(move) even if resources present when i do checks
+    # Timing
+    tSwarm               = numeric(1),
+    # mating swarm timing
+    # estivation 1
+    Emax                 = numeric(1),
+    Eb                   = numeric(1),
+    Ep                   = numeric(1),
+    eEndm                = numeric(1),
+    eEndSd               = numeric(1),
+    # estivation 2
+    estivationDay        = integer(1),
 
-                   # Post-bout Landing, House Entering, and Resting
-                   boutFail_p           = numeric(1), # 1/number of failed bouts until mosquito gives up and searches
-                   b_wts                = numeric(5), # weights on {i,r,v,w,l}
-                   o_wts                = numeric(5),
-                   m_wts                = numeric(5),
-                   s_wts                = numeric(5),
-                   InAndOut             = matrix(0L,5,5), # weights on transitioning between resting spots
+    # Energetics
+    energyPreG           = numeric(1),
+    # pre-gonotrophic energy requirement
+    preGsugar            = numeric(1),
+    # sugar energy that can satisfy pre-gonotrophic energy
+    energyFromBlood_b    = numeric(1),
+    # half-maximum parameter for mbites_energyFromBlood
+    S_u                  = numeric(1),
+    # energy expended during a flight
 
-                   # Timing
-                   tSwarm               = numeric(1), # mating swarm timing
-                   # estivation 1
-                   Emax                 = numeric(1),
-                   Eb                   = numeric(1),
-                   Ep                   = numeric(1),
-                   eEndm                = numeric(1),
-                   eEndSd               = numeric(1),
-                   # estivation 2
-                   estivationDay        = integer(1),
+    omega                = numeric(1),
+    S_sa                 = numeric(1),
+    # pSugarBout
+    S_sb                 = numeric(1),
+    # pSugarBout
+    S_w                  = numeric(1),
+    S_p                  = numeric(1),
 
-                   # Energetics
-                   energyPreG           = numeric(1), # pre-gonotrophic energy requirement
-                   preGsugar            = numeric(1), # sugar energy that can satisfy pre-gonotrophic energy
-                   energyFromBlood_b    = numeric(1), # half-maximum parameter for mbites_energyFromBlood
-                   S_u                  = numeric(1), # energy expended during a flight
+    # Survival
+    Bs_surv              = numeric(1),
+    Os_surv              = numeric(1),
+    Ms_surv              = numeric(1),
+    Ss_surv              = numeric(1),
+    B_surv               = numeric(1),
+    O_surv               = numeric(1),
+    M_surv               = numeric(1),
+    S_surv               = numeric(1),
 
-                   omega                = numeric(1),
-                   S_sa                 = numeric(1), # pSugarBout
-                   S_sb                 = numeric(1), # pSugarBout
-                   S_w                  = numeric(1),
-                   S_p                  = numeric(1),
+    # Bout success
+    Bs_succeed           = numeric(1),
+    Os_succeed           = numeric(1),
+    Ms_succeed           = numeric(1),
+    Ss_succeed           = numeric(1),
+    B_succeed            = numeric(1),
+    O_succeed            = numeric(1),
+    M_succeed            = numeric(1),
+    S_succeed            = numeric(1),
 
-                   # Survival
-                   Bs_surv              = numeric(1),
-                   Os_surv              = numeric(1),
-                   Ms_surv              = numeric(1),
-                   Ss_surv              = numeric(1),
-                   B_surv               = numeric(1),
-                   O_surv               = numeric(1),
-                   M_surv               = numeric(1),
-                   S_surv               = numeric(1),
+    # Host Encounter
+    surviveH                = numeric(1),
+    # survival probability for initial encounter (survive to probe)
+    probeH                  = numeric(1),
+    # probability that undeterred during probing
+    surviveprobeH           = numeric(1),
+    # survival probability for host probing
+    feedH                   = numeric(1),
+    # probability to successfully feed
+    surviveZ                = numeric(1),
+    # survival probability for initial encounter (survive to feed)
+    feedZ                   = numeric(1),
+    # probability to successfully feed
 
-                   # Bout success
-                   Bs_succeed           = numeric(1),
-                   Os_succeed           = numeric(1),
-                   Ms_succeed           = numeric(1),
-                   Ss_succeed           = numeric(1),
-                   B_succeed            = numeric(1),
-                   O_succeed            = numeric(1),
-                   M_succeed            = numeric(1),
-                   S_succeed            = numeric(1),
+    PPR_a                = numeric(1),
+    # mbites_pPPRFlight
+    PPR_b                = numeric(1),
+    # mbites_pPPRFlight
+    S_a                  = numeric(1),
+    # mbites_pEnergySurvival
+    S_b                  = numeric(1),
+    # mbites_pEnergySurvival
 
-                   # Host Encounter
-                   surviveH                = numeric(1), # survival probability for initial encounter (survive to probe)
-                   probeH                  = numeric(1), # probability that undeterred during probing
-                   surviveprobeH           = numeric(1), # survival probability for host probing
-                   feedH                   = numeric(1), # probability to successfully feed
-                   surviveZ                = numeric(1), # survival probability for initial encounter (survive to feed)
-                   feedZ                   = numeric(1), # probability to successfully feed
+    TATTER               = logical(1),
+    # control tattering
+    ttsz_p               = numeric(1),
+    # wing tattering (size of damage)
+    ttsz_a               = numeric(1),
+    ttsz_b               = numeric(1),
 
-                   PPR_a                = numeric(1), # mbites_pPPRFlight
-                   PPR_b                = numeric(1), # mbites_pPPRFlight
-                   S_a                  = numeric(1), # mbites_pEnergySurvival
-                   S_b                  = numeric(1), # mbites_pEnergySurvival
+    ttr_a                = numeric(1),
+    # wing tattering (probability of death)
+    ttr_b                = numeric(1),
 
-                   TATTER               = logical(1), # control tattering
-                   ttsz_p               = numeric(1), # wing tattering (size of damage)
-                   ttsz_a               = numeric(1),
-                   ttsz_b               = numeric(1),
+    chm_a                = numeric(1),
+    # chemical damage to mosquito body
+    chm_b                = numeric(1),
 
-                   ttr_a                = numeric(1), # wing tattering (probability of death)
-                   ttr_b                = numeric(1),
+    SENESCE              = logical(1),
+    # control senescence
+    sns_a                = numeric(1),
+    # senescence parameters
+    sns_b                = numeric(1),
+    # senescence parameters
 
-                   chm_a                = numeric(1), # chemical damage to mosquito body
-                   chm_b                = numeric(1),
+    # BloodMeal
+    bm_a                 = numeric(1),
+    # Beta-distributed bloodmeal size
+    bm_b                 = numeric(1),
+    # Beta-distributed bloodmeal size
 
-                   SENESCE              = logical(1), # control senescence
-                   sns_a                = numeric(1), # senescence parameters
-                   sns_b                = numeric(1), # senescence parameters
+    OVERFEED             = logical(1),
+    # control overfeeding
+    of_a                 = numeric(1),
+    of_b                 = numeric(1),
 
-                   # BloodMeal
-                   bm_a                 = numeric(1), # Beta-distributed bloodmeal size
-                   bm_b                 = numeric(1), # Beta-distributed bloodmeal size
+    # Oogenesis
+    bloodPerEgg          = numeric(1),
+    # egg provision: how much blood does each egg need?
+    bs_m                 = numeric(1),
+    # mean of normally dist. egg batch
+    bs_sd                = numeric(1),
+    # sd of normally dist. egg batch
+    maxBatch             = integer(1),
+    # max batch size
+    emt_m                = numeric(1),
+    # mean of normally dist. maturation time
+    emt_sd               = numeric(1),
+    # sd of normally dist. maturation time
 
-                   OVERFEED             = logical(1), # control overfeeding
-                   of_a                 = numeric(1),
-                   of_b                 = numeric(1),
+    rf_a                 = numeric(1),
+    # refeeding probability
+    rf_b                 = numeric(1)
 
-                   # Oogenesis
-                   bloodPerEgg          = numeric(1), # egg provision: how much blood does each egg need?
-                   bs_m                 = numeric(1), # mean of normally dist. egg batch
-                   bs_sd                = numeric(1), # sd of normally dist. egg batch
-                   maxBatch             = integer(1), # max batch size
-                   emt_m                = numeric(1), # mean of normally dist. maturation time
-                   emt_sd               = numeric(1), # sd of normally dist. maturation time
-
-                   rf_a                 = numeric(1), # refeeding probability
-                   rf_b                 = numeric(1)
-
-                 )
-) # end MBITES_Parameters class definition
+  )
+)
 
 
 ###############################################################################

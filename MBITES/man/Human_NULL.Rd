@@ -8,6 +8,11 @@
 An \code{\link{R6Class}} generator object
 }
 \description{
+NULL Human Class
+
+NULL Human Class
+}
+\details{
 A \code{Human_NULL} can be used as a drop-in replacement when human dynamics do not need
 to be simulated explicitly.
 }
@@ -47,6 +52,10 @@ to be simulated explicitly.
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{Human_NULL$new()}}
+\item \href{#method-add_pathogen}{\code{Human_NULL$add_pathogen()}}
+\item \href{#method-feedHost}{\code{Human_NULL$feedHost()}}
+\item \href{#method-get_id}{\code{Human_NULL$get_id()}}
+\item \href{#method-remove_pathogen}{\code{Human_NULL$remove_pathogen()}}
 \item \href{#method-finalize}{\code{Human_NULL$finalize()}}
 \item \href{#method-exit}{\code{Human_NULL$exit()}}
 \item \href{#method-oneDay_EventQ}{\code{Human_NULL$oneDay_EventQ()}}
@@ -59,15 +68,97 @@ to be simulated explicitly.
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
+Construct a human
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Human_NULL$new(id, w, feedingID, siteID, tileID)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{id}}{Integer identifier of human.}
+
+\item{\code{w}}{biting weight of human.}
+
+\item{\code{feedingID}}{where it is a feeding site}
+
+\item{\code{siteID}}{site for human}
+
+\item{\code{tileID}}{The tile that has that site.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-add_pathogen"></a>}}
+\if{latex}{\out{\hypertarget{method-add_pathogen}{}}}
+\subsection{Method \code{add_pathogen()}}{
+Add a pathogen to this human's pathogens.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$add_pathogen(pathogen)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pathogen}}{The pathogen to add to the list.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-feedHost"></a>}}
+\if{latex}{\out{\hypertarget{method-feedHost}{}}}
+\subsection{Method \code{feedHost()}}{
+Decide which pathogens from the host will transmit to the mosquito.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$feedHost(mosquito, mPathogens)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{mosquito}}{The mosquito feeding on this host.}
+
+\item{\code{mPathogens}}{The mosquito pathogens that it already has.
+Returns a list of new pathogens to add to the mosquito.
+This list may contain NULL values when no pathogen is added.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_id"></a>}}
+\if{latex}{\out{\hypertarget{method-get_id}{}}}
+\subsection{Method \code{get_id()}}{
+Get this Human's ID
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$get_id()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-remove_pathogen"></a>}}
+\if{latex}{\out{\hypertarget{method-remove_pathogen}{}}}
+\subsection{Method \code{remove_pathogen()}}{
+Take a pathogen from this human's list of pathogens.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$remove_pathogen(pathogen)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pathogen}}{The pathogen to remove.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-finalize"></a>}}
 \if{latex}{\out{\hypertarget{method-finalize}{}}}
 \subsection{Method \code{finalize()}}{
+Destructor
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Human_NULL$finalize()}\if{html}{\out{</div>}}
 }

@@ -72,6 +72,7 @@ mbites_humanEncounter <- function(){
     private$cod = "surviveH"
   # survives to probe
   } else {
+    # browser()
     if(runif(1) < MBITES:::Parameters$get_probeH()){
       # undeterred, probes the host
       self$trackProbe()
@@ -80,15 +81,21 @@ mbites_humanEncounter <- function(){
         # does not survive to blood feed
         private$alive = FALSE
         private$cod = "surviveprobeH"
-      # survives to blood feed
+        logtrace(paste("probe_and_die", self$get_id()))
+        # survives to blood feed
       } else {
         if(runif(1) < MBITES:::Parameters$get_feedH()){
           # successfully begins blood feeding
+          logtrace(paste("probe_and_feed", self$get_id()))
           self$trackFeed()
-          self$feedHost() # PATHOGEN-XX.R
+          self$feedHost()  # MBITES-Mosquito.R
           self$BloodMeal() # MBITES-BloodMeal.R
+        } else {
+          logtrace(paste("probe_no_feed", self$get_id()))
         }
       }
+    } else {
+      logtrace(paste("no_probe", self$get_id()))
     }
   }
 }

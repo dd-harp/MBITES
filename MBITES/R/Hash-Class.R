@@ -73,32 +73,28 @@ hash_size <- function(rho){
 #'  * storage: a hashed R environment, see \code{\link[base]{new.env}} for more details
 #'
 #' @export
-HashMap <- R6::R6Class(classname="HashMap",
-                     portable = TRUE,
-                     cloneable = FALSE,
-                     lock_class = FALSE,
-                     lock_objects = FALSE,
+HashMap <- R6::R6Class(
+  classname = "HashMap",
+  portable = TRUE,
+  cloneable = FALSE,
+  lock_class = FALSE,
+  lock_objects = FALSE,
 
-                     #public members
-                     public = list(
+  public = list(
+    initialize = function(N = 100L) {
+      private$storage = new.env(hash = TRUE, size = N)
+    },
 
-                       # begin constructor
-                       initialize = function(N = 100L){
-                         private$storage = new.env(hash=TRUE,size=N)
-                       }, # end constructor
+    finalize = function() {
+      self$rm_all()
+      invisible(gc())
+    }
 
-                       # begin destructor
-                       finalize = function(){
-                         self$rm_all()
-                         invisible(gc())
-                       } # end destructor
+  ),
 
-                     ),
+  private = list(storage = new.env())
 
-                     #private members
-                     private = list(storage = NULL)
-
-) #end class definition
+)
 
 
 ###############################################################################
