@@ -34,11 +34,13 @@ SEI_Pathogen <- R6::R6Class(
     #' @description
     #' Create a new SEI_Pathogen object.
     #' @param parentID The ID for the parent pathogen in lineage.
-    initialize = function(parentID = NULL) {
+    initialize = function(parentID = NULL, host_id = NULL, mosquito_id = NULL) {
       super$initialize(parentID) # initialize base parts
+      private$human_id <- host_id
+      private$mosquito_id <- mosquito_id
 
-      private$b = PathogenParameters$get_b()
-      private$c = PathogenParameters$get_c()
+      private$b <- PathogenParameters$get_b()
+      private$c <- PathogenParameters$get_c()
 
       # futile.logger::flog.trace("SEI_Pathogen being born at self: %s , private: %s",pryr::address(self),pryr::address(private))
     },
@@ -93,17 +95,22 @@ SEI_Pathogen <- R6::R6Class(
     #' @param mosquito Reference to the mosquito object.
     #' @param human Reference to the human object.
     probeHost = function(mosquito, host){
-      has_SEI = function(p) {"pathogen_SEI" %in% class(p)}
+      # No multiple infection, so check the host for same pathogen type.
+      is_SEI <- function(p) { "SEI_Pathogen" %in% class(p) }
+      sei_list <- host$on_pathogens(is_SEI)
+      has_SEI <- any(as.logical(sei_list))
 
-      if(self$m2h_transmission()){
+      if(!has_SEI && self$m2h_transmission()){
         # based on pf dynamics; recombination occurs in the mosquito, therefore a simple clone
         # of the object is all that's needed for the human.
-        pathogen = self$clone()
+        pathogen = SEI_Pathogen$new(
+          parentID = self$get_id(),
+          host_id = host$get_id()
+          )
         pathogen$mosquito2human()
         host$add_pathogen(pathogen)
         m_id <- mosquito$get_id()
         host$pushProbe(m_id=m_id,t=private$tNow)
-        private$human_id <- host$get_id()
         logtrace(paste("m2h", m_id, private$human_id))
       } else {
         logtrace(paste("probe_no_transmit", mosquito$get_id(), host$get_id()))
@@ -189,13 +196,16 @@ SEI_Pathogen <- R6::R6Class(
 
       mPathogen <- NULL
       if(!has_SEI && self$h2m_transmission()){
-        # generate a new pathogen and push it to the pedigree (recombination occurs in mosquito)
-        mPathogen <- SEI_Pathogen$new(parentID = self$get_id())
+        # generate a new pathogen and push it to the pedigree (recombination
+        # occurs in mosquito)
+        mPathogen <- SEI_Pathogen$new(
+          parentID = self$get_id(),
+          mosquito_id = mosquito$get_id()
+          )
         mPathogen$human2mosquito()
         mPathogen$push2pedigree(
           hID=host$get_id(),mPathogen$get_id(),tEvent=private$tNow,event="H2M"
         )
-        private$mosquito_id <- mosquito$get_id()
         logtrace(paste("h2m", "yes_transmit", host$get_id(), self$get_id()))
       } else {
         logtrace(paste("h2m", "no_transmit", host$get_id(), self$get_id()))

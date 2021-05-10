@@ -81,7 +81,7 @@ mosquitos = data.frame(
 # Run MBITES
 ###############################################################################
 
-directory <- here("output/trivial/")
+directory <- here("output/sei/")
 if(!dir.exists(directory)){
   dir.create(directory,recursive = T)
 }
@@ -185,6 +185,6 @@ for (hidx in which(humans$pr == 1L)) {
 # run simulation
 set_output(directory = directory,runID = 1)
 
-duration_days <- 365  # 365 * 5
+duration_days <- 365*5  # 365 * 5
 simday <- function() simulation(tMax = duration_days, pretty = TRUE)
 simday()
