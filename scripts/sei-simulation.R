@@ -185,6 +185,6 @@ for (hidx in which(humans$pr == 1L)) {
 # run simulation
 set_output(directory = directory,runID = 1)
 
-duration_days <- 365*5  # 365 * 5
+duration_days <- 365*1  # 365 * 5
 simday <- function() simulation(tMax = duration_days, pretty = TRUE)
 simday()
