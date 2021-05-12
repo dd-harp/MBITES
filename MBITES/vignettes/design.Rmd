@@ -388,16 +388,3 @@ The diagram is nice, but let's walk through the functions in more detail in orde
     simulate_MBITES_Globals. Removes humans from the tile's HashMap.
     Calls `mbites_exit_Mosquito_Female()` and both samples time to next
     bout and removes mosquito from Tile's HashMap.
-
-
-## Aquatic habitats
-
-There should be a daily update, like:
-
-```
-L_{t+1} = eggs_t + survive_t L_t - mature_t L_t
-```
-
-```
-Imago_t = Poisson(mature_t L_t)
-```

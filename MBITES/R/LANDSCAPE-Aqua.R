@@ -18,11 +18,11 @@
 
 #' Aquatic Habitat Resource Base Class
 #'
-#' A \code{Aqua_Resource} is a type of resource at a \code{\link{Site}} where mosquitoes travel for oviposition of eggs
-#' and from which new imagos (adult mosquitoes) emerge from. This abstract base class defines an interface which all models of aquatic ecology
-#' must inherit from to generate concrete implementations of the interface methods.
-#'
-#'
+#' A \code{Aqua_Resource} is a type of resource at a \code{\link{Site}} where
+#' mosquitoes travel for oviposition of eggs and from which new imagos (adult
+#' mosquitoes) emerge from. This abstract base class defines an interface which
+#' all models of aquatic ecology must inherit from to generate concrete
+#' implementations of the interface methods.
 #'
 #' @docType class
 #' @format An \code{\link{R6Class}} generator object
@@ -34,7 +34,8 @@
 #'
 #' @section **Methods**:
 #'  * one_day: function that updates daily aquatic population dynamics
-#'  * push_imago: function that takes emerging imagos from the \code{ImagoQ} and pushes them to the adult mosquito population
+#'  * push_imago: function that takes emerging imagos from the \code{ImagoQ} and
+#'    pushes them to the adult mosquito population
 #'  * reset: function that resets the aquatic habitat between simulation runs
 #'
 #' @section **Fields**:
@@ -42,67 +43,69 @@
 #'  * ImagoQ: a closure of imago cohorts (see \code{\link{make_ImagoQ}})
 #'
 #' @export
-Aqua_Resource <- R6::R6Class(classname = "Aqua_Resource",
-                 portable = TRUE,
-                 cloneable = FALSE,
-                 lock_class = FALSE,
-                 lock_objects = FALSE,
-                 inherit = MBITES:::Resource,
+Aqua_Resource <- R6::R6Class(
+  classname = "Aqua_Resource",
+  portable = TRUE,
+  cloneable = FALSE,
+  lock_class = FALSE,
+  lock_objects = FALSE,
+  inherit = MBITES:::Resource,
 
-                 # public members
-                 public = list(
+  public = list(
+    initialize = function(w, site) {
+      # futile.logger::flog.trace("Aqua_Resource being born at:
+      # self %s , private %s",pryr::address(self),
+      # pryr::address(private))
 
-                   # begin constructor
-                   initialize = function(w, site){
-                     # futile.logger::flog.trace("Aqua_Resource being born at: self %s , private %s",pryr::address(self),pryr::address(private))
+      # all habitats are normal ones for now
+      private$habitatID = 1L
 
-                     private$habitatID = 1L # all habitats are normal ones for now
+      super$initialize(w, site) # construct the base-class parts
 
-                     super$initialize(w,site) # construct the base-class parts
+      # set local closures
+      self$EggQ = make_EggQ()
+      self$ImagoQ = make_ImagoQ()
 
-                     # set local closures
-                     self$EggQ = make_EggQ()
-                     self$ImagoQ = make_ImagoQ()
+    },
+    # end constructor
 
-                   }, # end constructor
+    # begin destructor
+    finalize = function() {
+      # futile.logger::flog.trace("Aqua_Resource being killed at:
+      # self %s , private
+      # %s",pryr::address(self),pryr::address(private))
 
-                   # begin destructor
-                   finalize = function(){
-                     # futile.logger::flog.trace("Aqua_Resource being killed at: self %s , private %s",pryr::address(self),pryr::address(private))
+      self$EggQ = NULL
+      self$ImagoQ = NULL
+    },
 
-                     self$EggQ = NULL
-                     self$ImagoQ = NULL
-                   }, # end destructor
+    # one day of aquatic population
+    one_day = function() {
+      stop(paste("one_day should never be called from abstract base class",
+        "'Aqua_Resource'!"))
+    },
 
-                   # one day of aquatic population
-                   one_day = function(){
-                     stop("one_day should never be called from abstract base class 'Aqua_Resource'!")
-                   },
+    # send emerging imagos to adult population
+    push_imago = function() {
+      stop(paste("push_imago should never be called from abstract base class",
+        "'Aqua_Resource'!"))
+    },
 
-                   # send emerging imagos to adult population
-                   push_imago = function(){
-                     stop("push_imago should never be called from abstract base class 'Aqua_Resource'!")
-                   },
+    get_habitatID = function(){
+      return(private$habitatID)
+    },
 
-                   # closure fields
-                   EggQ = NULL, # closure of egg batches
-                   ImagoQ = NULL, # closure of imago cohorts
-                   habitatID = integer(1) # type of habitat
+    # closure fields
+    EggQ = NULL,
+    # closure of egg batches
+    ImagoQ = NULL,
+    # closure of imago cohorts
+    habitatID = integer(1) # type of habitat
 
-                 ),
+  ),
 
-                 # private members
-                 private = list()
+  private = list()
 
-) # end Aqua_Resource class definition
-
-# accessors
-get_habitatID_Aqua_Resource <- function(){
-  return(private$habitatID)
-}
-
-Aqua_Resource$set(which = "public",name = "get_habitatID",
-    value = get_habitatID_Aqua_Resource, overwrite = TRUE
 )
 
 
@@ -133,6 +136,7 @@ make_EggQ <- function(){
   add2Q <- function(batch_n,time_n){
     # new EggQ
     if(NEW){
+      # The time of the first entry is so large it won't be popped.
       batches <<- c(-99L,batch_n)
       times <<- c(2e16,time_n)
       NEW <<- FALSE
@@ -179,8 +183,11 @@ make_EggQ <- function(){
 #'  * times: numeric vector of imago emergence times
 #'
 #' The closure also contains the following functions:
-#'  * add2Q(batch_n,time_e,imago_f): add a new imago cohort of size \code{imago_n} and boolean sex \code{imago_f} to the queue that will emerge at \code{time_e}
-#'  * popQ(time_e,imago_f): return a vector of imago cohorts that are due to emerge by \code{time_e} and of boolean sex \code{imago_f}
+#'  * add2Q(batch_n,time_e,imago_f): add a new imago cohort of size
+#'    \code{imago_n} and boolean sex \code{imago_f} to the queue that will
+#'    emerge at \code{time_e}
+#'  * popQ(time_e,imago_f): return a vector of imago cohorts that are due to
+#'    emerge by \code{time_e} and of boolean sex \code{imago_f}
 #'  * printQ(): print the imago queue
 #'
 #' @export
@@ -196,6 +203,7 @@ make_ImagoQ <- function(){
   add2Q <- function(imago_n,time_e,imago_f){
     # new ImagoQ
     if(NEW){
+      # The first entry is to avoid an empty list and will never be popped.
       imagos <<- c(-99L,imago_n)
       female <<- c(NA,imago_f)
       times <<- c(2e16,time_e)

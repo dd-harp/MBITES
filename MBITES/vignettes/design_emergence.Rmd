@@ -1,0 +1,177 @@
+---
+title: "Design for Emergence"
+output: html_notebook
+---
+
+## Introduction
+
+MBITES doesn't link eggs laid by mosquitoes to the number of imagos. It could, but it doesn't yet. The current version draws from a Poisson-distributed rate of emergence. This document lays out a way to calculate how mosquito egg-laying produces imagos.
+
+We start with a description of the current code in order to see the order of events and where, in the code, each step is calculated. Then we can make a plan to teach the code to do what we want.
+
+We have a simple goal. The eggs get laid and have a daily survival.
+
+$$
+L_{t+1} = \mbox{eggs}_t + \mbox{survive}_t L_t - \mbox{mature}_t L_t
+$$
+
+Imagos are Poisson-distributed from those egg counts.
+$$
+\mbox{Imago}_t = \mbox{Poisson}(\mbox{mature}_t L_t)
+$$
+
+## Sequence of events
+
+The context for emergence is that it is calculated during the mosquito's portion of the time step. The high-level function call is the bout.
+```{r, eval=FALSE}
+mbites_oneBout <- function(){
+
+  # launch at the previously scheduled launch time
+  private$tNow = private$tNext
+
+  # launch and try
+  if(private$search){
+    self$attempt_search() # search
+    private$searchNow = TRUE
+  } else {
+    # attempt an action
+    switch(private$state,
+      B = {self$attempt_B()},
+      O = {self$attempt_O()},
+      M = {self$attempt_M()},
+      S = {self$attempt_S()},
+      {stop("mosquito ",private$id," calling illegal behavioral state: ",private$state,"\n")}
+    )
+    private$searchNow = FALSE
+  }
+
+  # land
+  self$restingSpot() # MBITES-Resting.R
+
+  # rest
+  self$updateState() # MBITES-Bout.R
+
+  # log history
+  if(private$alive){
+    self$trackHistory()
+  }
+}
+```
+
+Within the `updateState()` call, it computes oogenesis and other steps.
+```{r, eval=FALSE}
+mbites_updateState <- function(){
+  # only do this if you are alive
+  if(private$alive){
+
+    self$energetics()    # MBITES-Energetics.R
+    self$survival()      # MBITES-Survival.R
+
+    # check again for being alive because can be killed in survival; don't want zombie mosquitoes preforming actions
+    if(private$alive){
+
+      if(private$bloodfed){
+        self$Oogenesis() # MBITES-Oogenesis.R
+      }
+      # This can change the bout state from B to O.
+      self$checkEggMaturation() # MBITES-Oogenesis.R
+
+      # The states in priority order
+      if(private$starved){
+        private$state = "S"
+      } else {
+        if(private$gravid){
+          # Refeeding conditionally moves the bout state to B.
+          self$checkRefeed()  # MBITES-Oogenesis.R
+        } else {
+          private$state = "B"
+        }
+      }
+
+      # if there are no resources of the required type present, set
+      # search = TRUE
+      self$checkForResources()
+
+      # sample time to next launch based on current state (before it is changed from energetics, survival, egg maturation, or reeding)
+      self$timing() # MBITES-Timing.R
+
+      # check time-dependent events
+      self$findSwarm()
+      self$checkEstivation()
+
+      # call pathogen dynamics last so that EIP uses the tNext (time of next launch)
+      # to increment its incubation period now. this ensures that at the start of a bout,
+      # the pathogen is referencing the correct day.
+      self$pathogenDynamics() # PATHOGEN-XX.R
+    }
+  }
+}
+```
+
+If the mosquito isn't in the B bout, for bloodfeed, it can switch to the O bout, for Oviposition.
+```{R, eval=FALSE}
+mbites_attempt_O <- function(){
+
+  # bout success
+  if(runif(1) < MBITES:::Parameters$get_O_succeed()){
+
+    # sample resources
+    self$chooseHabitat() # MBITES-Oviposition.R
+
+    # check habitat type
+    if(private$habitatID > 0L){
+      # This should put eggs into the EggQ where emergence will find them.
+      self$layEggs() # MBITES-Oviposition.R
+    } else if(private$habitatID == -1L){
+      # self$ovitrap()
+    } else {
+      stop("illegal habitatID value")
+    }
+  }
+
+  # bout failure
+  if(private$batch > 0){
+    # if i did not succeed my bout, increment failure counter
+    private$boutFail = private$boutFail + 1L
+  } else {
+    # reset flags
+    private$boutFail = 0L
+  }
+}
+```
+
+We can see these as the following steps, in time, for the mosquito.
+
+1. Bloodfeed - Part of the feeding bout in the time step.
+
+2. Oogenesis
+
+   a. Refeeding is part of oogenesis algorithm. Can be egg batch refeeding or bloodmeal refeeding.
+
+   b. Egg batch size is decided here. Can be Gaussian-distributed or bloodmeal-dependent.
+
+   c. Two types of oogenesis: Either enter gravid state after egg maturation time has passed, or enter gravid state after egg provision is filled.
+
+3. Oviposition - picks the site. Puts eggs into the EggQ at the aquatic resource for that site. This code is in `LANDSCAPE-Emerge.R`.
+
+4. Emergence - Draws from emergence.
+
+5. Imagos
+
+
+## Structure
+
+* The mosquito has
+
+  * `gravid` whether it is gravid to oviposit.
+  * `energyPreG` the pre-gonotrophic energy requirement.
+  * `bloodfed` boolean.
+  * `batch` whether it has fed on blood this bout. Set during oogenesis.
+  * `eggT` size of the egg batch. Set during oogenesis.
+  * `eggP` time the egg batch will be ready. Set during oogenesis.
+  * `bmSize` size of the bloodmeal.
+
+* The aqua resource has
+
+  * `eggQ` the eggs laid.
+  * `imagoQ` imagos.

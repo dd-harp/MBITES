@@ -14,69 +14,74 @@
 
 #' Aquatic Ecology: Emerge Model Class
 #'
-#' Class that implements the 'Emerge' model of aquatic ecology, inheriting the interface of \code{\link{Aqua_Resource}}.
+#' Class that implements the 'Emerge' model of aquatic ecology, inheriting the
+#' interface of \code{\link{Aqua_Resource}}.
 #'
 #'
 #' @docType class
 #' @format An \code{\link{R6Class}} generator object
 #' @keywords R6 class
 #'
-#' @section **Constructor**:
-#'  * lambda: either numeric or vector of at least length 365
-#'  * site: a reference to a \code{\link{Site}} object
+#' @section **Constructor**: * lambda: either numeric or vector of at least
+#'   length 365 * site: a reference to a \code{\link{Site}} object
 #'
-#' @section **Methods**:
-#'  * one_day: function with void return that runs one day of the specific aquatic population simulation implementation
-#'  * get_imago: function that returns an ImagoQ (a \code{list} object) for imagos (adult mosquitoes) ready to emerge on that day
+#' @section **Methods**: * one_day: function with void return that runs one day
+#'   of the specific aquatic population simulation implementation * get_imago:
+#'   function that returns an ImagoQ (a \code{list} object) for imagos (adult
+#'   mosquitoes) ready to emerge on that day
 #'
-#' @section **Fields**:
-#'  * lambda: numeric vector
-#'  * constant: logical
+#' @section **Fields**: * lambda: numeric vector * constant: logical
 #'
 #' @export
-Aqua_Resource_Emerge <- R6::R6Class(classname = "Aqua_Resource_Emerge",
-                 portable = TRUE,
-                 cloneable = FALSE,
-                 lock_class = FALSE,
-                 lock_objects = FALSE,
-                 inherit = MBITES:::Aqua_Resource,
+Aqua_Resource_Emerge <-
+  R6::R6Class(
+    classname = "Aqua_Resource_Emerge",
+    portable = TRUE,
+    cloneable = FALSE,
+    lock_class = FALSE,
+    lock_objects = FALSE,
+    inherit = MBITES:::Aqua_Resource,
 
-                 # public members
-                 public = list(
+    public = list(
+      initialize = function(w, site, lambda) {
+        # futile.logger::flog.trace("Aqua_Resource_Emerge being born at: self %s
+        # , private %s",pryr::address(self),pryr::address(private))
 
-                   # begin constructor
-                   initialize = function(w, site, lambda){
-                     # futile.logger::flog.trace("Aqua_Resource_Emerge being born at: self %s , private %s",pryr::address(self),pryr::address(private))
+        if (length(lambda) < 365 & length(lambda) > 1) {
+          stop(
+            paste(
+              "length of provided lambda vector: ",
+              length(lambda),
+              ", but require vector either >= 365 days or",
+              "1 day (constant emergence)"
+            )
+          )
+        }
 
-                     if(length(lambda)<365 & length(lambda)>1){
-                       stop(cat("length of provided lambda vector: ",length(lambda),", but require vector either >= 365 days or 1 day (constant emergence)"))
-                     }
+        super$initialize(w, site) # construct base-class parts
 
-                     super$initialize(w,site) # construct base-class parts
+        if (length(lambda) == 1) {
+          private$constant = TRUE
+          private$lambda = lambda
+        } else {
+          private$constant = FALSE
+          private$lambda = lambda
+        }
 
-                     if(length(lambda)==1){
-                       private$constant = TRUE
-                       private$lambda = lambda
-                     } else {
-                       private$constant = FALSE
-                       private$lambda = lambda
-                     }
+      },
 
-                   }, # end constructor
+      finalize = function() {
+        # futile.logger::flog.trace("Aqua_Resource_Emerge being killed at: self
+        # %s , private %s",pryr::address(self),pryr::address(private))
+      }
 
-                   # begin destructor
-                   finalize = function(){
-                     # futile.logger::flog.trace("Aqua_Resource_Emerge being killed at: self %s , private %s",pryr::address(self),pryr::address(private))
-                   } # end destructor
+    ),
 
-                 ), # end public
-
-                 # private members
-                 private = list(
-                   lambda            = numeric(1),
-                   constant          = logical(1) # boolean indicating constant emergence or lambda vector
-                 ) # end private
-) # end Aqua_Resource_Emerge
+    private = list(lambda            = numeric(1),
+                   # boolean indicating constant emergence or lambda vector
+                   constant          = logical(1)
+                  )
+)
 
 
 ###############################################################################
@@ -85,9 +90,11 @@ Aqua_Resource_Emerge <- R6::R6Class(classname = "Aqua_Resource_Emerge",
 
 #' Aquatic Ecology: Emerge - Daily Emergence
 #'
-#' Add a cohort of emerging imagos based on current value of \eqn{\lambda} by calling \code{add2Q} function of the imago closure object, see \code{\link{make_ImagoQ}}.
+#' Add a cohort of emerging imagos based on current value of \eqn{\lambda} by
+#' calling \code{add2Q} function of the imago closure object, see
+#' \code{\link{make_ImagoQ}}.
 #'
-#'  * This method is bound to \code{Aqua_Resource_Emerge$one_day}
+#' * This method is bound to \code{Aqua_Resource_Emerge$one_day}
 #'
 one_day_Emerge <- function(){
 
@@ -100,13 +107,15 @@ one_day_Emerge <- function(){
     lambda_now = private$lambda[floor(tNow)%%365+1]
     lambda_t = rpois(n = 1, lambda = lambda_now)
   }
+  eggs <- self$EggQ$popQ(tNow)
+  logtrace(paste("eggs_emerge", sum(eggs)))
 
   # if emerging mosquitoes, send them to the population
   if(lambda_t>0){
     self$ImagoQ$add2Q(lambda_t,tNow,T)
   }
 
-} # end one_day
+}
 
 Aqua_Resource_Emerge$set(which = "public",name = "one_day",
           value = one_day_Emerge, overwrite = TRUE
@@ -119,8 +128,8 @@ Aqua_Resource_Emerge$set(which = "public",name = "one_day",
 
 #' Aquatic Ecology: Emerge - Emerging Imagos
 #'
-#' Take emering imagos (adult mosquitoes) and assign them to the mosquito population
-#' in this \code{\link{Tile}}.
+#' Take emering imagos (adult mosquitoes) and assign them to the mosquito
+#' population in this \code{\link{Tile}}.
 #'
 #'  * This method is bound to \code{Aqua_Resource_Emerge$push_imago}
 #'
