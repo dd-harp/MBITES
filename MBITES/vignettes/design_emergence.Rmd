@@ -20,9 +20,9 @@ $$
 \mbox{Imago}_t = \mbox{Poisson}(\mbox{mature}_t L_t)
 $$
 
-## Sequence of events
+## Sequence of events in the code
 
-The context for emergence is that it is calculated during the mosquito's portion of the time step. The high-level function call is the bout.
+The MBITES simulation has a daily time step, within which each mosquito performs bouts. The following code executes the next bout, and emergence is a background action of the bout, so it happens during `updateState()` near the bottom of the function.
 ```{r, eval=FALSE}
 mbites_oneBout <- function(){
 
@@ -140,6 +140,11 @@ mbites_attempt_O <- function(){
 }
 ```
 
+There is a second place in the code that that makes the daily timestep happen. The code is, at its top level, a set of `HashMap` objects. The main responsibility of a `HashMap` object is to enable a quick call to `apply`, that is faster than `lapply` because it doesn't accept return values. In this case, it calls `oneDay_AquaticEcology_Site`, which is in `LANDSCAPE-Site.R:141`. This calls `one_day()` in emergence and `push_imago()` in oviposition.
+
+
+## Sequence of events in time
+
 We can see these as the following steps, in time, for the mosquito.
 
 1. Bloodfeed - Part of the feeding bout in the time step.
@@ -161,7 +166,7 @@ We can see these as the following steps, in time, for the mosquito.
 
 ## Structure
 
-* The mosquito has
+* The mosquito has these member variables.
 
   * `gravid` whether it is gravid to oviposit.
   * `energyPreG` the pre-gonotrophic energy requirement.
@@ -171,7 +176,25 @@ We can see these as the following steps, in time, for the mosquito.
   * `eggP` time the egg batch will be ready. Set during oogenesis.
   * `bmSize` size of the bloodmeal.
 
-* The aqua resource has
+* The aqua-emerge resource has two member variables which represent queues of eggs and imagos.
 
   * `eggQ` the eggs laid.
   * `imagoQ` imagos.
+
+
+## How to modify for emergence
+
+### How the code is set up to support variation
+
+1. The oogenesis code, in `MBITES-Oogenesis.R`, works by attaching methods to the mosquito class. It supports variation on initialization of the mosquito, where it chooses which methods to attach. This happens in `MBITES_Setup_Oogenesis()` in the `MBITES-Setup.R` file. The calls to initialize this happen in the user-level script, `sei-simulation.R`, in this case. By the time oogenesis code is done, the mosquito has a batch of eggs in its `eggT` and `eggP` members.
+
+2. The eggs move to the site during oviposition, which is in the `MBITES-Oviposition.R` code. These methods are attached to the mosquito class in the `MBITES_Setup_MBDETES()` function, which is in `MBDETES-Setup.R`. The current code attaches a method which _does not oviposit eggs._ There is, in the same file, an example of a function which does oviposit a batch of eggs. It's called `mbites_layEggs_EL4P()`, and its code inserts eggs into the `eggQ` at an aqua emergence site.
+
+3. The code for emergence is in the `Aqua_Emerge_Resource`, which is a subclass of `Aqua_Resource`. The current version of this class doesn't calculate daily survival of eggs. It also doesn't draw from a Poisson distribution to create imagos, so we would make a different version of `Aqua_Emerge_Resource` in order to match the equations we want.
+
+4. The imagos, too, are part of the `Aqua_Emerge_Resource`, so we would add those calculations in the same class.
+
+
+### What we can do
+
+It's difficult to configure the simulation by attaching methods to the mosquito. You have to know what methods it needs and which methods work correctly with each other. For instance, the oogenesis code describes problems mixing-and-matching the refeeding and egg-laying methods. We can see in a user-level script, `sei-simulation.R`, that the user has to calls lots of setup before starting the simulation, which we expect, but some of that setup is about attaching methods to classes, which is unusual and requires more knowledge. So can we make small changes to the current code to make it easier a) to implement this emergence calculation and b) to set up a simulation?
