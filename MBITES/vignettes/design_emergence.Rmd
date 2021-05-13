@@ -198,3 +198,20 @@ We can see these as the following steps, in time, for the mosquito.
 ### What we can do
 
 It's difficult to configure the simulation by attaching methods to the mosquito. You have to know what methods it needs and which methods work correctly with each other. For instance, the oogenesis code describes problems mixing-and-matching the refeeding and egg-laying methods. We can see in a user-level script, `sei-simulation.R`, that the user has to calls lots of setup before starting the simulation, which we expect, but some of that setup is about attaching methods to classes, which is unusual and requires more knowledge. So can we make small changes to the current code to make it easier a) to implement this emergence calculation and b) to set up a simulation?
+
+We can solve this problem by continuing to use the same tools, at the egg-level, that we used at the top level of the code. We can create a class structure around eggs and the aquatic stages.
+
+The first two stages are associated with the mosquito and oogenesis. The central object is an egg batch, and its presence interacts with refeeding and terminates in oviposition. We could make the egg batch part of a class that represents oogenesis. Choosing a habitat is a short function that looks at sites. Maybe this can be an if-then statement that switches based on a configuration parameter.
+
+The next two stages are associated with the site. The same `Aqua_Emerge` resource covers both steps, growth of the eggs and holding imagos. Maybe we can keep this the same way and add another version of `Aqua_Emerge` that has the mathematical behaviors we want.
+
+
+### Development steps
+
+1. Keep current behavior but move oogenesis code into a class.
+
+   The challenge for this is that the oogenesis code is called both from the bout-based time step and from the update-state part of the time step. It's also initialized in more than one place. There is a fair amount to track down and no testing code.
+
+2. Create a new class that represents newer oogenesis math.
+
+3. Create a substitute for the `Aqua_Emerge` class.
