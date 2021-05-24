@@ -1,0 +1,54 @@
+---
+title: "MBITES in MASH"
+output: html_notebook
+---
+
+# Introduction
+
+We want to run MBITES inside of MASH. This document looks at a few ways.
+
+# The Less-Modular Method
+
+If we relax expectations about pulling the bloodmeal into its own module, we can make a lot of progress quickly. In this case, we let MBITES run as it would run by itself, but we modify the code to transfer pathogens from humans. Instead, we record the bite that could have led to transfer. Then, later, if MASH says so, we insert the pathogen into the mosquito. There are two parts, sending bites out to the Human module and receiving infection status from the Human module.
+
+
+# The Rerun Method
+
+## How to work into MBITES algorithm for MASH
+
+Could restart the computation with new information. Would need to set random number generator.
+
+* SetRNG package
+* dqrng - for parallel computing. `dqset.seed(seed, stream)`
+
+For the regular RNG, we would use
+
+ * `RNGkind("L'Ecuyer-CMRG")`
+ * `mc.reset.stream()`
+
+There is no way to save the state of a random number generator in R. Really. So I could either use a different seed for each time step or use parallel generation. The latter seems safer and not a problem when there are $10^192$ or so streams.
+
+Location is a problem. We don't know where people are until after we assign bites in MASH. That's weird. So MBITES needs to
+
+1. Do a pass where it doesn't know where humans are.
+
+  * All hosts are human.
+  * There is only one human host that receives all bites.
+
+2. Use MASH Bloodmeal to match bites to hosts. This finds which hosts are infectious.
+
+3. Do a pass where human locations and infectiousness are known.
+
+  * Include zoonotic hosts.
+  * Use recorded information about bite times and success from previous pass.
+
+
+## How to modify the software
+
+* Don't break MBITES.
+
+* The time step is hard-coded to call certain functions. We could add a flag to call different functions during the time step.
+
+* We need to pass in data and get out data. We could tuck the data into the Global() data or pass it into the simulation time step. Or set an object in Global() that then can be called during the time step. That would be an observer, or maybe a Channel pattern. In the Channel pattern, you create an input channel from which you request information and an output channel to which you write information. That might be more comfortable in this code because it sets up a data structure in the Global() object.
+
+* There could be a challenge for random number generation if one pass selects a human and the next selects a zoonotic host. The problem is that they do a different number of draws so that the RNG gets out of sync. There should be a way to ensure the draws are done the same way the second time. Or that we don't use the RNG? Could we make a replay mechanism? That seems like a lot of work in a code that is extensive.
