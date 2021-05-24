@@ -18,6 +18,7 @@ Collate:
     'HUMAN-Initialize.R'
     'HUMAN-Null.R'
     'Hash-Class.R'
+    'LANDSCAPE-Aqua-Daily.R'
     'LANDSCAPE-Aqua.R'
     'LANDSCAPE-EL4P.R'
     'LANDSCAPE-Emerge.R'

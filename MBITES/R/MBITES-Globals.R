@@ -135,6 +135,7 @@ simulate_MBITES_Globals <- function(tMax,pretty=TRUE){
   # run simulation
   pb <- txtProgressBar(min = 0, max = tMax, initial = 0)
   while(private$tNow < tMax){
+    cat(paste("time", private$tNow, "\n"))
     # advance day by one
     private$tNow <- private$tNow + 1L
 

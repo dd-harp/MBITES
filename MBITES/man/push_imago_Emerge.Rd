@@ -7,8 +7,8 @@
 push_imago_Emerge()
 }
 \description{
-Take emering imagos (adult mosquitoes) and assign them to the mosquito population
-in this \code{\link{Tile}}.
+Take emering imagos (adult mosquitoes) and assign them to the mosquito
+population in this \code{\link{Tile}}.
 }
 \details{
 \itemize{

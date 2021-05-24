@@ -55,6 +55,7 @@ It can be accessed by \code{MBITES:::Globals}.
 \item \href{#method-get_mosquito_f_out}{\code{MBITES_Globals$get_mosquito_f_out()}}
 \item \href{#method-get_mosquito_m_out}{\code{MBITES_Globals$get_mosquito_m_out()}}
 \item \href{#method-get_human_out}{\code{MBITES_Globals$get_human_out()}}
+\item \href{#method-get_pathogen_out}{\code{MBITES_Globals$get_pathogen_out()}}
 \item \href{#method-get_mosquito_id}{\code{MBITES_Globals$get_mosquito_id()}}
 \item \href{#method-get_human_id}{\code{MBITES_Globals$get_human_id()}}
 \item \href{#method-get_tileID}{\code{MBITES_Globals$get_tileID()}}
@@ -213,6 +214,15 @@ It can be accessed by \code{MBITES:::Globals}.
 \subsection{Method \code{get_human_out()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$get_human_out()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_pathogen_out"></a>}}
+\if{latex}{\out{\hypertarget{method-get_pathogen_out}{}}}
+\subsection{Method \code{get_pathogen_out()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MBITES_Globals$get_pathogen_out()}\if{html}{\out{</div>}}
 }
 
 }

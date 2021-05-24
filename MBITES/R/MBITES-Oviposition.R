@@ -51,28 +51,11 @@ Mosquito_Female$set(which = "public",name = "chooseHabitat",
 
 #' M-BITES: Lay Eggs for 'Emerge' \code{\link{MosquitoFemale}}
 #'
-#' During an oviposition bout \code{\link{mbites_boutO}}, lay eggs (this is just a filler to clear out the \code{batch} field of the mosquito; egg laying is not implemented in any modules relying on "Emerge" Aquatic Ecology module)
-#'  * This method is bound to \code{MosquitoFemale$layEggs()}.
+#' During an oviposition bout \code{\link{mbites_boutO}}, lay eggs by placing
+#' them into the `EggQ` of the aquatic site.
+#' This method is bound to \code{MosquitoFemale$layEggs()}.
 #'
 mbites_layEggs_Emerge <- function(){
-  self$trackOviposit()
-  private$eggT = 2e16
-  private$gravid = FALSE
-  private$batch = 0
-  private$state = "B"
-}
-
-
-###############################################################################
-# EL4P (set in MBITES_Setup)
-###############################################################################
-
-#' M-BITES: Lay Eggs for 'EL4P' \code{\link{MosquitoFemale}}
-#'
-#' During an oviposition bout \code{\link{mbites_boutO}}, lay eggs for 'EL4P' module of Aquatic Ecology.
-#'  * This method is bound to \code{MosquitoFemale$layEggs()}.
-#'
-mbites_layEggs_EL4P <- function(){
   self$trackOviposit()
   private$eggT = 2e16
   private$gravid = FALSE

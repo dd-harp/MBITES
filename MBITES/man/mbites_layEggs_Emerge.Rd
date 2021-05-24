@@ -7,8 +7,7 @@
 mbites_layEggs_Emerge()
 }
 \description{
-During an oviposition bout \code{\link{mbites_boutO}}, lay eggs (this is just a filler to clear out the \code{batch} field of the mosquito; egg laying is not implemented in any modules relying on "Emerge" Aquatic Ecology module)
-\itemize{
-\item This method is bound to \code{MosquitoFemale$layEggs()}.
-}
+During an oviposition bout \code{\link{mbites_boutO}}, lay eggs by placing
+them into the \code{EggQ} of the aquatic site.
+This method is bound to \code{MosquitoFemale$layEggs()}.
 }

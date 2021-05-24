@@ -53,6 +53,7 @@ to be simulated explicitly.
 \itemize{
 \item \href{#method-new}{\code{Human_NULL$new()}}
 \item \href{#method-add_pathogen}{\code{Human_NULL$add_pathogen()}}
+\item \href{#method-on_pathogens}{\code{Human_NULL$on_pathogens()}}
 \item \href{#method-feedHost}{\code{Human_NULL$feedHost()}}
 \item \href{#method-get_id}{\code{Human_NULL$get_id()}}
 \item \href{#method-remove_pathogen}{\code{Human_NULL$remove_pathogen()}}
@@ -102,6 +103,24 @@ Add a pathogen to this human's pathogens.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{pathogen}}{The pathogen to add to the list.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-on_pathogens"></a>}}
+\if{latex}{\out{\hypertarget{method-on_pathogens}{}}}
+\subsection{Method \code{on_pathogens()}}{
+Get a pathogen of a certain type.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Human_NULL$on_pathogens(fun)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{kind}}{The class of the pathogen as a string.
+Will return the first pathogen of this kind.}
 }
 \if{html}{\out{</div>}}
 }
