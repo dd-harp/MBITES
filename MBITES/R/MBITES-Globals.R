@@ -120,7 +120,7 @@ MBITES_Globals <- R6::R6Class(classname = "MBITES_Globals",
 ###############################################################################
 
 #' simulation
-simulate_MBITES_Globals <- function(tMax,pretty=TRUE){
+simulate_MBITES_Globals <- function(tMax, pretty=TRUE, cleanup = TRUE){
 
   self$pretty = pretty
 
@@ -148,9 +148,11 @@ simulate_MBITES_Globals <- function(tMax,pretty=TRUE){
   }
 
   # write out all agent histories and clear containers
-  for(i in 1:length(private$tiles)){
-    private$tiles[[i]]$get_mosquitoes()$apply(tag="exit",endSim=TRUE)
-    private$tiles[[i]]$get_humans()$apply(tag="exit",pretty)
+  if (cleanup) {
+    for(i in 1:length(private$tiles)){
+      private$tiles[[i]]$get_mosquitoes()$apply(tag="exit",endSim=TRUE)
+      private$tiles[[i]]$get_humans()$apply(tag="exit",pretty)
+    }
   }
 
   # end valid JSON output
@@ -179,8 +181,8 @@ MBITES_Globals$set(which = "public",name = "simulate",
 
 #' user-facing simulation function
 #' @export
-simulation <- function(tMax,pretty=TRUE){
-  MBITES:::Globals$simulate(tMax,pretty)
+simulation <- function(tMax,pretty=TRUE, cleanup = FALSE){
+  MBITES:::Globals$simulate(tMax,pretty,cleanup)
 }
 
 

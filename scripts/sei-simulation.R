@@ -185,6 +185,8 @@ for (hidx in which(humans$pr == 1L)) {
 # run simulation
 set_output(directory = directory,runID = 1)
 
-duration_days <- 365*1  # 365 * 5
-simday <- function() simulation(tMax = duration_days, pretty = TRUE)
+duration_days <- 3  # 365 * 5
+simday <- function() simulation(tMax = duration_days, pretty = TRUE, cleanup = FALSE)
 simday()
+
+bites <- MBITES:::Globals$get_tile(1)$human_bites()

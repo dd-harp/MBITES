@@ -11,6 +11,13 @@ We want to run MBITES inside of MASH. This document looks at a few ways.
 
 If we relax expectations about pulling the bloodmeal into its own module, we can make a lot of progress quickly. In this case, we let MBITES run as it would run by itself, but we modify the code to transfer pathogens from humans. Instead, we record the bite that could have led to transfer. Then, later, if MASH says so, we insert the pathogen into the mosquito. There are two parts, sending bites out to the Human module and receiving infection status from the Human module.
 
+## Mosquito-to-human
+
+Let the code pass the pathogens to the human objects, and query the human objects for that.
+
+## Human-to-mosquito
+
+Record the possibility in the mosquito objects. If the mosquito dies by the end of the time period, then that's quite OK, because it wouldn't have become infectious in time, anyway.
 
 # The Rerun Method
 
@@ -26,7 +33,17 @@ For the regular RNG, we would use
  * `RNGkind("L'Ecuyer-CMRG")`
  * `mc.reset.stream()`
 
-There is no way to save the state of a random number generator in R. Really. So I could either use a different seed for each time step or use parallel generation. The latter seems safer and not a problem when there are $10^192$ or so streams.
+The standard way to set the random number generator in R is to set the global random seed variable.
+
+```{r setSeed}
+current.seed <- .Random.seed
+samples <- runif(100)
+.Random.seed <- current.seed
+compare <- runif(100)
+stopifnot(all(samples == compare))
+```
+
+So I could either use a different seed for each time step or use parallel generation. The latter seems safer and not a problem when there are $10^192$ or so streams.
 
 Location is a problem. We don't know where people are until after we assign bites in MASH. That's weird. So MBITES needs to
 

@@ -141,6 +141,17 @@ Human_NULL <- R6::R6Class(
       invisible(self)
     },
 
+    infectious_bites = function() {
+      bite_times <- numeric()
+      for (p in private$pathogens) {
+        when <- p$infectious_bite_time()
+        if (!is.null(when)) {
+          bite_times <- append(bite_times, when)
+        }
+      }
+      bite_times
+    },
+
     #' @description
     #' Destructor
     finalize = function() {
