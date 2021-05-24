@@ -9,16 +9,17 @@ MBITES doesn't link eggs laid by mosquitoes to the number of imagos. It could, b
 
 We start with a description of the current code in order to see the order of events and where, in the code, each step is calculated. Then we can make a plan to teach the code to do what we want.
 
-We have a simple goal. The eggs get laid and have a daily survival.
+We have a simple goal. The eggs become larvae and have daily survival.
 
 $$
 L_{t+1} = \mbox{eggs}_t + \mbox{survive}_t L_t - \mbox{mature}_t L_t
 $$
 
-Imagos are Poisson-distributed from those egg counts.
+Imagos are Poisson-distributed from those larva counts.
 $$
 \mbox{Imago}_t = \mbox{Poisson}(\mbox{mature}_t L_t)
 $$
+Those are our two goals.
 
 ## Sequence of events in the code
 
@@ -197,6 +198,8 @@ We can see these as the following steps, in time, for the mosquito.
 
 ### What we can do
 
+We need to insert a larval stage between egg maturation and production of imagos. That is squarely in the Aqua-Emerge resource class. So we have to modify that class or make a different version of it, which makes more sense. There is another problem we could address.
+
 It's difficult to configure the simulation by attaching methods to the mosquito. You have to know what methods it needs and which methods work correctly with each other. For instance, the oogenesis code describes problems mixing-and-matching the refeeding and egg-laying methods. We can see in a user-level script, `sei-simulation.R`, that the user has to calls lots of setup before starting the simulation, which we expect, but some of that setup is about attaching methods to classes, which is unusual and requires more knowledge. So can we make small changes to the current code to make it easier a) to implement this emergence calculation and b) to set up a simulation?
 
 We can solve this problem by continuing to use the same tools, at the egg-level, that we used at the top level of the code. We can create a class structure around eggs and the aquatic stages.
@@ -208,10 +211,8 @@ The next two stages are associated with the site. The same `Aqua_Emerge` resourc
 
 ### Development steps
 
-1. Keep current behavior but move oogenesis code into a class.
+The eggs aren't being created, so the first step is to fix that function in the oviposition step. That's small once you know where to find it.
 
-   The challenge for this is that the oogenesis code is called both from the bout-based time step and from the update-state part of the time step. It's also initialized in more than one place. There is a fair amount to track down and no testing code.
+Create a substitute for the `Aqua_Emerge` class. That's it. We don't have to fix the whole thing right now. If we want to do more, keep in mind that it's much easier to separate steps where you move code from steps where you change features. So it would start with taking existing egg functionality and putting it into its own class.
 
-2. Create a new class that represents newer oogenesis math.
-
-3. Create a substitute for the `Aqua_Emerge` class.
+The eggs and imagos are in a queue data structure. Can we put the larvae in a similar data structure?

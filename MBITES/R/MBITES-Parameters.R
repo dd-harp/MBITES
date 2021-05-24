@@ -77,7 +77,7 @@ MBITES_Parameters <- R6::R6Class(
   ),
 
   private = list(
-    aqua_model           = "emerge",
+    aqua_model           = "larvae", # emerge or larvae
 
     # Search behavior
     disperse             = numeric(1),
@@ -1758,7 +1758,7 @@ set_parameters_MBITES_Parameters <- function(
 
   defaultState_F       = "B",
   defaultState_M       = "S",
-  aqua_model           = "emerge",
+  aqua_model           = "larvae",  # Could be "emerge".
 
   # Search behavior
   disperse             = 0, # P(move) even if resources present when i do checks

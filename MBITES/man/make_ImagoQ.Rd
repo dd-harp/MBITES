@@ -17,8 +17,11 @@ Generates a closure that contains the following fields:
 \details{
 The closure also contains the following functions:
 \itemize{
-\item add2Q(batch_n,time_e,imago_f): add a new imago cohort of size \code{imago_n} and boolean sex \code{imago_f} to the queue that will emerge at \code{time_e}
-\item popQ(time_e,imago_f): return a vector of imago cohorts that are due to emerge by \code{time_e} and of boolean sex \code{imago_f}
+\item add2Q(batch_n,time_e,imago_f): add a new imago cohort of size
+\code{imago_n} and boolean sex \code{imago_f} to the queue that will
+emerge at \code{time_e}
+\item popQ(time_e,imago_f): return a vector of imago cohorts that are due to
+emerge by \code{time_e} and of boolean sex \code{imago_f}
 \item printQ(): print the imago queue
 }
 }

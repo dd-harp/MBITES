@@ -8,9 +8,11 @@
 An \code{\link{R6Class}} generator object
 }
 \description{
-A \code{Aqua_Resource} is a type of resource at a \code{\link{Site}} where mosquitoes travel for oviposition of eggs
-and from which new imagos (adult mosquitoes) emerge from. This abstract base class defines an interface which all models of aquatic ecology
-must inherit from to generate concrete implementations of the interface methods.
+A \code{Aqua_Resource} is a type of resource at a \code{\link{Site}} where
+mosquitoes travel for oviposition of eggs and from which new imagos (adult
+mosquitoes) emerge from. This abstract base class defines an interface which
+all models of aquatic ecology must inherit from to generate concrete
+implementations of the interface methods.
 }
 \section{\strong{Constructor}}{
 
@@ -24,7 +26,8 @@ must inherit from to generate concrete implementations of the interface methods.
 
 \itemize{
 \item one_day: function that updates daily aquatic population dynamics
-\item push_imago: function that takes emerging imagos from the \code{ImagoQ} and pushes them to the adult mosquito population
+\item push_imago: function that takes emerging imagos from the \code{ImagoQ} and
+pushes them to the adult mosquito population
 \item reset: function that resets the aquatic habitat between simulation runs
 }
 }

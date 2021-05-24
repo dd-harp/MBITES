@@ -8,30 +8,23 @@
 An \code{\link{R6Class}} generator object
 }
 \description{
-Class that implements the 'Emerge' model of aquatic ecology, inheriting the interface of \code{\link{Aqua_Resource}}.
+Class that implements the 'Emerge' model of aquatic ecology, inheriting the
+interface of \code{\link{Aqua_Resource}}.
 }
 \section{\strong{Constructor}}{
-
-\itemize{
-\item lambda: either numeric or vector of at least length 365
-\item site: a reference to a \code{\link{Site}} object
-}
+ * lambda: either numeric or vector of at least
+length 365 * site: a reference to a \code{\link{Site}} object
 }
 
 \section{\strong{Methods}}{
-
-\itemize{
-\item one_day: function with void return that runs one day of the specific aquatic population simulation implementation
-\item get_imago: function that returns an ImagoQ (a \code{list} object) for imagos (adult mosquitoes) ready to emerge on that day
-}
+ * one_day: function with void return that runs one day
+of the specific aquatic population simulation implementation * get_imago:
+function that returns an ImagoQ (a \code{list} object) for imagos (adult
+mosquitoes) ready to emerge on that day
 }
 
 \section{\strong{Fields}}{
-
-\itemize{
-\item lambda: numeric vector
-\item constant: logical
-}
+ * lambda: numeric vector * constant: logical
 }
 
 \keyword{R6}

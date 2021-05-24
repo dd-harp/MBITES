@@ -34,6 +34,7 @@ states, but we keep the "SEI" designation for comprehension.
 \item \href{#method-h2m_transmission}{\code{SEI_Pathogen$h2m_transmission()}}
 \item \href{#method-feedHost}{\code{SEI_Pathogen$feedHost()}}
 \item \href{#method-human2mosquito}{\code{SEI_Pathogen$human2mosquito()}}
+\item \href{#method-exit}{\code{SEI_Pathogen$exit()}}
 \item \href{#method-clone}{\code{SEI_Pathogen$clone()}}
 }
 }
@@ -51,7 +52,7 @@ states, but we keep the "SEI" designation for comprehension.
 \subsection{Method \code{new()}}{
 Create a new SEI_Pathogen object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$new(parentID = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$new(parentID = NULL, host_id = NULL, mosquito_id = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -214,6 +215,15 @@ Decide whether this pathogen will enter the given mosquito.
 Initialize this for new creation in a mosquito.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$human2mosquito()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-exit"></a>}}
+\if{latex}{\out{\hypertarget{method-exit}{}}}
+\subsection{Method \code{exit()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SEI_Pathogen$exit()}\if{html}{\out{</div>}}
 }
 
 }

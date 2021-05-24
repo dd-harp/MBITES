@@ -99,6 +99,8 @@ Tile_Initialize <- function(landscape){
     stop("MBITES Globals registered a new tile with ID: ",tileID," but site has tile ID: ",landscape[[1]]$tileID,", please fix discrepancy\n")
   }
 
+  logdebug(paste("aqua model is", MBITES:::Parameters$get_aqua_model()))
+
   for(s in 1:n){
 
     site_p = landscape[[s]] # parameters for this site
@@ -136,9 +138,11 @@ Tile_Initialize <- function(landscape){
         if(MBITES:::Parameters$get_aqua_model()=="emerge"){
           aqua = Aqua_Resource_Emerge$new(w=i$w,site=site,lambda=i$lambda)
           site$add_aqua(aqua)
-        }
-        if(MBITES:::Parameters$get_aqua_model()=="EL4P"){
-          stop("EL4P model not finished\n")
+        } else if(MBITES:::Parameters$get_aqua_model()=="larvae"){
+          aqua = Aqua_Resource_Daily$new(w=i$w,site=site)
+          site$add_aqua(aqua)
+        } else {
+          stop(paste("the aqua site type is", site_p$aqua))
         }
       }
     }
