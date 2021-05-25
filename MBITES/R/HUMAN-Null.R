@@ -141,15 +141,31 @@ Human_NULL <- R6::R6Class(
       invisible(self)
     },
 
+    #' This host was probed by a particular mosquito.
+    mosquitoProbe = function(mosquito_id) {
+      private$probedBy <- append(private$probedBy, mosquito_id)
+      tNow <- MBITES:::Globals$get_tNow()
+      private$probedWhen <- append(private$probedWhen, tNow)
+    },
+
     infectious_bites = function() {
-      bite_times <- numeric()
+      bite_times <- numeric(0)
       for (p in private$pathogens) {
         when <- p$infectious_bite_time()
         if (!is.null(when)) {
           bite_times <- append(bite_times, when)
         }
       }
-      bite_times
+      report <- list(
+        bite_times = bite_times,
+        probed = data.frame(
+          mosquito_id = private$probedBy,
+          when = private$probedWhen
+        )
+      )
+      private$probedBy <- integer(0)
+      private$probedWhen <- numeric(0)
+      report
     },
 
     #' @description
@@ -184,7 +200,10 @@ Human_NULL <- R6::R6Class(
     # F for probing-only events, T for blood feeding events
 
     # A human can have multiple pathogens
-    pathogens           = list()
+    pathogens           = list(),
+
+    probedBy            = integer(0),
+    probedWhen          = numeric(0)
   )
 )
 

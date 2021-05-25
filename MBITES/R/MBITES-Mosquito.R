@@ -202,7 +202,6 @@ Mosquito_Female <- R6::R6Class(
                private$state, "\n")
         }
       )
-
     },
 
     #' @description
@@ -217,6 +216,7 @@ Mosquito_Female <- R6::R6Class(
       for (pathogen in private$pathogens) {
         pathogen$probeHost(self, host)
       }
+      host$mosquitoProbe(self$get_id())
     },
 
     #' @description
