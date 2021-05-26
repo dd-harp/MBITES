@@ -185,6 +185,35 @@ for (hidx in which(humans$pr == 1L)) {
 # run simulation
 set_output(directory = directory,runID = 1)
 
-duration_days <- 365*1  # 365 * 5
-simday <- function() simulation(tMax = duration_days, pretty = TRUE)
+duration_days <- 3  # 365 * 5
+simday <- function() simulation(tMax = duration_days, pretty = TRUE, cleanup = FALSE)
 simday()
+
+# This gets its list of bite times by asking each pathogen on a human
+# when it was attached to that human.
+bites_infectious_to_humans <- MBITES:::Globals$get_tile(1)$human_bites()
+
+now <- MBITES:::Globals$get_tNow()
+sample_infectious_bites_from_human <- data.frame(
+  human = c(1, 2, 3),
+  mosquito = MBITES:::Globals$get_tile(1)$get_mosquitoes()$ls()[1:3],
+  parent_pathogen = c(30, 31, 32),
+  infection_time = c(now - 2, now - 3, now - 1)
+)
+
+# This retroactively infects mosquitoes, according to a list of bites.
+register_infected_mosquitoes <- function(df) {
+  for (icnt in 1:nrow(df)) {
+    pathogen = SEI_Pathogen$new(
+      parentID = df[icnt, "parent_pathogen"], # parent ID of pathogen
+      mosquito_id = df[icnt, "mosquito"]
+    )
+    pathogen$human2mosquito()
+    pathogen$time_created <- df[icnt, "infection_time"]
+    mosquito_to_infect <- MBITES:::Globals$get_tile(1)$get_mosquito(
+      df[icnt, "mosquito"])
+    mosquito_to_infect$add_pathogen(pathogen)
+  }
+}
+
+register_infected_mosquitoes(sample_infectious_bites_from_human)

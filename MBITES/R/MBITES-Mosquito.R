@@ -202,7 +202,6 @@ Mosquito_Female <- R6::R6Class(
                private$state, "\n")
         }
       )
-
     },
 
     #' @description
@@ -217,6 +216,7 @@ Mosquito_Female <- R6::R6Class(
       for (pathogen in private$pathogens) {
         pathogen$probeHost(self, host)
       }
+      host$mosquitoProbe(self$get_id())
     },
 
     #' @description
@@ -228,11 +228,15 @@ Mosquito_Female <- R6::R6Class(
                class(to_add), paste(to_add, collapse=",")))
       for (mPathogen in to_add) {
         if (!is.null(mPathogen)) {
-          private$pathogens[[length(private$pathogens) + 1]] <- mPathogen
+          self$add_pathogen(mPathogen)
         }
       }
       logtrace(paste("mosquito_feed_host", self$get_id(),
                      length(private$pathogens)))
+    },
+
+    add_pathogen = function(mPathogen) {
+      private$pathogens[[length(private$pathogens) + 1]] <- mPathogen
     },
 
     # pathogenDynamics

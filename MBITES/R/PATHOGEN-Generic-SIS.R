@@ -166,6 +166,12 @@ SEI_Pathogen <- R6::R6Class(
       }
     },
 
+    #' The day on which this infectious bite happened.
+    #' This may be null if the first `oneDay()` hasn't been called.
+    infectious_bite_time = function() {
+      private$time_created
+    },
+
     #' @description
     #' Determine whether a human can transmit this pathogen to a mosquito.
     #' Returns a bool.
